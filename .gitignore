@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# stray skill install (not part of the portfolio)
+.ui-ux-pro-max-skill/

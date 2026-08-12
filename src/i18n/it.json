@@ -1,0 +1,264 @@
+{
+  "nav": {
+    "work": "Lavori",
+    "writing": "Blog",
+    "studio": "Studio",
+    "contact": "Contatto",
+    "available": "Disponibile"
+  },
+  "hero": {
+    "greeting": "Ingegneria Creativa",
+    "role": "Fullstack & Creative Engineer",
+    "tagline": "Colmare il divario tra design di alto livello e architettura tecnica robusta.",
+    "bio": "Tech Lead & Senior Frontend Developer presso {{company}}: costruisco la piattaforma che digitalizza le agenzie di assicurazione italiane. Precedentemente: SaaS verticale per studi di tatuaggi, R&S in rendering neurale WebGPU. Costruisco interfacce non solo visivamente precise, ma strutturate per scalare a livello globale.",
+    "currentFocus": "Focus Attuale",
+    "availability": "Disponibile per progetti Q3/Q4",
+    "exploreWork": "Esplora i Lavori",
+    "contactMe": "Contattami"
+  },
+  "work": {
+    "title": "Lavori Selezionati",
+    "subtitle": "Una selezione tra prodotti, lavori per clienti e ricerca.",
+    "viewProject": "Vedi Progetto",
+    "category": {
+      "product": "Prodotto",
+      "client": "Lavoro per Cliente",
+      "experimental": "R&S"
+    },
+    "filters": {
+      "all": "Tutti i Progetti",
+      "product": "Prodotti & Web App",
+      "client": "Lavori Cliente",
+      "experimental": "R&S & WebGL"
+    }
+  },
+  "writing": {
+    "title": "Blog",
+    "subtitle": "Riflessioni su ingegneria, creative coding e costruire prodotti che contano.",
+    "articles": "{{count}} articoli",
+    "readMore": "Leggi",
+    "backToWriting": "Torna al Blog"
+  },
+  "studio": {
+    "title": "Studio",
+    "subtitle": "Chi sono, come lavoro e cosa mi muove.",
+    "bioTitle": "Ciao, sono Giovanni.",
+    "bioP1": "Sono un <strong>Senior Frontend Developer & Creative Engineer</strong> italiano. Attualmente Tech Lead presso <strong>Agilae</strong>, dove costruisco la piattaforma che digitalizza le agenzie di assicurazione italiane.",
+    "bioP2": "Il mio lavoro si colloca all'intersezione tra <strong>rigore ingegneristico</strong> e <strong>cura visiva</strong>. Credo che il software fantastico debba sembrare vivo: reattivo, performante e piacevole da usare.",
+    "bioP3": "Quando non costruisco applicazioni production, esploro il <strong>rendering neurale WebGPU</strong>, l'architettura dei design system e il creative coding. Scrivo di ingegneria frontend, pattern React e l'intersezione tra design e codice.",
+    "quickFacts": "Info Rapide",
+    "location": "Sede",
+    "experience": "Esperienza",
+    "focus": "Focus",
+    "languages": "Lingue",
+    "valuesTitle": "Valori",
+    "timelineTitle": "Timeline",
+    "techStackTitle": "Tech Stack",
+    "playgroundTitle": "Playground",
+    "playgroundSubtitle": "Editor di codice interattivo. Scrivi, esegui ed esperimenta.",
+    "loadingEditor": "Caricamento editor...",
+    "values": {
+      "engineering": {
+        "title": "Ingegneria, non Hacking",
+        "description": "Ogni soluzione deve essere strutturata, documentata e manutenibile. Le hack veloci diventano debito tecnico."
+      },
+      "performance": {
+        "title": "La Performance è UX",
+        "description": "Un'interfaccia bella che carica lentamente è un'interfaccia rotta. Ogni millisecondo conta."
+      },
+      "designSystems": {
+        "title": "Design System Prima",
+        "description": "Token, componenti, pattern. Costruisci il sistema, poi costruisci il prodotto. La coerenza scala."
+      },
+      "accessibility": {
+        "title": "L'Accessibilità non è Opzionale",
+        "description": "Il web è per tutti. La conformità WCAG è la base, non l'obiettivo."
+      },
+      "ship": {
+        "title": "Lancia, Misura, Itera",
+        "description": "Il perfetto è nemico del live. Lancia presto, raccogli dati reali, migliora con evidenze."
+      }
+    },
+    "timeline": {
+      "2019": "2019 – 2020",
+      "2020": "2020 – 2022",
+      "2022": "2022 – 2023",
+      "current": "2023 – Oggi",
+      "currentRole": "Tech Lead & Senior Frontend Developer",
+      "currentCompany": "Agilae",
+      "currentDesc": "Architettura frontend per una piattaforma SaaS che digitalizza le agenzie di assicurazione italiane. Costruzione di design system, ottimizzazione delle performance, mentoring di sviluppatori.",
+      "2022Role": "Full Stack Developer & Product Designer",
+      "2022Company": "InkFlow (Freelance / Startup)",
+      "2022Desc": "SaaS verticale per studi di tatuaggi: calendario, CRM, consenso digitale, pagamenti. Dal concept a 12 studi onboardati.",
+      "2020Role": "Frontend Developer",
+      "2020Company": "Varie Agenzie & Startup",
+      "2020Desc": "Sviluppo React/Next.js per e-commerce, dashboard, siti marketing. Focus su performance, animazioni e design system.",
+      "2019Role": "Junior Frontend Developer",
+      "2019Company": "Web Agency",
+      "2019Desc": "Migrazione WordPress → React. Primo contatto con architetture component-driven e tooling moderno."
+    }
+  },
+  "techStack": {
+    "title": "Tech Stack",
+    "subtitle": "Strumenti e tecnologie che uso quotidianamente per costruire interfacce di livello production.",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Strumenti",
+      "creative": "Creativo"
+    }
+  },
+  "metrics": {
+    "experience": {
+      "label": "Anni di Esperienza",
+      "sublabel": "Sviluppo Fullstack & System Architecture"
+    },
+    "projects": {
+      "label": "Progetti Consegnati",
+      "sublabel": "SaaS, Web App & piattaforme in produzione"
+    },
+    "studios": {
+      "label": "Studi Onboardati",
+      "sublabel": "SaaS verticale per tatuatori, dal concept al lancio"
+    },
+    "loc": {
+      "label": "LOC Type-safe",
+      "sublabel": "Codebase TypeScript strict a zero errori runtime"
+    }
+  },
+  "techRadar": {
+    "title": "Radar Tecnologico",
+    "subtitle": "Clicca sulle tecnologie per ispezionare casi d'uso reali ed estratti di codice.",
+    "keyImpact": "Impatto Chiave",
+    "exampleSnippet": "Snippet di Esempio:",
+    "tabs": {
+      "all": "Tutto lo Stack",
+      "frontend": "Frontend & RSC",
+      "backend": "Backend & Data",
+      "graphics": "Creative & WebGL",
+      "devops": "DevOps & AI Tools"
+    },
+    "categoryNames": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "graphics": "Grafica",
+      "devops": "DevOps"
+    },
+    "levels": {
+      "Expert": "Esperto",
+      "Advanced": "Avanzato",
+      "Proficient": "Competente"
+    },
+    "items": {
+      "nextjs": {
+        "description": "Architetture web moderne con React Server Components, Server Actions, routing parallelo e caching distribuito.",
+        "highlight": "Sviluppo di portali ad alte prestazioni con tempi di caricamento sub-secondo."
+      },
+      "typescript": {
+        "description": "Tipizzazione statica avanzata, generici, utilità di tipo condizionali e garanzia di correttezza a tempo di compilazione.",
+        "highlight": "Zero errori a runtime su codebase oltre 50k LOC."
+      },
+      "trpc": {
+        "description": "API full-stack senza codice boilerplate e sincronizzazione istantanea dei tipi dal backend al frontend.",
+        "highlight": "Produttività raddoppiata nella gestione degli endpoint API."
+      },
+      "threejs": {
+        "description": "Grafica 3D interattiva per il browser, shader GLSL personalizzati, particelle dinamiche e canvas interattivi.",
+        "highlight": "Esperienze visive immersive mantenendo 60fps costanti."
+      },
+      "prisma": {
+        "description": "Modellazione dati, migrazioni automatiche e query complesse su database relazionali ad alte prestazioni.",
+        "highlight": "Ottimizzazione indici e query complesse."
+      },
+      "framer": {
+        "description": "Animazioni fluide basate su fisica molla (spring physics), transizioni di pagina e interazioni reattive al gesto.",
+        "highlight": "UI vivaci ed altamente coinvolgenti."
+      },
+      "ai-agents": {
+        "description": "Integrazione di agenti AI, MCP Servers, prompt engineering e automazioni evolute.",
+        "highlight": "Workflow automatizzati guidati da LLM avanzati."
+      },
+      "docker": {
+        "description": "Containerizzazione di servizi micro-frontend/backend, deployment Vercel/AWS e pipeline CI/CD.",
+        "highlight": "Deploy continui e riproducibili."
+      }
+    }
+  },
+  "experience": {
+    "title": "Esperienza & Timeline",
+    "subtitle": "Ruoli, aziende e risultati nel tempo.",
+    "expand": "Espandi dettagli",
+    "collapse": "Nascondi dettagli",
+    "results": "Risultati & Impatto",
+    "milestones": {
+      "agilae": {
+        "year": "2024 – Oggi",
+        "role": "Fullstack Engineer",
+        "company": "Agilae",
+        "location": "Roma / Remote",
+        "description": "Sviluppo di piattaforme enterprise ad alte prestazioni, integrazione di agenti AI ed architetture Next.js avanzate.",
+        "achievements": [
+          "Progettazione di micro-frontend e Server Components per sistemi ad alto traffico.",
+          "Riduzione dei tempi di caricamento del 45% tramite code-splitting e risorse ottimizzate.",
+          "Integrazione di workflow AI per l'automazione di processi aziendali."
+        ]
+      },
+      "studio": {
+        "year": "2022 – 2024",
+        "role": "Senior Frontend & WebGL Developer",
+        "company": "Studio Tech & Agency",
+        "location": "Milano / Hybrid",
+        "description": "Realizzazione di portali creativi ed e-commerce ad alto tasso di conversione con animazioni Three.js e Framer Motion.",
+        "achievements": [
+          "Direzione dello sviluppo di 12+ progetti web con valutazione Web Vitals superiore a 95.",
+          "Creazione di librerie UI interne riutilizzabili su molteplici prodotti.",
+          "Implementazione di canvas 3D interattivi per brand di primo piano."
+        ]
+      },
+      "dph": {
+        "year": "2020 – 2022",
+        "role": "Software Developer",
+        "company": "Digital Product House",
+        "location": "Roma",
+        "description": "Sviluppo di web app full-stack e API REST/GraphQL per clienti nel settore finanziario e assicurativo.",
+        "achievements": [
+          "Ingegnerizzazione di dashboard analitiche in tempo reale.",
+          "Integrazione di sistemi di pagamento sicuri e gestione stato complessa."
+        ]
+      }
+    }
+  },
+  "openSource": {
+    "title": "Open Source",
+    "subtitle": "Progetti e contributi su GitHub.",
+    "error": "I repository non sono raggiungibili in questo momento.",
+    "viewOnGithub": "Vedi su GitHub"
+  },
+  "contact": {
+    "title": "Contattami",
+    "subtitle": "Hai un progetto in mente? Parliamone.",
+    "name": "Nome",
+    "email": "Email",
+    "subject": "Oggetto",
+    "message": "Messaggio",
+    "send": "Invia Messaggio",
+    "sending": "Invio in corso...",
+    "success": "Messaggio inviato con successo!",
+    "error": "Invio fallito. Riprova.",
+    "directContact": "Contatto Diretto",
+    "replyWithin": "Rispondo generalmente entro 24h",
+    "availability": "Disponibilità",
+    "availableForFreelance": "Disponibile per freelance",
+    "openTo": "Aperto a: contratti, consulenze, opportunità full-time",
+    "social": "Social"
+  },
+  "footer": {
+    "builtWith": "Costruito con Next.js e Tailwind CSS",
+    "madeWith": "Fatto con passione e tanto caffè",
+    "letsBuild": "Costruiamo qualcosa."
+  },
+  "credentials": {
+    "title": "Certificazioni",
+    "subtitle": "Certificazioni e riconoscimenti professionali."
+  }
+}

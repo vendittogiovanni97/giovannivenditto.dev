@@ -1,0 +1,139 @@
+---
+title: "Neural Field Explorer"
+description: "Interactive exploration of Neural Radiance Fields (NeRF) and Gaussian Splatting in browser via WebGPU. Real-time rendering of 3D scenes from sparse views."
+shortDescription: "R&D: WebGPU real-time Neural Rendering for scientific visualization and creative coding."
+role: "Creative Engineer & Graphics Programmer"
+company: "Personal R&D"
+startDate: "2024-01"
+current: true
+stack:
+  - "WebGPU / WebGL 2 fallback"
+  - "TypeScript"
+  - "Three.js / R3F"
+  - "GLSL / WGSL Shaders"
+  - "ONNX Runtime Web (client-side inference)"
+  - "Vite"
+  - "GitHub Pages"
+category: "experimental"
+featured: false
+order: 3
+metrics:
+  "FPS on RTX 3080": "60+ (1080p)"
+  "FPS on M2 MacBook": "45 (1080p)"
+  "Model size": "~15 MB (compressed)"
+  "Load time": "< 3s (broadband)"
+challenges:
+  - "Limited WebGPU adoption (Chrome/Edge, behind flag on Firefox/Safari)"
+  - "Memory bandwidth for real-time Gaussian Splatting (millions of splats)"
+  - "Numerical precision WGSL vs GLSL for training/inference"
+  - "Progressive loading for large models on slow connections"
+solutions:
+  - "Hybrid renderer: WebGPU primary, WebGL 2 compute shader fallback"
+  - "Hierarchical frustum culling + LOD for Gaussian Splatting"
+  - "ONNX Runtime Web for client-side NeRF inference (quantized INT8)"
+  - "Streaming loader: coarse→fine progressive refinement"
+  - "Shader hot-reload for fast iteration during development"
+learnings:
+  - "WebGPU is the future but today requires robust fallbacks"
+  - "Gaussian Splatting > NeRF for real-time: explicit vs implicit rendering"
+  - "Client-side ML inference opens privacy-first scenarios (no server GPU)"
+  - "Shader debugging tools (RenderDoc, Spector.js) are essential"
+images:
+  hero: "/projects/neural-field/hero.jpg"
+  gallery:
+    - "/projects/neural-field/nerf.jpg"
+    - "/projects/neural-field/gaussian.jpg"
+    - "/projects/neural-field/webgpu.jpg"
+links:
+  live: "https://giovannivenditto.github.io/neural-field-explorer"
+  github: "https://github.com/giovannivenditto/neural-field-explorer"
+  caseStudy: "/work/neural-field-explorer"
+---
+
+# Neural Field Explorer — WebGPU Neural Rendering R&D
+
+## Context
+
+Neural Radiance Fields (NeRF) and Gaussian Splatting have revolutionized novel view synthesis. However, execution traditionally required server-side GPU (CUDA) and video streaming. With WebGPU and WebAssembly, it's now possible to bring inference and rendering entirely client-side.
+
+## Research Goals
+
+1. **Real-time Gaussian Splatting in browser**: 60fps rendering of complex scenes (1M+ splats)
+2. **Client-side NeRF inference**: ONNX Runtime Web + INT8 quantization
+3. **Progressive streaming**: Hierarchical loading for models >50MB
+4. **Cross-platform**: WebGPU primary, WebGL 2 compute fallback, CPU fallback for compatibility
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      Neural Field Explorer                       │
+├─────────────────────────────────────────────────────────────────┤
+│  UI Layer (React + R3F)                                         │
+│  ├── Camera Controls (Orbit, Fly, First Person)                 │
+│  ├── Debug Panel (stats, layer visibility, quality)             │
+│  └── Model Loader (progressive, resume, cache)                  │
+├─────────────────────────────────────────────────────────────────┤
+│  Renderer Abstraction                                           │
+│  ├── WebGPURenderer (WGSL, compute shaders, storage buffers)    │
+│  ├── WebGL2Renderer (compute shaders, transform feedback)       │
+│  └── CPURenderer (fallback, WASM)                               │
+├─────────────────────────────────────────────────────────────────┤
+│  Neural Backends                                                │
+│  ├── Gaussian Splatting (explicit, sorted rendering)            │
+│  ├── NeRF (implicit, ray marching + ONNX inference)             │
+│  └── Hybrid (NeRF→Gaussian conversion pipeline)                 │
+├─────────────────────────────────────────────────────────────────┤
+│  Asset Pipeline                                                 │
+│  ├── PLY/SPZ/NPZ loaders (streaming, progressive)               │
+│   ├── Quantization (FP32→FP16/INT8)                             │
+│   └── Compression (Draco, Basis Universal)                      │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## Technical Innovations
+
+**1. Gaussian Splatting WebGPU-Optimized**
+- Tile-based rasterization via compute shader (64x64 tiles)
+- Parallel prefix sum (Blelloch scan) for per-tile depth sorting
+- Spherical harmonics evaluation in-shader (SH degree 3)
+- View-frustum culling on GPU (indirect draw)
+
+**2. NeRF Inference Client-Side**
+- TinyNeRF model exported ONNX, INT8 quantized (ONNX Runtime Web)
+- Positional encoding precomputed in 3D texture
+- Hierarchical sampling: coarse (64 samples) → fine (128 samples)
+- Early termination via opacity threshold
+
+**3. Progressive Streaming**
+- Octree spatial partitioning
+- LOD 0: bounding box → LOD 1: coarse splats → LOD N: full resolution
+- Priority queue: viewport-proximity + screen-space error
+- Service Worker + IndexedDB for persistent caching
+
+## Results & Benchmarks
+
+- **Room** (240K splats): RTX 3080 120 fps / M2 Max 85 fps / iPhone 15 Pro 35 fps
+- **Garden** (890K splats): RTX 3080 62 fps / M2 Max 42 fps / iPhone 15 Pro 18 fps
+- **Museum** (1.2M splats): RTX 3080 48 fps / M2 Max 31 fps / iPhone 15 Pro 12 fps
+
+**NeRF Inference (512x512, 192 samples/ray):**
+- RTX 3080: ~8 fps (WebGPU compute)
+- M2 Max: ~5 fps
+- WebGL fallback: ~2 fps
+
+## Full Stack
+
+**Graphics:** WebGPU (WGSL), WebGL 2 (GLSL 300 ES), Three.js / React Three Fiber, custom GLSL/WGSL shaders
+**ML:** ONNX Runtime Web, Hugging Face Transformers.js (tokenizers), TensorFlow.js (custom ops)
+**Build:** Vite, TypeScript strict, GitHub Pages (static deploy)
+**Tooling:** RenderDoc (GPU capture), Spector.js (WebGL/WebGPU debug), Chrome DevTools (WebGPU tab)
+**Math:** gl-matrix, custom SIMD utilities
+
+## Next Steps
+
+- [ ] 3D Gaussian Splatting with motion (dynamic scenes)
+- [ ] WebGPU ray tracing for NeRF (hardware RT cores)
+- [ ] Collaborative viewing (WebRTC + shared state)
+- [ ] PLY/GLB export for production pipelines
+- [ ] Automated benchmark suite (CI/CD)
