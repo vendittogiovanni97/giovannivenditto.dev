@@ -42,3 +42,6 @@ next-env.d.ts
 
 # stray skill install (not part of the portfolio)
 .ui-ux-pro-max-skill/
+
+# design-review snapshots (local tooling)
+.impeccable/
