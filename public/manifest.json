@@ -1,0 +1,16 @@
+{
+  "name": "Giovanni Venditto | Creative Engineering",
+  "short_name": "GV Portfolio",
+  "description": "Senior Frontend Developer & Creative Engineer. Tech Lead at Agilae.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0c12",
+  "theme_color": "#0a0c12",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

@@ -1,26 +1,160 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/Geist-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/GeistMono-Regular.woff2") format("woff2");
+}
+
+/*
+  Palette: "Deep Green Terminal"
+  Single source of truth. One base (green-black) + one accent (acid lime).
+  Legacy Tailwind color families (cyan/sky/indigo/violet) are remapped to the
+  single accent below so existing utility classes reskin without per-file edits.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0b1410;
+  --foreground: #e7efe9;
+  --color-surface: #0f1b14;
+  --color-border: rgba(184, 255, 60, 0.1);
+  --color-accent: #b8ff3c;
+  --color-accent-bright: #cbff6b;
+  --color-accent-deep: #84c70f;
+  --spacing-gutter: 24px;
+}
+
+@theme {
+  /* Micro type scale (technical labels / metadata) */
+  --text-2xs: 0.6875rem; /* 11px */
+  --text-3xs: 0.625rem; /* 10px */
+  --text-4xs: 0.5625rem; /* 9px */
+
+  /* Single brand accent (acid lime) */
+  --color-accent: #b8ff3c;
+  --color-accent-bright: #cbff6b;
+  --color-accent-deep: #84c70f;
+
+  /* Remap legacy accent families -> single lime accent (kills cyan+violet mix) */
+  --color-cyan-300: #cbff6b;
+  --color-cyan-400: #b8ff3c;
+  --color-cyan-500: #a2ee22;
+  --color-cyan-900: #213a08;
+  --color-sky-400: #b8ff3c;
+  --color-indigo-400: #b8ff3c;
+  --color-indigo-500: #a2ee22;
+  --color-violet-500: #a2ee22;
+  --color-violet-600: #84c70f;
+
+  /* Neutral ramp: green-tinted ink (replaces blue-tinted slate) */
+  --color-slate-50: #f2f7f3;
+  --color-slate-100: #e7efe9;
+  --color-slate-200: #d0ddd4;
+  --color-slate-300: #b4c7bb;
+  --color-slate-400: #8aa294;
+  --color-slate-500: #5c7565;
+  --color-slate-600: #405648;
+  --color-slate-700: #2c4034;
+  --color-slate-800: #1c2b22;
+  --color-slate-900: #0f1b14;
+  --color-slate-950: #0a130e;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --spacing-container-max: 1400px;
+  --spacing-gutter: 24px;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Geist", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism & Panel System */
+.glass-panel {
+  background: rgba(15, 27, 20, 0.72);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(184, 255, 60, 0.28);
+  box-shadow: 0 14px 40px -10px rgba(184, 255, 60, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Background Gradients (subtle single-hue green glow) */
+.aurora-bg {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(184, 255, 60, 0.05) 0%, transparent 42%),
+    radial-gradient(circle at 82% 30%, rgba(132, 199, 15, 0.04) 0%, transparent 42%),
+    radial-gradient(circle at 50% 82%, rgba(184, 255, 60, 0.03) 0%, transparent 46%);
+}
+
+/*
+  Former gradient-text classes are now solid (gradient text is a decorative
+  AI tell). Kept as classes so existing markup renders correctly.
+*/
+.text-gradient-cyan {
+  color: var(--foreground);
+  -webkit-text-fill-color: currentColor;
+  background: none;
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-gradient-subtle {
+  color: var(--foreground);
+  -webkit-text-fill-color: currentColor;
+  background: none;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0b1410;
+}
+::-webkit-scrollbar-thumb {
+  background: #1c2b22;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b8ff3c;
+}
+
+/* Focus Visible Access */
+:focus-visible {
+  outline: 2px solid #b8ff3c;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

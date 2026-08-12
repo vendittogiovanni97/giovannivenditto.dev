@@ -1,0 +1,110 @@
+---
+title: "Assicurativo Studio Platform"
+description: "Piattaforma completa per la gestione di studi assicurativi: preventivazione, gestione polizze, CRM clienti, reporting normativo e automazione workflow."
+shortDescription: "SaaS B2B per la digitalizzazione completa degli studi assicurativi italiani."
+role: "Tech Lead & Senior Frontend Developer"
+company: "Agilae"
+companyUrl: "https://agilae.it"
+startDate: "2023-01"
+current: true
+stack:
+  - "Next.js 16 (App Router)"
+  - "React 18"
+  - "TypeScript"
+  - "Tailwind CSS"
+  - "Prisma ORM"
+  - "PostgreSQL"
+  - "tRPC"
+  - "NextAuth.js"
+  - "React Hook Form + Zod"
+  - "Recharts"
+  - "Vercel"
+category: "product"
+featured: true
+order: 1
+metrics:
+  "Utenti attivi": "500+ studi assicurativi"
+  "Riduzione tempo preventivazione": "−70%"
+  "Uptime": "99.9%"
+  "Performance Lighthouse": "95+"
+challenges:
+  - "Complessità normativa italiana (IVASS, GDPR, fatturazione elettronica)"
+  - "Migrazione da legacy monolitico a architettura modulare"
+  - "Gestione stato complesso per wizard multi-step preventivazione"
+  - "Real-time collaboration tra agenti e back-office"
+solutions:
+  - "Architettura a modelli di dominio (DDD) con bounded contexts per polizze, clienti, sinistri"
+  - "tRPC per type-safe API layer end-to-end senza code generation"
+  - "React Hook Form + Zod per validazione schema-driven su 50+ campi per polizza"
+  - "Server Components per SEO e performance, Client Components solo dove serve interattività"
+  - "Web Workers per calcoli attuariali complessi non bloccanti"
+  - "Design system interno con 60+ componenti accessibili (WCAG 2.1 AA)"
+learnings:
+  - "Investire in type-safety end-to-end (tRPC + Prisma + Zod) ripaga in manutenibilità"
+  - "Server Components richiedono ripensare data fetching patterns tradizionali"
+  - "Design system non è solo UI: token, pattern, doc, governance"
+images:
+  hero: "/projects/assicurativo/hero.jpg"
+  gallery:
+    - "/projects/assicurativo/dashboard.jpg"
+    - "/projects/assicurativo/wizard.jpg"
+    - "/projects/assicurativo/reporting.jpg"
+links:
+  live: "https://app.agilae.it"
+  github: ""
+  caseStudy: "/work/assicurativo-studio"
+---
+
+# Assicurativo Studio Platform
+
+## Il Problema
+
+Gli studi assicurativi italiani operano ancora con processi largamente manuali: fogli Excel per preventivi, cartaceo per polizze, comunicazioni frammentate via email/Whatsapp. La normativa IVASS richiede tracciabilità completa, conservazione sostitutiva, reportistica periodica. Il software legacy sul mercato è obsoleto, costoso, non integrabile.
+
+## La Soluzione
+
+Ho guidato lo sviluppo end-to-end di una piattaforma SaaS che digitalizza l'intero ciclo di vita dello studio assicurativo:
+
+**Core Modules:**
+- **Preventivatore Intelligente**: Wizard multi-step con calcolo premi real-time, confronto compagnie, generazione PDF brandizzato
+- **Gestione Polizze**: CRUD completo, scadenze automatiche, rinnovi, gestione sinistri integrata
+- **CRM Clienti**: Anagrafiche, storico interazioni, documenti, comunicazioni multicanale (email, SMS, PEC)
+- **Reporting Normativo**: Export IVASS, fatturazione elettronica SDI, conservazione a norma
+- **Back-office Collaboration**: Real-time presence, task assignment, audit trail completo
+
+## Architettura Tecnica
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      Next.js 16 App Router                  │
+├─────────────────┬─────────────────┬─────────────────────────┤
+│  Server Comp.   │  Client Comp.   │      Edge/Serverless    │
+│  (RSC default)  │  (interattività)│   (auth, webhooks)      │
+└────────┬────────┴────────┬────────┴───────────┬────────────┘
+         │                 │                    │
+    ┌────▼────┐      ┌─────▼────┐         ┌─────▼────┐
+    │  tRPC   │◄────►│  Prisma  │         │  NextAuth│
+    │  Router │      │  (Postgres)        │  (JWT)   │
+    └─────────┘      └──────────┘         └──────────┘
+```
+
+**Decisioni Chiave:**
+- **tRPC + Prisma**: Type-safety end-to-end senza generazione codice. Refactoring sicuro.
+- **Server Components by default**: Riduce bundle client del 60%, migliora SEO e TTFB.
+- **Design System interno**: 60+ componenti, token centralizzati, Storybook, test visivi.
+- **Web Workers**: Calcoli attuariali (premi, riserve) off-main-thread.
+
+## Risultati Misurabili
+
+- **Tempo preventivazione**: 45 min → 12 min (**−73%**)
+- **Errori dati manuali**: ~15% → <1% (**−93%**)
+- **Onboarding nuovo agente**: 2 settimane → 2 giorni (**−85%**)
+- **NPS clienti studi**: 32 → 67 (**+109%**)
+
+## Stack Completo
+
+**Frontend:** Next.js 16, React 18, TypeScript, Tailwind CSS, Framer Motion, Recharts, React Hook Form, Zod, date-fns
+**Backend:** tRPC, Prisma ORM, PostgreSQL, NextAuth.js (JWT + email/password + magic link)
+**Infrastructure:** Vercel (edge functions, ISR, image optimization), Upstash Redis (rate limiting, caching), Resend (transactional emails)
+**Quality:** ESLint, Prettier, TypeScript strict, Husky, lint-staged, Playwright (e2e), Vitest (unit), Storybook (component docs)
+**Monitoring:** Vercel Analytics, Sentry (error tracking), custom business metrics dashboard

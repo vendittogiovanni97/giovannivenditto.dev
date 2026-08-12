@@ -1,0 +1,121 @@
+---
+title: "InkFlow - Gestionale Tatuaggi"
+description: "Software gestionale completo per studi di tatuaggi: prenotazioni, gestione artisti, portfolio clienti, consenso informato digitale, fatturazione e inventory inchiostri."
+shortDescription: "Vertical SaaS per la gestione completa di studi tatuaggi e piercing."
+role: "Full Stack Developer & Product Designer"
+company: "Freelance / Startup"
+startDate: "2022-06"
+endDate: "2023-12"
+current: false
+stack:
+  - "Next.js 13 (Pages Router → App Router migration)"
+  - "React 18"
+  - "TypeScript"
+  - "Tailwind CSS"
+  - "Supabase (PostgreSQL + Auth + Realtime + Storage)"
+  - "Prisma ORM"
+  - "Stripe (pagamenti + abbonamenti)"
+  - "React Hook Form + Zod"
+  - "React Big Calendar"
+  - "Vercel"
+category: "client"
+featured: true
+order: 2
+metrics:
+  "Studi onboardati": "12"
+  "Artisti gestiti": "45+"
+  "Prenotazioni/mese": "2.000+"
+  "Riduzione no-show": "−60% (reminder automatici)"
+  "Tempo setup nuovo studio": "< 30 min"
+challenges:
+  - "Calendar complesso: artisti multipli, risorse condivise, durate variabili, walk-in"
+  - "Consenso informato digitale con firma legalmente valida (eIDAS)"
+  - "Gestione inventory inchiostri/aghi con scadenze e lotti"
+  - "Pagamenti: acconti, saldi, tip, split tra artista/studio"
+  - "Migrazione da Pages Router ad App Router in produzione"
+solutions:
+  - "Supabase Realtime per calendar sincronizzato multi-device senza polling"
+  - "Firma digitale con canvas + timestamp + hash su blockchain (Anchor) per non ripudiabilità"
+  - "Stripe Connect per marketplace: payout automatici ad artisti, fee piattaforma"
+  - "Design system adattabile: theming per brand studio (colori, logo, font)"
+  - "Migration strategy: route per route, feature flags, zero downtime"
+learnings:
+  - "Supabase (PostgreSQL + Realtime + Auth + Storage) accelera MVP 10x vs backend custom"
+  - "Vertical SaaS richiede domain modeling profondo, non solo CRUD"
+  - "Firma digitale: UX fluida ma compliance rigorosa (eIDAS, GDPR)"
+  - "Stripe Connect: gestire onboarding KYC artisti è la parte più complessa"
+images:
+  hero: "/projects/inkflow/hero.jpg"
+  gallery:
+    - "/projects/inkflow/calendar.jpg"
+    - "/projects/inkflow/consent.jpg"
+    - "/projects/inkflow/inventory.jpg"
+    - "/projects/inkflow/payments.jpg"
+links:
+  live: "https://inkflow.app"
+  github: ""
+  caseStudy: "/work/inkflow"
+---
+
+# InkFlow - Gestionale per Studi Tatuaggi
+
+## Il Problema
+
+Gli studi tatuaggi gestiscono tutto su carta, WhatsApp, fogli Excel: agenda appuntamenti, schede clienti, consenso informato, inventory materiali, pagamenti, split commissioni artisti. Nessun software verticale italiano risolve il problema end-to-end. Gli strumenti generici (Calendly, Square, ecc.) non coprono: consenso informato medico-estetico, gestione artisti con portfolio, inventory inchiostri con lotti/scadenze, split pagamenti studio/artista.
+
+## La Soluzione
+
+Sviluppato come prodotto SaaS verticale (B2B2C), InkFlow digitalizza l'intera operatività dello studio:
+
+**Moduli Core:**
+- **Smart Calendar**: Multi-artista, multi-risorsa (postazioni, sale), durate variabili per tipologia tatuaggio, walk-in queue, drag&drop, sync real-time su tutti i device
+- **Client CRM & Portfolio**: Anagrafiche, storico tatuaggi (foto, note, artista), preferenze, allergie, consenso informato versionato
+- **Digital Consent Form**: Firma su canvas (touch/mouse), timestamp, IP, hash su blockchain (Anchor protocol) per non ripudiabilità, PDF generato e archiviato a norma GDPR
+- **Inventory & Supply Chain**: Inchiostri, aghi, guanti, aftercare - tracking lotti, scadenze, soglie riordino, fornitori
+- **Payments & Payouts**: Stripe Connect - cliente paga (acconto/saldo/tip), payout automatico ad artista (percentuale configurabile), fee piattaforma, fatturazione elettronica SDI
+- **Artist Portal**: Dashboard personale: agenda, clienti, portfolio, guadagni, statistiche
+- **Studio Analytics**: Occupazione postazioni, revenue per artista/servizio, retention clienti, conversion funnel
+
+## Architettura Tecnica
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        Next.js 13/14                            │
+├──────────────────┬──────────────────┬──────────────────────────┤
+│  App Router      │  API Routes      │  Middleware              │
+│  (RSC, Layouts)  │  (webhooks,      │  (auth, i18n,          │
+│                  │   Stripe,        │   feature flags)        │
+│                  │   Supabase)      │                          │
+└────────┬─────────┴────────┬─────────┴───────────┬──────────────┘
+         │                  │                     │
+    ┌────▼────┐       ┌─────▼────┐          ┌─────▼────┐
+    │Supabase │◄─────►│  Prisma  │          │  Stripe  │
+    │(Auth,   │       │ (Schema) │          │ Connect  │
+    │ Realtime,│       │          │          │ (Payouts)│
+    │ Storage) │       │          │          │          │
+    └─────────┘       └──────────┘          └──────────┘
+```
+
+**Decisioni Chiave:**
+- **Supabase come backend unificato**: Auth (email/password, magic link, OAuth), Database (PostgreSQL + RLS), Realtime (calendar sync), Storage (foto tatuaggi, PDF consenso) - zero server management
+- **Row Level Security (RLS)**: Policy per tenant (studio) - isolamento dati nativo a livello DB
+- **Stripe Connect Standard**: Onboarding artisti guidato, payout automatici giornalieri, gestione dispute/rimborsi
+- **Migration App Router**: Feature flag per route, parallel run, testing automatizzato (Playwright), rollback istantaneo
+
+## Risultati Misurabili
+
+- **Studi onboardati (beta)**: 12
+- **Artisti attivi**: 45+
+- **Prenotazioni/mese**: 2.000+
+- **Riduzione no-show**: **−60%** (reminder WhatsApp/Email automatici 24h/2h prima)
+- **Tempo setup nuovo studio**: **< 30 min** (wizard guidato)
+- **NPS artisti**: 72
+- **Uptime**: 99.95%
+
+## Stack Completo
+
+**Frontend:** Next.js 16, React 18, TypeScript, Tailwind CSS, Framer Motion, React Big Calendar, React Hook Form, Zod, date-fns, Lucide React
+**Backend:** Supabase (PostgreSQL, Auth, Realtime, Storage, Edge Functions), Prisma ORM, Stripe Connect, Resend (email), Twilio (WhatsApp/SMS)
+**Infrastructure:** Vercel (deploy, edge, analytics), GitHub Actions (CI/CD), Sentry (error tracking), PostHog (product analytics)
+**Quality:** TypeScript strict, ESLint, Prettier, Husky, Playwright (e2e multi-browser), Vitest, Storybook
+**Compliance:** GDPR (data export/deletion, consent log), eIDAS (firma elettronica avanzata), Fatturazione elettronica SDI
