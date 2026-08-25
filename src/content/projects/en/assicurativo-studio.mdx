@@ -1,110 +1,46 @@
 ---
-title: "Assicurativo Studio Platform"
-description: "Complete platform for managing insurance agencies: quoting, policy management, client CRM, regulatory reporting and workflow automation."
-shortDescription: "B2B SaaS for the complete digitalization of Italian insurance agencies."
-role: "Tech Lead & Senior Frontend Developer"
-company: "Agilae"
-companyUrl: "https://agilae.it"
+title: "Portale Assicurativo"
+description: "Enterprise monorepo platform for integrated insurance management of clients, policies, and expirations, featuring automated OCR & LLM extraction."
+shortDescription: "Full-stack insurance management platform with automated OCR, LLM, and security hardening."
+role: "Tech Lead & Fullstack Developer"
+company: "VG Assicurazioni"
 startDate: "2023-01"
 current: true
 stack:
-  - "Next.js 16 (App Router)"
-  - "React 18"
+  - "React 19"
+  - "Vite"
   - "TypeScript"
-  - "Tailwind CSS"
-  - "Prisma ORM"
-  - "PostgreSQL"
-  - "tRPC"
-  - "NextAuth.js"
-  - "React Hook Form + Zod"
-  - "Recharts"
-  - "Vercel"
+  - "Material UI (MUI)"
+  - "AG Grid 32"
+  - "Node.js 22+"
+  - "Express 5"
+  - "MongoDB / Mongoose"
+  - "OCR Tesseract + LLM Gemini"
+  - "Docker"
 category: "product"
 featured: true
 order: 1
-metrics:
-  "Active users": "500+ insurance agencies"
-  "Quoting time reduction": "−70%"
-  "Uptime": "99.9%"
-  "Lighthouse Performance": "95+"
-challenges:
-  - "Italian regulatory complexity (IVASS, GDPR, electronic invoicing)"
-  - "Migration from legacy monolith to modular architecture"
-  - "Complex state management for multi-step quoting wizard"
-  - "Real-time collaboration between agents and back-office"
-solutions:
-  - "Domain-Driven Design (DDD) architecture with bounded contexts for policies, clients, claims"
-  - "tRPC for end-to-end type-safe API layer without code generation"
-  - "React Hook Form + Zod for schema-driven validation on 50+ fields per policy"
-  - "Server Components for SEO and performance, Client Components only where interactivity is needed"
-  - "Web Workers for non-blocking actuarial calculations"
-  - "Internal design system with 60+ accessible components (WCAG 2.1 AA)"
-learnings:
-  - "Investing in end-to-end type-safety (tRPC + Prisma + Zod) pays off in maintainability"
-  - "Server Components require rethinking traditional data fetching patterns"
-  - "Design system is not just UI: tokens, patterns, docs, governance"
-images:
-  hero: "/projects/assicurativo/hero.jpg"
-  gallery:
-    - "/projects/assicurativo/dashboard.jpg"
-    - "/projects/assicurativo/wizard.jpg"
-    - "/projects/assicurativo/reporting.jpg"
 links:
-  live: "https://app.agilae.it"
-  github: ""
+  live: ""
+  github: "https://github.com/vendittogiovanni97/PortaleAssicurazioni"
   caseStudy: "/work/assicurativo-studio"
 ---
 
-# Assicurativo Studio Platform
+# Portale Assicurativo — Enterprise Management & OCR Pipeline
 
-## The Problem
+## Project Overview
+**Portale Assicurazioni** is an enterprise platform designed to digitalize the management of insurance clients, contracts, and expirations. The app combines a ultra-reactive frontend built with **React 19 + Vite + Material UI** with a Node.js/Express backend and **MongoDB**.
 
-Italian insurance agencies still operate with largely manual processes: Excel spreadsheets for quotes, paper for policies, fragmented communication via email/WhatsApp. IVASS regulations require complete traceability, digital preservation, periodic reporting. Legacy software on the market is outdated, expensive, and non-integrable.
+## Technical Highlights & Features
 
-## The Solution
+### 🔍 Real-Time Watcher & OCR + LLM Pipeline
+- **Real-Time Directory Monitoring**: Backend watches input folders in real-time via *Chokidar watcher*.
+- **Automated Data Extraction**: Uploaded PDF policy documents are parsed using a combined **OCR (Tesseract)** and **LLM (Gemini)** pipeline to automatically extract client info, limits, premiums, and expiration dates.
 
-I led the end-to-end development of a SaaS platform that digitizes the entire lifecycle of an insurance agency:
+### 🛡️ Security Hardening
+- **IDOR Protection & RBAC**: Role-based access control (`admin`, `super_admin`) with ownership verification on sensitive attachments and resources.
+- **MIME Magic Bytes Verification**: Binary signature inspection for image and PDF uploads to prevent malicious file execution.
+- **Path Traversal Mitigation**: Controlled path resolution with strict system whitelisting.
 
-**Core Modules:**
-- **Smart Quoter**: Multi-step wizard with real-time premium calculation, company comparison, branded PDF generation
-- **Policy Management**: Complete CRUD, automatic expirations, renewals, integrated claims management
-- **Client CRM**: Profiles, interaction history, documents, omnichannel communication (email, SMS, PEC)
-- **Regulatory Reporting**: IVASS exports, electronic invoicing SDI, compliant digital preservation
-- **Back-office Collaboration**: Real-time presence, task assignment, complete audit trail
-
-## Technical Architecture
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      Next.js 16 App Router                  │
-├─────────────────┬─────────────────┬─────────────────────────┤
-│  Server Comp.   │  Client Comp.   │      Edge/Serverless    │
-│  (RSC default)  │  (interactivity)│   (auth, webhooks)      │
-└────────┬────────┴────────┬────────┴───────────┬────────────┘
-         │                 │                    │
-    ┌────▼────┐      ┌─────▼────┐         ┌─────▼────┐
-    │  tRPC   │◄────►│  Prisma  │         │  NextAuth│
-    │  Router │      │  (Postgres)        │  (JWT)   │
-    └─────────┘      └──────────┘         └──────────┘
-```
-
-**Key Decisions:**
-- **tRPC + Prisma**: End-to-end type-safety without code generation. Safe refactoring.
-- **Server Components by default**: Reduces client bundle by 60%, improves SEO and TTFB.
-- **Internal Design System**: 60+ components, centralized tokens, Storybook, visual tests.
-- **Web Workers**: Actuarial calculations (premiums, reserves) off-main-thread.
-
-## Measurable Results
-
-- **Quoting time**: 45 min → 12 min (**−73%**)
-- **Manual data errors**: ~15% → <1% (**−93%**)
-- **New agent onboarding**: 2 weeks → 2 days (**−85%**)
-- **Client agency NPS**: 32 → 67 (**+109%**)
-
-## Full Stack
-
-**Frontend:** Next.js 16, React 18, TypeScript, Tailwind CSS, Framer Motion, Recharts, React Hook Form, Zod, date-fns
-**Backend:** tRPC, Prisma ORM, PostgreSQL, NextAuth.js (JWT + email/password + magic link)
-**Infrastructure:** Vercel (edge functions, ISR, image optimization), Upstash Redis (rate limiting, caching), Resend (transactional emails)
-**Quality:** ESLint, Prettier, TypeScript strict, Husky, lint-staged, Playwright (e2e), Vitest (unit), Storybook (component docs)
-**Monitoring:** Vercel Analytics, Sentry (error tracking), custom business metrics dashboard
+### 📊 Analytics Dashboard & AG Grid
+- High-performance tabular data management with **AG Grid 32** for fast search, advanced filtering, and report export.

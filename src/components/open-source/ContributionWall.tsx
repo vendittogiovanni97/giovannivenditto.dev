@@ -130,18 +130,20 @@ export function ContributionWall({ username }: ContributionWallProps) {
   }, []);
 
   return (
-    <section className="w-full py-[120px]">
-      <div className="max-w-container-max mx-auto px-gutter">
+    <section className="w-full py-20 relative">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-slate-800 pb-8"
+          className="mb-10 border-b border-slate-800 pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4"
         >
           <div>
-            <h2 className="font-headline text-4xl md:text-5xl text-slate-100 tracking-tight mb-4">{t.openSource.title}</h2>
-            <p className="font-headline text-slate-400 max-w-xl text-lg font-light">
+            <h2 className="font-headline text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+              {t.openSource.title}
+            </h2>
+            <p className="mt-2 text-slate-400 text-base max-w-xl font-headline font-light">
               {t.openSource.subtitle}
             </p>
           </div>

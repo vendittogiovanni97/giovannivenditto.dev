@@ -1,4 +1,3 @@
-import { Credentials } from "@/components/credentials/Credentials";
 import { Hero } from "@/components/hero/Hero";
 import { HomeSections } from "@/components/layout/HomeSections";
 import { getAllProjects } from "@/lib/content";
@@ -12,7 +11,6 @@ export default async function Home() {
     <>
       <Hero />
       <HomeSections projects={projects} />
-      <Credentials />
     </>
   );
 }

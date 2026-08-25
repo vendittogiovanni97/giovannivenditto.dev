@@ -67,7 +67,7 @@ export function WebGLBackground() {
         float n2 = snoise(uv * 1.0 - u_time * 0.02);
         
         float dist = length(uv - mouse);
-        float mouseGlow = smoothstep(0.8, 0.0, dist) * 0.15;
+        float mouseGlow = smoothstep(0.8, 0.0, dist) * 0.05;
         
         float flow = smoothstep(0.4, 0.6, n + n2 * 0.5);
         vec3 accentColor = vec3(0.722, 1.0, 0.235);

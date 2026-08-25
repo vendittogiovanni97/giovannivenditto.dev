@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Chip } from "@/components/ui";
 import type { ProjectMetadata } from "@/lib/content";
 import { useI18n } from "@/i18n";
 import Link from "next/link";
-import { Eye, ArrowUpRight, Filter } from "lucide-react";
+import { Eye, ArrowUpRight } from "lucide-react";
 import { ProjectQuickViewModal } from "./ProjectQuickViewModal";
 
 interface ProjectCardProps {
@@ -40,9 +39,9 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={`project-card group relative rounded-3xl overflow-hidden glass-panel border border-slate-800 bg-slate-900/60 hover:border-cyan-400/40 transition-all ${className ?? ""}`}
+      className={`project-card group relative rounded-3xl overflow-hidden glass-panel border border-slate-800 bg-slate-900/60 hover:border-accent/40 transition-all ${className ?? ""}`}
     >
-      {/* Generative cover (fallback when no hero screenshot exists) */}
+      {/* Generative cover */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         <div
           className="absolute inset-0 opacity-60 group-hover:opacity-80 transition-opacity duration-700"
@@ -56,7 +55,7 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
         </span>
       </div>
 
-      {/* Real hero screenshot, if present (layers above the cover) */}
+      {/* Real hero screenshot */}
       {project.images?.hero && (
         <div
           className="absolute inset-0 bg-cover bg-center opacity-25 group-hover:opacity-55 transition-all duration-700 grayscale group-hover:grayscale-0 group-hover:scale-105 transform-gpu"
@@ -69,11 +68,11 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent" />
 
       {/* Card Content Overlay */}
-      <div className="relative z-20 p-6 sm:p-8 flex flex-col min-h-[380px] justify-between">
+      <div className="relative z-20 p-6 sm:p-8 flex flex-col min-h-[360px] justify-between">
         
         {/* Category & Action Buttons */}
         <div className="flex justify-between items-center w-full">
-          <span className="font-mono text-xs px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-400/20">
+          <span className="font-mono text-xs px-3 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">
             {categoryLabels[project.category]}
           </span>
 
@@ -84,15 +83,15 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
                 onQuickView(project);
               }}
               title="Anteprima Rapida"
-              className="w-9 h-9 rounded-full glass-panel flex items-center justify-center border border-slate-700 text-cyan-300 hover:bg-cyan-400 hover:text-slate-950 transition-all cursor-pointer shadow-md"
+              className="w-9 h-9 rounded-full glass-panel flex items-center justify-center border border-slate-700 text-accent hover:bg-accent hover:text-slate-950 transition-all cursor-pointer shadow-md"
             >
               <Eye className="w-4 h-4" />
             </button>
 
             <Link
               href={`/work/${project.slug}`}
-              title="Apri Case Study"
-              className="w-9 h-9 rounded-full glass-panel flex items-center justify-center border border-slate-700 text-slate-200 hover:bg-cyan-400 hover:text-slate-950 transition-all cursor-pointer shadow-md"
+              title="Apri Dettaglio"
+              className="w-9 h-9 rounded-full glass-panel flex items-center justify-center border border-slate-700 text-slate-200 hover:bg-accent hover:text-slate-950 transition-all cursor-pointer shadow-md"
             >
               <ArrowUpRight className="w-4 h-4" />
             </Link>
@@ -102,7 +101,7 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
         {/* Title, Description & Tech Badges */}
         <div className="mt-auto pt-8">
           <Link href={`/work/${project.slug}`}>
-            <h3 className="font-headline text-2xl sm:text-3xl font-bold text-slate-100 mb-2 group-hover:text-cyan-300 transition-colors">
+            <h3 className="font-headline text-2xl sm:text-3xl font-bold text-slate-100 mb-2 group-hover:text-accent transition-colors">
               {project.title}
             </h3>
           </Link>
@@ -134,19 +133,7 @@ interface SelectedWorkProps {
 
 export function SelectedWork({ projects }: SelectedWorkProps) {
   const { t } = useI18n();
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [activeModalProject, setActiveModalProject] = useState<ProjectMetadata | null>(null);
-
-  const categories = [
-    { id: "all", label: t.work.filters.all },
-    { id: "product", label: t.work.filters.product },
-    { id: "client", label: t.work.filters.client },
-    { id: "experimental", label: t.work.filters.experimental },
-  ];
-
-  const filteredProjects = selectedCategory === "all"
-    ? projects
-    : projects.filter((p) => p.category === selectedCategory);
 
   return (
     <section id="work" className="w-full py-20 relative">
@@ -157,39 +144,20 @@ export function SelectedWork({ projects }: SelectedWorkProps) {
           <h2 className="font-headline text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
             {t.work.title}
           </h2>
-          <p className="mt-2 text-slate-400 text-base max-w-xl">
+          <p className="mt-2 text-slate-400 text-base max-w-xl font-headline font-light">
             {t.work.subtitle}
           </p>
-        </div>
-
-        {/* Category Filters */}
-        <div className="flex flex-wrap items-center gap-2 mb-10">
-          <Filter className="w-4 h-4 text-cyan-400 mr-2 hidden sm:block" />
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 py-2 rounded-full font-mono text-xs transition-all cursor-pointer ${
-                selectedCategory === cat.id
-                  ? "bg-cyan-400 text-slate-950 font-semibold shadow-[0_0_20px_rgba(184,255,60,0.3)]"
-                  : "glass-panel text-slate-300 hover:text-white border-slate-800 hover:border-slate-700"
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
         </div>
 
         {/* Project Grid */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => (
+            {projects.map((project, index) => (
               <ProjectCard
                 key={project.slug}
                 project={project}
                 delay={0.05 + index * 0.05}
                 onQuickView={(proj) => setActiveModalProject(proj)}
-                className={project.slug === "neural-field-explorer" ? "md:col-span-2" : ""}
               />
             ))}
           </AnimatePresence>

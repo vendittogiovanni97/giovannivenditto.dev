@@ -33,16 +33,17 @@ export function CursorSpotlight() {
 
   return (
     <motion.div
-      className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
+      className="pointer-events-none fixed inset-0 z-[-1] transition-opacity duration-300"
       animate={{ opacity: isVisible ? 1 : 0 }}
+      aria-hidden="true"
     >
       <div
-        className="pointer-events-none fixed -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/10 blur-[90px]"
+        className="pointer-events-none fixed -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.06] blur-[100px]"
         style={{
           left: `${mousePosition.x}px`,
           top: `${mousePosition.y}px`,
-          width: "450px",
-          height: "450px",
+          width: "380px",
+          height: "380px",
         }}
       />
     </motion.div>

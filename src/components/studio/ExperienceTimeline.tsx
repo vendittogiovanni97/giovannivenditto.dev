@@ -6,9 +6,7 @@ import { Calendar, ChevronDown, Award, Sparkles, Building2 } from "lucide-react"
 import { useI18n } from "@/i18n";
 
 const MILESTONES = [
-  { id: "agilae", stack: ["Next.js 16", "React 19", "TypeScript", "tRPC", "Prisma", "Tailwind CSS v4"] },
-  { id: "studio", stack: ["React", "Three.js", "WebGL", "GSAP", "Framer Motion", "Zustand"] },
-  { id: "dph", stack: ["Node.js", "Express", "React", "PostgreSQL", "Docker", "Jest"] },
+  { id: "agilae", stack: ["Next.js 16", "React 19", "TypeScript", "Material UI", "Node.js", "Express", "MongoDB", "Docker"] },
 ] as const;
 
 export function ExperienceTimeline() {

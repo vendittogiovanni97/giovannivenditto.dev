@@ -2,12 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui";
 import { LanguageToggle } from "@/components/ui/LanguageToggle";
-import { SoundToggle } from "@/components/ui/SoundToggle";
 import { useI18n } from "@/i18n";
+import { config } from "@/lib/config";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 
 export function NavBar() {
   const [scrolled, setScrolled] = useState(false);
@@ -17,9 +16,40 @@ export function NavBar() {
 
   const navLinks = [
     { href: "/#work", label: t.nav.work },
+    { href: "/lab", label: "Lab Demo" },
     { href: "/writing", label: t.nav.writing },
-    { href: "/studio", label: t.nav.studio },
-    { href: "/contact", label: t.nav.contact },
+    { href: "/CV_Giovanni_Venditto.pdf", label: "Curriculum", isDownload: true },
+  ];
+
+  const socialLinks = [
+    {
+      href: `https://linkedin.com/in/${config.linkedin}`,
+      label: "LinkedIn",
+      icon: (
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+        </svg>
+      ),
+    },
+    {
+      href: `https://github.com/${config.github}`,
+      label: "GitHub",
+      icon: (
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.579v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+        </svg>
+      ),
+    },
+    {
+      href: `mailto:${config.email}`,
+      label: "Email",
+      icon: (
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+          <polyline points="22,6 12,13 2,6" />
+        </svg>
+      ),
+    },
   ];
 
   useEffect(() => {
@@ -37,10 +67,10 @@ export function NavBar() {
 
   return (
     <>
-      {/* Scrim: hides page content scrolling behind the floating nav pill */}
+      {/* Scrim */}
       <div
         aria-hidden="true"
-        className={`fixed top-0 left-0 w-full h-28 z-40 pointer-events-none transition-opacity duration-300 ${
+        className={`fixed top-0 left-0 w-full h-24 z-40 pointer-events-none transition-opacity duration-300 ${
           scrolled ? "opacity-100" : "opacity-0"
         }`}
         style={{
@@ -53,50 +83,76 @@ export function NavBar() {
       <div className="fixed top-0 left-0 w-full h-[2px] z-[60] bg-transparent">
         <div
           ref={progressBarRef}
-          className="h-full bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-500 origin-left"
+          className="h-full bg-accent origin-left"
           style={{ transform: "scaleX(0)" }}
         />
       </div>
 
       <nav
         id="main-nav"
-        className={`fixed top-0 w-full z-50 transition-all duration-300 px-6 sm:px-8 ${
-          scrolled ? "py-3" : "py-5"
+        className={`fixed top-0 w-full z-50 transition-all duration-300 px-4 sm:px-6 ${
+          scrolled ? "py-3" : "py-4"
         }`}
         role="navigation"
         aria-label="Main navigation"
       >
-        <div className="max-w-[1400px] mx-auto flex justify-between items-center glass-panel rounded-full px-6 py-2.5 bg-slate-950/80 border-slate-800">
+        <div className="max-w-[1400px] mx-auto flex justify-between items-center glass-panel rounded-full px-5 sm:px-6 py-2 bg-slate-950/85 border border-slate-800 shadow-xl backdrop-blur-md">
           
           {/* Logo */}
-          <Link href="/" className="font-headline text-lg font-extrabold tracking-tighter text-slate-100 hover:text-cyan-400 transition-colors">
-            GV.
+          <Link href="/" className="font-headline text-base sm:text-lg font-extrabold tracking-tighter text-slate-100 hover:text-accent transition-colors">
+            GV
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-slate-300 font-mono text-xs hover:text-cyan-400 transition-colors duration-200"
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) =>
+              link.isDownload ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="CV_Giovanni_Venditto.pdf"
+                  className="text-slate-300 font-mono text-xs hover:text-accent px-2 py-1 rounded-md transition-colors duration-200 flex items-center gap-1.5"
+                >
+                  <Download className="w-3.5 h-3.5 text-accent" />
+                  <span>{link.label}</span>
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-slate-300 font-mono text-xs hover:text-accent px-2 py-1 rounded-md transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
 
-          {/* Controls */}
+          {/* Controls & Social Links */}
           <div className="hidden md:flex items-center gap-3">
-            <div className="flex items-center gap-2 font-mono text-2xs text-slate-400 pr-2 border-r border-slate-800">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" aria-hidden="true" />
-              {t.nav.available}
+            {/* Social Icons Floating inside Nav Pill */}
+            <div className="flex items-center gap-2.5 pr-3.5 border-r border-slate-800/80">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target={s.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel={s.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                  className="p-1.5 rounded-full text-slate-300 hover:text-accent hover:bg-slate-900 transition-all hover:scale-110"
+                  aria-label={s.label}
+                  title={s.label}
+                >
+                  {s.icon}
+                </a>
+              ))}
             </div>
-            <SoundToggle />
+
             <LanguageToggle />
             <Link
               href="/contact"
-              className="px-4 py-2 rounded-full bg-cyan-400 text-slate-950 font-mono text-xs font-semibold hover:bg-cyan-300 transition-all shadow-[0_0_15px_rgba(184,255,60,0.3)]"
+              className="px-4 py-1.5 rounded-full bg-accent text-slate-950 font-mono text-xs font-semibold hover:bg-accent-bright transition-all shadow-[0_0_15px_rgba(184,255,60,0.3)]"
             >
               {t.nav.contact}
             </Link>
@@ -109,45 +165,72 @@ export function NavBar() {
             aria-expanded={mobileMenuOpen}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6 text-accent" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 text-accent" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
-        {/* Mobile Dropdown */}
+        {/* Mobile Navigation Dropdown */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              id="mobile-menu"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden mt-3 rounded-2xl px-6 py-5 bg-slate-950 border border-slate-800 shadow-2xl"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden mt-3 max-w-4xl mx-auto glass-panel rounded-2xl p-5 bg-slate-950/95 border border-slate-800 shadow-2xl backdrop-blur-xl flex flex-col gap-4"
             >
-              <div className="flex flex-col gap-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-slate-200 font-mono text-sm hover:text-accent py-1"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <div className="flex items-center justify-between pt-4 border-t border-slate-800">
-                  <div className="flex items-center gap-3">
-                    <SoundToggle />
-                    <LanguageToggle />
-                  </div>
-                  <Link
-                    href="/contact"
-                    className="px-5 py-2 rounded-full bg-accent text-slate-950 font-mono text-xs font-semibold"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {t.nav.contact}
-                  </Link>
-                </div>
+              <div className="flex flex-col gap-2">
+                {navLinks.map((link) =>
+                  link.isDownload ? (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download="CV_Giovanni_Venditto.pdf"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-slate-200 font-headline text-sm font-semibold hover:text-accent py-2 border-b border-slate-900 flex items-center gap-2"
+                    >
+                      <Download className="w-4 h-4 text-accent" />
+                      <span>{link.label} (PDF)</span>
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-slate-200 font-headline text-sm font-semibold hover:text-accent py-2 border-b border-slate-900"
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                )}
               </div>
+
+              <div className="flex items-center justify-between pt-2 border-t border-slate-800">
+                <div className="flex items-center gap-3">
+                  {socialLinks.map((s) => (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      target={s.href.startsWith("mailto") ? undefined : "_blank"}
+                      rel={s.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                      className="p-2 rounded-full border border-slate-800 text-slate-400 hover:text-accent"
+                    >
+                      {s.icon}
+                    </a>
+                  ))}
+                </div>
+                <LanguageToggle />
+              </div>
+
+              <Link
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-2.5 text-center rounded-xl bg-accent text-slate-950 font-headline font-bold text-sm shadow-[0_0_15px_rgba(184,255,60,0.3)]"
+              >
+                {t.nav.contact}
+              </Link>
             </motion.div>
           )}
         </AnimatePresence>

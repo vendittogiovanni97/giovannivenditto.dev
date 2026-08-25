@@ -8,6 +8,8 @@ import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { ImpactMetrics } from "@/components/home/ImpactMetrics";
 import { TechRadar } from "@/components/tech-stack/TechRadar";
 import { ExperienceTimeline } from "@/components/studio/ExperienceTimeline";
+import { Credentials } from "@/components/credentials/Credentials";
+import { HowIWork } from "@/components/home/HowIWork";
 
 const ScrollDivider = dynamic(
   () => import("@/components/ui/ScrollDivider").then((m) => ({ default: m.ScrollDivider })),
@@ -36,6 +38,10 @@ export function HomeSections({ projects }: { projects: ProjectMetadata[] }) {
     <>
       <ImpactMetrics />
       <ScrollDivider color="#b8ff3c" height={80} />
+      <Credentials />
+      <ScrollDivider color="#b8ff3c" height={80} />
+      <HowIWork />
+      <ScrollDivider color="#b8ff3c" height={80} />
       <SelectedWork projects={projects} />
       <ScrollDivider color="#b8ff3c" height={80} />
       <TechRadar />
@@ -48,4 +54,3 @@ export function HomeSections({ projects }: { projects: ProjectMetadata[] }) {
     </>
   );
 }
-

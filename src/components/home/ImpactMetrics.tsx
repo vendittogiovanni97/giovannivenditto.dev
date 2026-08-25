@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code, ShieldCheck, Globe, Trophy } from "lucide-react";
+import { Code, ShieldCheck, Zap, Trophy } from "lucide-react";
 import { useI18n } from "@/i18n";
 
 const METRICS = [
-  { key: "experience", icon: Trophy, value: "5+", color: "text-accent" },
-  { key: "projects", icon: Code, value: "20+", color: "text-accent-bright" },
-  { key: "studios", icon: ShieldCheck, value: "12", color: "text-accent-deep" },
-  { key: "loc", icon: Globe, value: "50k+", color: "text-accent" },
+  { key: "experience", icon: Trophy, value: "2+", color: "text-accent" },
+  { key: "projects", icon: Code, value: "3+", color: "text-accent-bright" },
+  { key: "quality", icon: ShieldCheck, value: "100%", color: "text-accent-deep" },
+  { key: "performance", icon: Zap, value: "99+", color: "text-accent" },
 ] as const;
 
 export function ImpactMetrics() {

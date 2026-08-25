@@ -150,6 +150,19 @@ body {
   border-radius: 6px;
 }
 
+@keyframes infinite-scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.animate-infinite-scroll-right {
+  animation: infinite-scroll-right 35s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
