@@ -30,10 +30,10 @@ const skills: Skill[] = [
 ];
 
 const categoryConfig = {
-  frontend: { key: "frontend" as const, color: "#b8ff3c" },
-  backend: { key: "backend" as const, color: "#84c70f" },
+  frontend: { key: "frontend" as const, color: "#caa456" },
+  backend: { key: "backend" as const, color: "#9c7d3c" },
   tools: { key: "tools" as const, color: "#8aa294" },
-  creative: { key: "creative" as const, color: "#cbff6b" },
+  creative: { key: "creative" as const, color: "#e0bd70" },
 };
 
 function SkillNode({ skill, index }: { skill: Skill; index: number }) {
@@ -92,7 +92,7 @@ export function TechStackViz() {
           className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-accent/20 pb-8"
         >
           <div>
-            <h2 className="font-headline text-4xl md:text-5xl text-slate-100 tracking-tight mb-4">{t.techStack.title}</h2>
+            <h2 className="[font-family:var(--font-display)] uppercase text-4xl md:text-5xl text-slate-100 tracking-tight mb-4">{t.techStack.title}</h2>
             <p className="font-headline text-slate-400 max-w-xl text-lg font-light">
               {t.techStack.subtitle}
             </p>

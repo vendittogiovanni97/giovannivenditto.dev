@@ -88,7 +88,7 @@ export function WritingList({ posts }: WritingListProps) {
           className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-accent/20 pb-8"
         >
           <div>
-            <h1 className="font-headline text-4xl md:text-5xl text-slate-100 tracking-tight mb-4">{t.writing.title}</h1>
+            <h1 className="[font-family:var(--font-display)] uppercase text-4xl md:text-5xl text-slate-100 tracking-tight mb-4">{t.writing.title}</h1>
             <p className="font-headline text-slate-400 max-w-xl text-lg font-light">
               {t.writing.subtitle}
             </p>

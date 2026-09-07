@@ -25,7 +25,7 @@ export function StudioContent() {
       title: "Full Stack Developer",
       institution: "Università degli Studi Link Campus",
       icon: <GraduationCap className="w-5 h-5 text-accent" />,
-      desc: "Percorso accademico di specializzazione nello sviluppo full-stack, architetture web, database relazionali/NoSQL e metodologie agili.",
+      desc: t.studio.educationDesc.linkCampus,
     },
     {
       id: "nexus-pozzuoli",
@@ -33,7 +33,7 @@ export function StudioContent() {
       title: "Frontend Developer",
       institution: "Corso TEMP presso Nexus Pozzuoli",
       icon: <BookOpen className="w-5 h-5 text-accent" />,
-      desc: "Corso intensivo di ingegneria frontend: TypeScript, React, componentistica riutilizzabile, responsive design ed ottimizzazione UX.",
+      desc: t.studio.educationDesc.nexusPozzuoli,
     },
     {
       id: "claude-101",
@@ -41,7 +41,7 @@ export function StudioContent() {
       title: "Claude 101",
       institution: "Anthropic Certification",
       icon: <Award className="w-5 h-5 text-accent" />,
-      desc: "Certificazione ufficiale sull'utilizzo avanzato di LLM, prompt engineering ed integrazione agentica con modelli Anthropic.",
+      desc: t.studio.educationDesc.claude101,
     },
   ];
 
@@ -51,7 +51,7 @@ export function StudioContent() {
         
         {/* Header */}
         <div className="mb-16 border-b border-slate-800 pb-8">
-          <h1 className="font-headline text-4xl md:text-5xl text-slate-100 tracking-tight">{t.studio.title}</h1>
+          <h1 className="[font-family:var(--font-display)] uppercase text-4xl md:text-5xl text-slate-100 tracking-tight">{t.studio.title}</h1>
           <p className="mt-2 text-slate-400 text-base max-w-xl">
             {t.studio.subtitle}
           </p>
@@ -67,7 +67,7 @@ export function StudioContent() {
               transition={{ duration: 0.6 }}
               className="lg:col-span-7"
             >
-              <h2 className="font-headline text-2xl md:text-3xl text-slate-100 mb-6">{t.studio.bioTitle}</h2>
+              <h2 className="[font-family:var(--font-display)] uppercase text-2xl md:text-3xl text-slate-100 mb-6">{t.studio.bioTitle}</h2>
               <div className="space-y-4 font-headline text-base text-slate-300 font-light leading-relaxed">
                 <p dangerouslySetInnerHTML={{ __html: t.studio.bioP1 }} />
                 <p dangerouslySetInnerHTML={{ __html: t.studio.bioP2 }} />
@@ -85,10 +85,10 @@ export function StudioContent() {
               <GlassPanel padding="lg" className="rounded-2xl mb-6 border border-slate-800 bg-slate-900/60">
                 <div className="font-mono text-xs text-accent uppercase tracking-widest mb-4 font-semibold">{t.studio.quickFacts}</div>
                 <div className="space-y-3 font-mono text-xs">
-                  <div className="flex justify-between border-b border-slate-800/60 pb-2"><span className="text-slate-400">{t.studio.location}</span><span className="text-slate-100 font-medium">Italia</span></div>
-                  <div className="flex justify-between border-b border-slate-800/60 pb-2"><span className="text-slate-400">{t.studio.experience}</span><span className="text-slate-100 font-medium">2+ anni</span></div>
+                  <div className="flex justify-between border-b border-slate-800/60 pb-2"><span className="text-slate-400">{t.studio.location}</span><span className="text-slate-100 font-medium">{t.studio.locationValue}</span></div>
+                  <div className="flex justify-between border-b border-slate-800/60 pb-2"><span className="text-slate-400">{t.studio.experience}</span><span className="text-slate-100 font-medium">{t.studio.experienceYears}</span></div>
                   <div className="flex justify-between border-b border-slate-800/60 pb-2"><span className="text-slate-400">{t.studio.focus}</span><span className="text-slate-100 font-medium">Fullstack Engineer</span></div>
-                  <div className="flex justify-between"><span className="text-slate-400">{t.studio.languages}</span><span className="text-slate-100 font-medium">Italiano (Nativo), Inglese</span></div>
+                  <div className="flex justify-between"><span className="text-slate-400">{t.studio.languages}</span><span className="text-slate-100 font-medium">{t.studio.languagesValue}</span></div>
                 </div>
               </GlassPanel>
             </motion.div>
@@ -97,7 +97,7 @@ export function StudioContent() {
 
         {/* Education & Studies Section */}
         <section className="mb-24">
-          <div className="font-headline text-2xl md:text-3xl text-slate-100 mb-8 border-b border-slate-800/80 pb-4">
+          <div className="[font-family:var(--font-display)] uppercase text-2xl md:text-3xl text-slate-100 mb-8 border-b border-slate-800/80 pb-4">
             {t.studio.educationTitle}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -131,7 +131,7 @@ export function StudioContent() {
 
         {/* Values Section */}
         <section className="mb-24">
-          <div className="font-headline text-2xl md:text-3xl text-slate-100 mb-8 border-b border-slate-800/80 pb-4">{t.studio.valuesTitle}</div>
+          <div className="[font-family:var(--font-display)] uppercase text-2xl md:text-3xl text-slate-100 mb-8 border-b border-slate-800/80 pb-4">{t.studio.valuesTitle}</div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {valueKeys.map((key, i) => (
               <motion.div
@@ -155,7 +155,7 @@ export function StudioContent() {
 
         {/* Experience Timeline */}
         <section className="mb-24">
-          <div className="font-headline text-2xl md:text-3xl text-slate-100 mb-8 border-b border-slate-800/80 pb-4">{t.studio.timelineTitle}</div>
+          <div className="[font-family:var(--font-display)] uppercase text-2xl md:text-3xl text-slate-100 mb-8 border-b border-slate-800/80 pb-4">{t.studio.timelineTitle}</div>
           <div className="space-y-0">
             {[
               { period: t.studio.timeline.current, role: t.studio.timeline.currentRole, company: t.studio.timeline.currentCompany, description: t.studio.timeline.currentDesc },
@@ -180,7 +180,7 @@ export function StudioContent() {
 
         {/* Complete Tech Stack Categories */}
         <section>
-          <div className="font-headline text-2xl md:text-3xl text-slate-100 mb-8 border-b border-slate-800/80 pb-4">{t.studio.techStackTitle}</div>
+          <div className="[font-family:var(--font-display)] uppercase text-2xl md:text-3xl text-slate-100 mb-8 border-b border-slate-800/80 pb-4">{t.studio.techStackTitle}</div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { category: "Frontend & UI", items: ["React 19", "Next.js 16 (App Router)", "TypeScript", "Tailwind CSS", "Material UI (MUI)", "Vite", "Framer Motion"] },

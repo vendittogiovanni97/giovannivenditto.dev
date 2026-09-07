@@ -87,7 +87,7 @@ function generateRecords(count: number) {
 }
 
 export function LabContent() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [activeTab, setActiveTab] = useState<"ocr" | "grid" | "theme">("ocr");
 
   // OCR Demo State
@@ -103,7 +103,7 @@ export function LabContent() {
   const [isGenerating, setIsGenerating] = useState(false);
 
   // Theme Inspector State
-  const [accentColor, setAccentColor] = useState("#b8ff3c");
+  const [accentColor, setAccentColor] = useState("#caa456");
   const [blurIntensity, setBlurIntensity] = useState(16);
   const [glowPower, setGlowPower] = useState(25);
 
@@ -145,9 +145,9 @@ export function LabContent() {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent font-mono text-xs mb-3 font-semibold">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Interactive Engineering Playground</span>
+              <span>{t.lab.eyebrow}</span>
             </div>
-            <h1 className="font-headline text-4xl md:text-5xl text-slate-100 font-extrabold tracking-tight">
+            <h1 className="[font-family:var(--font-display)] uppercase text-4xl md:text-5xl text-slate-100 font-extrabold tracking-tight">
               {t.lab.title}
             </h1>
             <p className="mt-2 text-slate-400 text-base max-w-xl font-headline font-light">
@@ -161,34 +161,34 @@ export function LabContent() {
               onClick={() => setActiveTab("ocr")}
               className={`flex items-center gap-2 px-4 py-2 rounded-full font-mono text-xs transition-all cursor-pointer ${
                 activeTab === "ocr"
-                  ? "bg-accent text-slate-950 font-bold shadow-[0_0_15px_rgba(184,255,60,0.3)]"
+                  ? "bg-accent text-slate-950 font-bold shadow-[0_0_15px_rgba(202,164,86,0.3)]"
                   : "text-slate-400 hover:text-slate-200"
               }`}
             >
               <Scan className="w-3.5 h-3.5" />
-              <span>OCR Extractor</span>
+              <span>{t.lab.tabOcr}</span>
             </button>
             <button
               onClick={() => setActiveTab("grid")}
               className={`flex items-center gap-2 px-4 py-2 rounded-full font-mono text-xs transition-all cursor-pointer ${
                 activeTab === "grid"
-                  ? "bg-accent text-slate-950 font-bold shadow-[0_0_15px_rgba(184,255,60,0.3)]"
+                  ? "bg-accent text-slate-950 font-bold shadow-[0_0_15px_rgba(202,164,86,0.3)]"
                   : "text-slate-400 hover:text-slate-200"
               }`}
             >
               <Zap className="w-3.5 h-3.5" />
-              <span>10k Grid Benchmark</span>
+              <span>{t.lab.tabGrid}</span>
             </button>
             <button
               onClick={() => setActiveTab("theme")}
               className={`flex items-center gap-2 px-4 py-2 rounded-full font-mono text-xs transition-all cursor-pointer ${
                 activeTab === "theme"
-                  ? "bg-accent text-slate-950 font-bold shadow-[0_0_15px_rgba(184,255,60,0.3)]"
+                  ? "bg-accent text-slate-950 font-bold shadow-[0_0_15px_rgba(202,164,86,0.3)]"
                   : "text-slate-400 hover:text-slate-200"
               }`}
             >
               <Sliders className="w-3.5 h-3.5" />
-              <span>UI Inspector</span>
+              <span>{t.lab.tabTheme}</span>
             </button>
           </div>
         </div>
@@ -206,7 +206,7 @@ export function LabContent() {
               {/* Document Selection Column */}
               <div className="lg:col-span-4 space-y-4">
                 <h3 className="font-mono text-xs text-accent uppercase tracking-widest font-semibold mb-2">
-                  1. Seleziona Documento di Prova
+                  {t.lab.ocrSelectPrompt}
                 </h3>
                 {sampleDocs.map((doc) => (
                   <button
@@ -218,7 +218,7 @@ export function LabContent() {
                     }}
                     className={`w-full p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-center justify-between ${
                       selectedDoc.id === doc.id
-                        ? "bg-slate-900/90 border-accent/60 shadow-[0_0_20px_rgba(184,255,60,0.15)]"
+                        ? "bg-slate-900/90 border-accent/60 shadow-[0_0_20px_rgba(202,164,86,0.15)]"
                         : "bg-slate-950/60 border-slate-800 hover:border-slate-700"
                     }`}
                   >
@@ -238,10 +238,10 @@ export function LabContent() {
                 <button
                   onClick={startScan}
                   disabled={isScanning}
-                  className="w-full py-3.5 rounded-xl bg-accent text-slate-950 font-mono text-xs font-bold hover:bg-accent-bright transition-all shadow-[0_0_20px_rgba(184,255,60,0.25)] flex items-center justify-center gap-2 cursor-pointer mt-4"
+                  className="w-full py-3.5 rounded-xl bg-accent text-slate-950 font-mono text-xs font-bold hover:bg-accent-bright transition-all shadow-[0_0_20px_rgba(202,164,86,0.25)] flex items-center justify-center gap-2 cursor-pointer mt-4"
                 >
                   <Play className="w-4 h-4 fill-slate-950" />
-                  <span>{isScanning ? "Scansione OCR ed Estrazione AI..." : "Esegui Scansione OCR + LLM"}</span>
+                  <span>{isScanning ? t.lab.ocrScanning : t.lab.ocrRunScan}</span>
                 </button>
               </div>
 
@@ -255,13 +255,13 @@ export function LabContent() {
                       initial={{ y: 0 }}
                       animate={{ y: [0, 320, 0] }}
                       transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-                      className="absolute top-0 left-0 right-0 h-1 bg-accent shadow-[0_0_20px_#b8ff3c,0_0_40px_#b8ff3c] z-30 pointer-events-none"
+                      className="absolute top-0 left-0 right-0 h-1 bg-accent shadow-[0_0_20px_#caa456,0_0_40px_#caa456] z-30 pointer-events-none"
                     />
                   )}
 
                   <div>
                     <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-                      <span className="font-mono text-xs text-slate-400">Anteprima PDF Digitalizzato</span>
+                      <span className="font-mono text-xs text-slate-400">{t.lab.ocrPdfPreview}</span>
                       <Chip variant="status" size="sm">PDF 300 DPI</Chip>
                     </div>
 
@@ -271,16 +271,16 @@ export function LabContent() {
                       <div className="w-5/6 h-2 bg-slate-800/60 rounded" />
                       <div className="w-4/6 h-2 bg-slate-800/60 rounded" />
                       <div className="w-full h-12 bg-slate-950/60 border border-slate-800 rounded p-2 text-slate-300">
-                        [TABELLA DATI ESTRATTA: {selectedDoc.title.toUpperCase()}]
+                        [{t.lab.ocrExtractedTable}: {selectedDoc.title.toUpperCase()}]
                       </div>
                       <div className="w-3/4 h-2 bg-slate-800/60 rounded" />
                     </div>
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-slate-800/80 flex justify-between items-center text-xs font-mono">
-                    <span className="text-slate-400">Status OCR:</span>
+                    <span className="text-slate-400">{t.lab.ocrStatusLabel}</span>
                     <span className={isScanning ? "text-amber-400 animate-pulse font-bold" : "text-accent font-bold"}>
-                      {isScanning ? "Elaborazione in corso..." : "Pronto per l'analisi"}
+                      {isScanning ? t.lab.ocrStatusProcessing : t.lab.ocrStatusReady}
                     </span>
                   </div>
                 </GlassPanel>
@@ -292,46 +292,48 @@ export function LabContent() {
                   <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
                     <div className="flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                      <span className="text-slate-200 font-bold">Risultato JSON Estratto</span>
+                      <span className="text-slate-200 font-bold">{t.lab.ocrJsonResult}</span>
                     </div>
                     <span className={`text-2xs px-2 py-0.5 rounded transition-all ${
                       scanComplete
-                        ? "text-accent bg-accent/10 border border-accent/30 font-bold shadow-[0_0_10px_rgba(184,255,60,0.2)]"
+                        ? "text-accent bg-accent/10 border border-accent/30 font-bold shadow-[0_0_10px_rgba(202,164,86,0.2)]"
                         : isScanning
                         ? "text-amber-400 bg-amber-500/10 border border-amber-400/30 animate-pulse font-bold"
                         : "text-slate-500 bg-slate-950 border border-slate-800 font-mono"
                     }`}>
-                      Accuracy: {scanComplete ? selectedDoc.extracted.confidence : isScanning ? "Analisi..." : "0.0%"}
+                      {t.lab.ocrAccuracy}: {scanComplete ? selectedDoc.extracted.confidence : isScanning ? t.lab.ocrAnalyzingShort : "0.0%"}
                     </span>
                   </div>
 
                   {isScanning ? (
                     <div className="h-[260px] flex flex-col items-center justify-center text-center p-6 bg-slate-950 rounded-xl border border-amber-400/30 text-amber-300">
                       <div className="w-8 h-8 rounded-full border-2 border-accent border-t-transparent animate-spin mb-3" />
-                      <p className="font-mono text-xs font-bold animate-pulse">Analisi OCR & Estrazione AI in corso...</p>
+                      <p className="font-mono text-xs font-bold animate-pulse">{t.lab.ocrAnalyzingFull}</p>
                     </div>
                   ) : scanComplete ? (
                     <motion.pre
                       initial={{ opacity: 0, scale: 0.98 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3 }}
-                      className="text-slate-300 bg-slate-950 p-4 rounded-xl border border-accent/40 shadow-[0_0_20px_rgba(184,255,60,0.1)] overflow-x-auto text-2xs leading-relaxed max-h-[300px]"
+                      className="text-slate-300 bg-slate-950 p-4 rounded-xl border border-accent/40 shadow-[0_0_20px_rgba(202,164,86,0.1)] overflow-x-auto text-2xs leading-relaxed max-h-[300px]"
                     >
                       {JSON.stringify(selectedDoc.extracted, null, 2)}
                     </motion.pre>
                   ) : (
                     <div className="h-[260px] flex flex-col items-center justify-center text-center p-6 bg-slate-950 rounded-xl border border-slate-800/80 text-slate-500">
                       <FileText className="w-10 h-10 text-slate-700 mb-3" />
-                      <p className="font-mono text-xs text-slate-400 mb-1">JSON non ancora estratto</p>
+                      <p className="font-mono text-xs text-slate-400 mb-1">{t.lab.ocrNotExtracted}</p>
                       <p className="font-headline text-2xs text-slate-500 font-light max-w-xs">
-                        Clicca sul pulsante <span className="text-accent font-semibold">"Esegui Scansione OCR + LLM"</span> per avviare l'estrazione in tempo reale.
+                        {t.lab.ocrClickToStart.split("{button}")[0]}
+                        <span className="text-accent font-semibold">&quot;{t.lab.ocrRunScan}&quot;</span>
+                        {t.lab.ocrClickToStart.split("{button}")[1]}
                       </p>
                     </div>
                   )}
 
                   <div className="mt-4 flex items-center gap-2 text-2xs text-slate-400 pt-2 border-t border-slate-800/80">
                     <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
-                    <span>Dati strutturati e pronti per l'inserimento in Database</span>
+                    <span>{t.lab.ocrReadyForDb}</span>
                   </div>
                 </GlassPanel>
               </div>
@@ -363,15 +365,15 @@ export function LabContent() {
                     disabled={isGenerating}
                     className="px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-200 font-mono text-xs hover:border-slate-500 transition-all cursor-pointer"
                   >
-                    Genera 1.000 Record
+                    {t.lab.gridGenerate1k}
                   </button>
                   <button
                     onClick={() => handleGenerateBenchmark(10000)}
                     disabled={isGenerating}
-                    className="px-4 py-2 rounded-xl bg-accent text-slate-950 font-mono text-xs font-bold hover:bg-accent-bright transition-all shadow-[0_0_15px_rgba(184,255,60,0.3)] cursor-pointer flex items-center gap-1.5"
+                    className="px-4 py-2 rounded-xl bg-accent text-slate-950 font-mono text-xs font-bold hover:bg-accent-bright transition-all shadow-[0_0_15px_rgba(202,164,86,0.3)] cursor-pointer flex items-center gap-1.5"
                   >
                     <Zap className="w-3.5 h-3.5 fill-slate-950" />
-                    <span>Genera 10.000 Record</span>
+                    <span>{t.lab.gridGenerate10k}</span>
                   </button>
                 </div>
               </div>
@@ -380,20 +382,20 @@ export function LabContent() {
               {recordsCount > 0 && (
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
                   <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                    <div className="font-mono text-2xs text-slate-400">Record in Memoria</div>
-                    <div className="font-mono text-lg font-bold text-accent">{recordsCount.toLocaleString()}</div>
+                    <div className="font-mono text-2xs text-slate-400">{t.lab.gridRecordsInMemory}</div>
+                    <div className="font-mono text-lg font-bold text-accent">{recordsCount.toLocaleString(locale)}</div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                    <div className="font-mono text-2xs text-slate-400">Tempo di Resa</div>
+                    <div className="font-mono text-2xs text-slate-400">{t.lab.gridRenderTime}</div>
                     <div className="font-mono text-lg font-bold text-slate-100">{renderTime} ms</div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                    <div className="font-mono text-2xs text-slate-400">Framerate Resa</div>
+                    <div className="font-mono text-2xs text-slate-400">{t.lab.gridFramerate}</div>
                     <div className="font-mono text-lg font-bold text-emerald-400">60 FPS</div>
                   </div>
                   <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                    <div className="font-mono text-2xs text-slate-400">Filtro Reattivo</div>
-                    <div className="font-mono text-lg font-bold text-slate-100">Immediato</div>
+                    <div className="font-mono text-2xs text-slate-400">{t.lab.gridReactiveFilter}</div>
+                    <div className="font-mono text-lg font-bold text-slate-100">{t.lab.gridImmediate}</div>
                   </div>
                 </div>
               )}
@@ -403,7 +405,7 @@ export function LabContent() {
                 <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
                 <input
                   type="text"
-                  placeholder="Filtra 10.000 record in tempo reale per nome, id o ruolo..."
+                  placeholder={t.lab.gridSearchPlaceholder}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 font-mono text-xs text-slate-100 placeholder:text-slate-500 focus:border-accent focus:outline-none transition-all"
@@ -414,18 +416,18 @@ export function LabContent() {
               <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950 max-h-[360px] overflow-y-auto">
                 {recordsCount === 0 ? (
                   <div className="py-16 text-center text-slate-500 font-mono text-xs">
-                    Clicca su "Genera 10.000 Record" per avviare il benchmark di rendering in tempo reale.
+                    {t.lab.gridEmptyState}
                   </div>
                 ) : (
                   <table className="w-full text-left border-collapse font-mono text-2xs">
                     <thead className="bg-slate-900 text-slate-400 sticky top-0 border-b border-slate-800 z-10">
                       <tr>
-                        <th className="p-3 font-semibold">ID RECORD</th>
-                        <th className="p-3 font-semibold">NOME UTENTE</th>
-                        <th className="p-3 font-semibold">RUOLO</th>
-                        <th className="p-3 font-semibold">STATO</th>
-                        <th className="p-3 font-semibold">MATCH SCORE</th>
-                        <th className="p-3 font-semibold">TIMESTAMP</th>
+                        <th className="p-3 font-semibold">{t.lab.gridColId}</th>
+                        <th className="p-3 font-semibold">{t.lab.gridColName}</th>
+                        <th className="p-3 font-semibold">{t.lab.gridColRole}</th>
+                        <th className="p-3 font-semibold">{t.lab.gridColStatus}</th>
+                        <th className="p-3 font-semibold">{t.lab.gridColScore}</th>
+                        <th className="p-3 font-semibold">{t.lab.gridColTimestamp}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-900 text-slate-300">
@@ -469,10 +471,10 @@ export function LabContent() {
 
                 {/* Accent Color Selector */}
                 <div>
-                  <label className="font-mono text-xs text-slate-300 mb-2 block">Colore d'Accento Primario</label>
+                  <label className="font-mono text-xs text-slate-300 mb-2 block">{t.lab.themeAccentColor}</label>
                   <div className="flex gap-3">
                     {[
-                      { name: "Lime Neon", hex: "#b8ff3c" },
+                      { name: "Lime Neon", hex: "#caa456" },
                       { name: "Cyan Electric", hex: "#00f0ff" },
                       { name: "Purple Future", hex: "#a855f7" },
                       { name: "Emerald Pulse", hex: "#10b981" },
@@ -493,7 +495,7 @@ export function LabContent() {
                 {/* Blur Slider */}
                 <div>
                   <div className="flex justify-between font-mono text-xs text-slate-300 mb-2">
-                    <span>Sfocatura Vetro (Backdrop Blur)</span>
+                    <span>{t.lab.themeBlur}</span>
                     <span className="text-accent">{blurIntensity}px</span>
                   </div>
                   <input
@@ -509,7 +511,7 @@ export function LabContent() {
                 {/* Glow Slider */}
                 <div>
                   <div className="flex justify-between font-mono text-xs text-slate-300 mb-2">
-                    <span>Intensità Bagliore Neon</span>
+                    <span>{t.lab.themeGlow}</span>
                     <span className="text-accent">{glowPower}px</span>
                   </div>
                   <input
@@ -537,23 +539,23 @@ export function LabContent() {
               >
                 <div className="flex justify-between items-center mb-6">
                   <span className="font-mono text-xs px-3 py-1 rounded-full font-bold" style={{ backgroundColor: `${accentColor}20`, color: accentColor, border: `1px solid ${accentColor}40` }}>
-                    Live Preview Token
+                    {t.lab.themeLivePreviewToken}
                   </span>
                   <Sparkles className="w-5 h-5" style={{ color: accentColor }} />
                 </div>
 
                 <h4 className="font-headline text-2xl font-bold text-slate-100 mb-2">
-                  Glassmorphic UI Card
+                  {t.lab.themeCardTitle}
                 </h4>
                 <p className="font-headline text-slate-300 text-sm font-light leading-relaxed mb-6">
-                  Componente reattivo con stili CSS dinamici. Sposta i cursori a sinistra per testare la resa visiva del design system.
+                  {t.lab.themeCardDesc}
                 </p>
 
                 <button
                   className="w-full py-3 rounded-full font-mono text-xs font-bold text-slate-950 transition-all cursor-pointer shadow-lg"
                   style={{ backgroundColor: accentColor, boxShadow: `0 0 20px ${accentColor}40` }}
                 >
-                  Pulsante Accento Reattivo
+                  {t.lab.themeCardButton}
                 </button>
               </div>
             </div>

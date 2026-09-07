@@ -37,7 +37,7 @@ export function ImpactMetrics() {
                   <ShieldCheck className="w-4 h-4 text-slate-600 group-hover:text-accent transition-colors" />
                 </div>
 
-                <div className="font-headline text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight mb-1">
+                <div className="[font-family:var(--font-display)] text-4xl sm:text-5xl text-slate-100 tracking-tight mb-1">
                   {metric.value}
                 </div>
 

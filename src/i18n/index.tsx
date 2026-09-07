@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import en from "./en.json";
 import it from "./it.json";
 
@@ -19,6 +20,7 @@ const I18nContext = createContext<I18nContextValue | null>(null);
 
 export function I18nProvider({ children, initialLocale = "it" }: { children: React.ReactNode; initialLocale?: Locale }) {
   const [locale, setLocaleState] = useState<Locale>(initialLocale);
+  const router = useRouter();
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale);
@@ -27,7 +29,12 @@ export function I18nProvider({ children, initialLocale = "it" }: { children: Rea
       document.cookie = `locale=${newLocale};path=/;max-age=31536000`;
       document.documentElement.lang = newLocale;
     }
-  }, []);
+    // Server Components (project/writing lists resolved from locale-specific
+    // MDX) read the locale cookie at request time, so a pure client-side
+    // context update leaves them stale until the next navigation. Refresh
+    // the router so they re-render with the new locale immediately.
+    router.refresh();
+  }, [router]);
 
   return (
     <I18nContext.Provider value={{ locale, t: translations[locale], setLocale }}>

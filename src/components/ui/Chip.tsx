@@ -14,9 +14,9 @@ const Chip = React.forwardRef<HTMLSpanElement, ChipProps>(
     
     const variants = {
       default: "bg-slate-900 text-slate-100 border border-accent/10",
-      tech: "bg-slate-900/50 backdrop-blur-sm text-accent border border-accent/20",
+      tech: "bg-slate-900 text-accent border border-accent/20",
       status: "bg-accent/10 text-accent border border-accent/30",
-      credential: "bg-accent/10 text-accent border border-accent/30 backdrop-blur-md",
+      credential: "bg-accent/10 text-accent border border-accent/30",
     };
 
     const sizes = {

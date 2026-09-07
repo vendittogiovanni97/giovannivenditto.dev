@@ -29,7 +29,33 @@
       "product": "Prodotti & Web App",
       "client": "Lavori Cliente",
       "experimental": "Progetti"
-    }
+    },
+    "caseStudy": {
+      "backToWork": "Torna ai Progetti",
+      "role": "Ruolo",
+      "company": "Azienda",
+      "period": "Periodo",
+      "present": "Presente",
+      "screenshot": "Screenshot",
+      "keyMetrics": "Metriche Chiave",
+      "techStack": "Stack Tecnologico",
+      "liveDemo": "Demo Live",
+      "sourceCode": "Codice Sorgente",
+      "previous": "Precedente",
+      "next": "Successivo",
+      "current": "Attuale"
+    },
+    "modal": {
+      "overview": "Panoramica Progetto",
+      "techStackUsed": "Tech Stack Utilizzato",
+      "role": "Ruolo svolto",
+      "company": "Azienda / Cliente",
+      "close": "Chiudi anteprima",
+      "readFullCaseStudy": "Leggi Case Study Completa",
+      "closePreviewAria": "Chiudi anteprima progetto"
+    },
+    "quickView": "Anteprima Rapida",
+    "openDetail": "Apri Dettaglio"
   },
   "writing": {
     "title": "Blog",
@@ -84,7 +110,23 @@
       "currentRole": "Fullstack Engineer",
       "currentCompany": "Agilae",
       "currentDesc": "Sviluppo della piattaforma SaaS per la digitalizzazione delle agenzie assicurative."
-    }
+    },
+    "liveEditor": "Editor Live",
+    "outputRealTime": "Output in Tempo Reale",
+    "resetCode": "Ripristina Codice",
+    "copyCode": "Copia Codice",
+    "liveHtmlPreview": "Anteprima HTML Live",
+    "snippetLabEyebrow": "LIVE CODE PLAYGROUND PRESETS",
+    "snippetLabTitle": "Interactive Snippet Lab",
+    "snippetLabSubtitle": "Modifica il codice in tempo reale nel CodeMirror per testare la resa dal vivo.",
+    "educationDesc": {
+      "linkCampus": "Percorso accademico di specializzazione nello sviluppo full-stack, architetture web, database relazionali/NoSQL e metodologie agili.",
+      "nexusPozzuoli": "Corso intensivo di ingegneria frontend: TypeScript, React, componentistica riutilizzabile, responsive design ed ottimizzazione UX.",
+      "claude101": "Certificazione ufficiale sull'utilizzo avanzato di LLM, prompt engineering ed integrazione agentica con modelli Anthropic."
+    },
+    "experienceYears": "2+ anni",
+    "languagesValue": "Italiano (Nativo), Inglese",
+    "locationValue": "Italia"
   },
   "techStack": {
     "title": "Tech Stack Completo",
@@ -166,7 +208,8 @@
         "description": "Creazione e gestione di ambienti di sviluppo isolati.",
         "highlight": "Deploy semplici e riproducibili."
       }
-    }
+    },
+    "pauseHint": "Passa con il mouse per interrompere lo scorrimento"
   },
   "experience": {
     "title": "Esperienza",
@@ -193,7 +236,8 @@
     "title": "GitHub",
     "subtitle": "I miei repository ed il codice su GitHub.",
     "error": "Impossibile caricare i dati in questo momento.",
-    "viewOnGithub": "Vedi su GitHub"
+    "viewOnGithub": "Vedi su GitHub",
+    "liveData": "Dati live da GitHub"
   },
   "contact": {
     "title": "Contattami",
@@ -215,7 +259,8 @@
     "availability": "Disponibilità",
     "availableForFreelance": "Disponibile per progetti",
     "openTo": "Aperto a nuove opportunità e collaborazioni",
-    "social": "Social"
+    "social": "Social",
+    "subjectPlaceholder": "Richiesta progetto, collaborazione, ecc."
   },
   "footer": {
     "builtWith": "Costruito con Next.js",
@@ -224,7 +269,12 @@
   },
   "credentials": {
     "title": "Percorso Studi & Formazione",
-    "subtitle": "I miei studi, corsi di formazione e certificazioni."
+    "subtitle": "I miei studi, corsi di formazione e certificazioni.",
+    "enlarge": "Ingrandisci",
+    "officialCertificate": "Certificato Ufficiale Anthropic",
+    "prevAria": "Credenziale precedente",
+    "nextAria": "Credenziale successiva",
+    "goToAria": "Vai alla credenziale {n}"
   },
   "lab": {
     "title": "Interactive Lab",
@@ -234,6 +284,79 @@
     "gridTitle": "AG Grid Benchmark (10.000 Record)",
     "gridSubtitle": "Test di prestazioni e rendering di tabelle enterprise a 60fps.",
     "themeTitle": "Design System & Glassmorphism Inspector",
-    "themeSubtitle": "Personalizza sfumature, sfocatura e colori in tempo reale."
+    "themeSubtitle": "Personalizza sfumature, sfocatura e colori in tempo reale.",
+    "eyebrow": "Playground Interattivo",
+    "liveEditor": "Editor Live",
+    "tabOcr": "OCR Extractor",
+    "tabGrid": "10k Grid Benchmark",
+    "tabTheme": "UI Inspector",
+    "ocrSelectPrompt": "1. Seleziona Documento di Prova",
+    "ocrScanning": "Scansione OCR ed Estrazione AI...",
+    "ocrRunScan": "Esegui Scansione OCR + LLM",
+    "ocrPdfPreview": "Anteprima PDF Digitalizzato",
+    "ocrExtractedTable": "TABELLA DATI ESTRATTA",
+    "ocrStatusLabel": "Status OCR:",
+    "ocrStatusProcessing": "Elaborazione in corso...",
+    "ocrStatusReady": "Pronto per l'analisi",
+    "ocrJsonResult": "Risultato JSON Estratto",
+    "ocrAccuracy": "Accuracy",
+    "ocrAnalyzingShort": "Analisi...",
+    "ocrAnalyzingFull": "Analisi OCR & Estrazione AI in corso...",
+    "ocrNotExtracted": "JSON non ancora estratto",
+    "ocrClickToStart": "Clicca sul pulsante {button} per avviare l'estrazione in tempo reale.",
+    "ocrReadyForDb": "Dati strutturati e pronti per l'inserimento in Database",
+    "gridGenerate1k": "Genera 1.000 Record",
+    "gridGenerate10k": "Genera 10.000 Record",
+    "gridRecordsInMemory": "Record in Memoria",
+    "gridRenderTime": "Tempo di Resa",
+    "gridFramerate": "Framerate Resa",
+    "gridReactiveFilter": "Filtro Reattivo",
+    "gridImmediate": "Immediato",
+    "gridSearchPlaceholder": "Filtra 10.000 record in tempo reale per nome, id o ruolo...",
+    "gridEmptyState": "Clicca su \"Genera 10.000 Record\" per avviare il benchmark di rendering in tempo reale.",
+    "gridColId": "ID RECORD",
+    "gridColName": "NOME UTENTE",
+    "gridColRole": "RUOLO",
+    "gridColStatus": "STATO",
+    "gridColScore": "MATCH SCORE",
+    "gridColTimestamp": "TIMESTAMP",
+    "themeAccentColor": "Colore d'Accento Primario",
+    "themeBlur": "Sfocatura Vetro (Backdrop Blur)",
+    "themeGlow": "Intensità Bagliore Neon",
+    "themeLivePreviewToken": "Live Preview Token",
+    "themeCardTitle": "Glassmorphic UI Card",
+    "themeCardDesc": "Componente reattivo con stili CSS dinamici. Sposta i cursori a sinistra per testare la resa visiva del design system.",
+    "themeCardButton": "Pulsante Accento Reattivo"
+  },
+  "howIWork": {
+    "title": "Come lavoro",
+    "subtitle": "Il mio metodo per trasformare idee e requisiti in software reattivo, sicuro e pronto per la produzione.",
+    "steps": {
+      "analysis": {
+        "title": "Analisi & Architettura Dati",
+        "desc": "Definizione dei requisiti aziendali, modellazione del database e scelta dell'architettura ideale."
+      },
+      "design": {
+        "title": "Progettazione UI & Componenti",
+        "desc": "Creazione di interfacce pulite, reattive e modulari per un'esperienza utente veloce ed intuitiva."
+      },
+      "development": {
+        "title": "Sviluppo Fullstack & Integrazioni",
+        "desc": "Scrittura di codice pulito in TypeScript con gestione delle API, integrazioni OCR ed intelligenza artificiale."
+      },
+      "deploy": {
+        "title": "Deploy & Ottimizzazione",
+        "desc": "Containerizzazione Docker, rilascio continuo ed ottimizzazione delle prestazioni con tempi di risposta minimi."
+      }
+    }
+  },
+  "common": {
+    "somethingWentWrong": "Qualcosa è andato storto.",
+    "tryAgain": "Riprova",
+    "pageNotFound": "Questa pagina si è persa nel vuoto.",
+    "returnHome": "Torna alla Home",
+    "konamiTitle": "Codice Konami Attivato!",
+    "konamiDesc": "Hai trovato l'easter egg. Impressionato?",
+    "close": "Chiudi"
   }
 }

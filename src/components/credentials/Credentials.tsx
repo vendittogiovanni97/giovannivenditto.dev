@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Award, GraduationCap, Code2, ExternalLink, X, ZoomIn } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
+import { Award, GraduationCap, Code2, X, ZoomIn, FileText, ArrowLeft, ArrowRight } from "lucide-react";
 import { useI18n } from "@/i18n";
 
 interface Credential {
@@ -10,7 +10,7 @@ interface Credential {
   year: string;
   title: string;
   issuer: string;
-  badge?: string;
+  badge: string;
   image?: string;
   icon: React.ReactNode;
 }
@@ -23,7 +23,7 @@ const credentials: Credential[] = [
     issuer: "Anthropic",
     badge: "Certificazione Ufficiale",
     image: "/certificates/claude-101.png",
-    icon: <Award className="w-6 h-6 text-accent" />,
+    icon: <Award className="w-5 h-5" />,
   },
   {
     id: "claude-code-101",
@@ -32,7 +32,7 @@ const credentials: Credential[] = [
     issuer: "Anthropic",
     badge: "Certificazione Ufficiale",
     image: "/certificates/claude-code-101.png",
-    icon: <Award className="w-6 h-6 text-accent" />,
+    icon: <Award className="w-5 h-5" />,
   },
   {
     id: "claude-platform-101",
@@ -41,7 +41,7 @@ const credentials: Credential[] = [
     issuer: "Anthropic",
     badge: "Certificazione Ufficiale",
     image: "/certificates/claude-platform-101.png",
-    icon: <Award className="w-6 h-6 text-accent" />,
+    icon: <Award className="w-5 h-5" />,
   },
   {
     id: "claude-cowork",
@@ -50,7 +50,7 @@ const credentials: Credential[] = [
     issuer: "Anthropic",
     badge: "Certificazione Ufficiale",
     image: "/certificates/claude-cowork.png",
-    icon: <Award className="w-6 h-6 text-accent" />,
+    icon: <Award className="w-5 h-5" />,
   },
   {
     id: "link-campus",
@@ -58,108 +58,191 @@ const credentials: Credential[] = [
     title: "Full Stack Developer",
     issuer: "Università degli Studi Link Campus",
     badge: "Attestato Accademico",
-    icon: <GraduationCap className="w-6 h-6 text-accent" />,
+    icon: <GraduationCap className="w-8 h-8" />,
   },
   {
     id: "nexus-pozzuoli",
     year: "2025",
     title: "Frontend Developer",
-    issuer: "Corso TEMP presso Nexus Pozzuoli",
+    issuer: "Corso presso Nexus Pozzuoli",
     badge: "Corso di Specializzazione",
-    icon: <Code2 className="w-6 h-6 text-accent" />,
+    icon: <Code2 className="w-8 h-8" />,
   },
 ];
 
+const AUTOPLAY_MS = 6000;
+
+const slideVariants: Variants = {
+  enter: (direction: number) => ({
+    opacity: 0,
+    x: direction > 0 ? 60 : -60,
+    scale: 0.97,
+  }),
+  center: { opacity: 1, x: 0, scale: 1 },
+  exit: (direction: number) => ({
+    opacity: 0,
+    x: direction > 0 ? -60 : 60,
+    scale: 0.97,
+  }),
+};
+
 export function Credentials() {
   const { t } = useI18n();
+  const reduce = useReducedMotion();
+  const [[index, direction], setSlide] = useState<[number, number]>([0, 0]);
   const [selectedImage, setSelectedImage] = useState<{ title: string; image: string } | null>(null);
+  const [paused, setPaused] = useState(false);
+  const total = credentials.length;
+  const current = credentials[index];
+
+  const goTo = useCallback(
+    (next: number) => {
+      const wrapped = (next + total) % total;
+      setSlide(([i]) => [wrapped, wrapped > i || (i === total - 1 && wrapped === 0) ? 1 : -1]);
+    },
+    [total]
+  );
+
+  const next = useCallback(() => goTo(index + 1), [goTo, index]);
+  const prev = useCallback(() => goTo(index - 1), [goTo, index]);
+
+  // Autoplay: advances on a timer, pauses on hover/focus and resets whenever
+  // the user navigates manually so it never fights an intentional click.
+  useEffect(() => {
+    if (reduce || paused) return;
+    const id = window.setTimeout(next, AUTOPLAY_MS);
+    return () => window.clearTimeout(id);
+  }, [index, paused, reduce, next]);
 
   return (
-    <section id="credentials" className="w-full py-20 relative">
+    <section
+      id="credentials"
+      className="w-full py-20 relative overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8">
-        
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-12 border-b border-slate-800 pb-6 flex items-center justify-between"
-        >
+        <div className="mb-12 border-b border-slate-800 pb-6 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="font-headline text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+            <h2 className="[font-family:var(--font-display)] uppercase text-4xl sm:text-5xl text-slate-100 tracking-tight">
               {t.credentials.title}
             </h2>
-            <p className="mt-2 text-slate-400 text-base max-w-xl">
-              {t.credentials.subtitle}
-            </p>
+            <p className="mt-2 text-slate-400 text-base max-w-xl">{t.credentials.subtitle}</p>
           </div>
-        </motion.div>
+          <div className="font-mono text-sm text-slate-500 tracking-wider">
+            <span className="text-accent">{String(index + 1).padStart(2, "0")}</span> / {String(total).padStart(2, "0")}
+          </div>
+        </div>
 
-        {/* Credentials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {credentials.map((cred, idx) => (
+        {/* Stage */}
+        <div className="relative">
+          <AnimatePresence mode="wait" custom={direction} initial={false}>
             <motion.div
-              key={cred.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="glass-panel p-6 rounded-3xl border border-slate-800 bg-slate-900/60 hover:border-slate-700 transition-all flex flex-col justify-between group relative overflow-hidden"
+              key={current.id}
+              custom={direction}
+              variants={slideVariants}
+              initial={reduce ? undefined : "enter"}
+              animate="center"
+              exit={reduce ? undefined : "exit"}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center"
             >
-              <div>
-                {/* Header Icon & Year */}
-                <div className="flex items-center justify-between mb-5">
-                  <div className="p-3 rounded-2xl bg-slate-950 border border-slate-800 group-hover:border-accent/40 transition-colors">
-                    {cred.icon}
-                  </div>
-                  <span className="font-mono text-xs text-accent px-3 py-1 rounded-full bg-accent/10 border border-accent/20 font-semibold">
-                    {cred.year}
-                  </span>
-                </div>
-
-                {/* Title & Issuer */}
-                <h3 className="font-headline text-xl font-bold text-slate-100 mb-1 group-hover:text-accent transition-colors">
-                  {cred.title}
+              {/* Left: identity block */}
+              <div className="lg:col-span-5 order-2 lg:order-1">
+                <span
+                  aria-hidden="true"
+                  className="block [font-family:var(--font-display)] text-[7rem] sm:text-[9rem] leading-none text-transparent [-webkit-text-stroke:2px_var(--color-slate-700)] select-none"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+                  {current.badge} · {current.year}
+                </span>
+                <h3 className="mt-3 [font-family:var(--font-display)] uppercase text-4xl sm:text-5xl leading-[0.95] text-slate-100">
+                  {current.title}
                 </h3>
-                <p className="font-headline text-sm text-slate-300 font-medium mb-4">
-                  {cred.issuer}
-                </p>
+                <p className="mt-4 text-slate-400 text-base sm:text-lg">{current.issuer}</p>
 
-                {/* Certificate Preview Image if Available */}
-                {cred.image ? (
-                  <div
-                    onClick={() => setSelectedImage({ title: cred.title, image: cred.image! })}
-                    className="relative w-full h-44 rounded-2xl overflow-hidden border border-slate-800 group-hover:border-accent/50 cursor-pointer transition-all my-4 bg-slate-950 flex items-center justify-center p-2"
+                {current.image && (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedImage({ title: current.title, image: current.image! })}
+                    className="mt-8 inline-flex items-center gap-2 border-b-2 border-accent pb-1 text-sm font-semibold text-accent hover:text-accent-bright transition-colors cursor-pointer"
                   >
-                    {/* Standard HTML img to avoid Next Image loader blocking */}
-                    <img
-                      src={cred.image}
-                      alt={cred.title}
-                      className="w-full h-full object-contain rounded-xl group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
-                      <span className="bg-slate-900/90 text-accent font-mono text-xs px-3.5 py-2 rounded-xl border border-accent/40 flex items-center gap-1.5 shadow-lg">
-                        <ZoomIn className="w-4 h-4" />
-                        Ingrandisci
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="w-full py-10 rounded-2xl bg-slate-950/40 border border-dashed border-slate-800 flex items-center justify-center text-slate-500 font-mono text-xs my-4">
-                    <span>Documento in fase di caricamento</span>
-                  </div>
+                    <ZoomIn className="w-4 h-4" />
+                    {t.credentials.enlarge}
+                  </button>
                 )}
               </div>
 
-              {/* Footer Badge */}
-              <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                <span className="font-mono text-xs text-slate-400">
-                  {cred.badge}
-                </span>
+              {/* Right: the certificate itself, framed and flat (no crop) */}
+              <div className="lg:col-span-7 order-1 lg:order-2">
+                <div className="relative rounded-lg bg-paper text-ink p-3 sm:p-4 shadow-[14px_18px_0_rgba(0,0,0,0.35)] border border-black/5">
+                  {current.image ? (
+                    <button
+                      type="button"
+                      onClick={() => setSelectedImage({ title: current.title, image: current.image! })}
+                      className="group relative block w-full aspect-[4/3] overflow-hidden bg-slate-950 cursor-pointer rounded-sm"
+                    >
+                      <img
+                        src={current.image}
+                        alt={current.title}
+                        className="absolute inset-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                      <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <span className="bg-ink/85 text-paper font-mono text-2xs px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                          <ZoomIn className="w-3.5 h-3.5" />
+                          {t.credentials.enlarge}
+                        </span>
+                      </div>
+                    </button>
+                  ) : (
+                    <div className="relative w-full aspect-[4/3] bg-slate-100 flex flex-col items-center justify-center gap-3 text-slate-500 rounded-sm">
+                      {current.icon}
+                      <FileText className="w-6 h-6 opacity-50" />
+                    </div>
+                  )}
+                </div>
               </div>
             </motion.div>
-          ))}
+          </AnimatePresence>
+        </div>
+
+        {/* Controls */}
+        <div className="mt-10 flex items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={prev}
+              aria-label={t.credentials.prevAria}
+              className="w-11 h-11 rounded-full flex items-center justify-center border border-slate-700 text-slate-200 hover:bg-accent hover:text-slate-950 hover:border-accent transition-colors cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={next}
+              aria-label={t.credentials.nextAria}
+              className="w-11 h-11 rounded-full flex items-center justify-center border border-slate-700 text-slate-200 hover:bg-accent hover:text-slate-950 hover:border-accent transition-colors cursor-pointer"
+            >
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="flex-1 flex items-center gap-2">
+            {credentials.map((cred, i) => (
+              <button
+                key={cred.id}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={t.credentials.goToAria.replace("{n}", String(i + 1))}
+                aria-current={i === index}
+                className={`h-1.5 flex-1 max-w-16 rounded-full transition-colors duration-300 cursor-pointer ${
+                  i === index ? "bg-accent" : "bg-slate-800 hover:bg-slate-700"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
@@ -174,16 +257,16 @@ export function Credentials() {
             className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 cursor-pointer"
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.96, opacity: 0, y: 8 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.96, opacity: 0, y: 8 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
               className="relative max-w-4xl w-full bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl overflow-hidden"
             >
-              {/* Modal Header */}
               <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
-                <h3 className="font-headline text-lg font-bold text-slate-100">
-                  {selectedImage.title} — Certificato Ufficiale Anthropic
+                <h3 className="[font-family:var(--font-display)] uppercase text-lg text-slate-100">
+                  {selectedImage.title} — {t.credentials.officialCertificate}
                 </h3>
                 <button
                   type="button"
@@ -194,7 +277,6 @@ export function Credentials() {
                 </button>
               </div>
 
-              {/* Certificate Image View */}
               <div className="relative w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 p-2 flex items-center justify-center">
                 <img
                   src={selectedImage.image}

@@ -37,7 +37,7 @@ function TechBrandIcon({ id, className = "w-10 h-10" }: { id: string; className?
       return (
         <svg viewBox="0 0 128 128" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="64" cy="64" r="64" fill="#FFFFFF" />
-          <path d="M106.333 111.966L49.167 38H38v52h9.167V50.366l51.616 66.6a63.95 63.95 0 0 0 7.55-5remz" fill="#000000" />
+          <path d="M106.333 111.966L49.167 38H38v52h9.167V50.366l51.616 66.6z" fill="#000000" />
           <path d="M89.833 38H80.667v52h9.166V38z" fill="#000000" />
         </svg>
       );
@@ -209,7 +209,7 @@ export function TechRadar() {
       {/* Section Header */}
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8 mb-12 border-b border-slate-800/80 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
-          <h2 className="font-headline text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+          <h2 className="[font-family:var(--font-display)] uppercase text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
             {t.techRadar.title}
           </h2>
           <p className="mt-2 text-slate-400 text-base max-w-xl font-headline font-light">
@@ -218,7 +218,7 @@ export function TechRadar() {
         </div>
         <span className="font-mono text-xs text-slate-400 bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-full inline-flex items-center gap-2 self-start sm:self-auto shrink-0 shadow-sm">
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse" aria-hidden="true" />
-          <span>Passa con il mouse per interrompere lo scorrimento</span>
+          <span>{t.techRadar.pauseHint}</span>
         </span>
       </div>
 
@@ -253,7 +253,7 @@ export function TechRadar() {
               </motion.div>
 
               {/* Sleek High-Contrast Tooltip on Hover */}
-              <div className="absolute left-1/2 top-full mt-3 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none z-40 whitespace-nowrap bg-slate-900 border border-slate-700 px-3.5 py-1 rounded-full shadow-[0_6px_25px_rgba(0,0,0,0.9)] backdrop-blur-xl">
+              <div className="absolute left-1/2 top-full mt-3 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none z-40 whitespace-nowrap bg-slate-900 border border-slate-700 px-3.5 py-1 rounded-full shadow-[0_6px_25px_rgba(0,0,0,0.9)]">
                 <span className="font-mono text-xs text-accent font-bold">{item.name}</span>
               </div>
             </div>

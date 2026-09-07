@@ -6,8 +6,10 @@ import { EasterEggs } from "@/components/ui/EasterEggs";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { CursorSpotlight } from "@/components/ui/CursorSpotlight";
+import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import Script from "next/script";
 import { getLocale } from "@/i18n/server";
+import { displayFont, bodyFont } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b1410",
+  themeColor: "#14100b",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -51,7 +53,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const locale = await getLocale();
 
   return (
-    <html lang={locale} className="h-full antialiased" data-theme="dark" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang={locale} className={`h-full antialiased ${displayFont.variable} ${bodyFont.variable}`} data-theme="dark" suppressHydrationWarning>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <Script id="register-sw" strategy="afterInteractive">
           {`if ('serviceWorker' in navigator) {
@@ -60,6 +62,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             });
           }`}
         </Script>
+        <SmoothScroll />
         <I18nProvider initialLocale={locale}>
           <a
             href="#main-content"
@@ -72,10 +75,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             position="bottom-right"
             toastOptions={{
               style: {
-                background: "#0f1b14",
-                border: "1px solid rgba(184, 255, 60, 0.2)",
-                color: "#e7efe9",
-                fontFamily: "var(--font-headline)",
+                background: "#1c1712",
+                border: "1px solid rgba(202,164,86, 0.2)",
+                color: "#f3ece0",
+                fontFamily: "var(--font-body)",
               },
             }}
           />

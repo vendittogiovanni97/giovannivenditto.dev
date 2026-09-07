@@ -1,10 +1,11 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ExternalLink, ArrowRight, Code2, Layers, Award } from "lucide-react";
+import { X, ArrowRight, Code2, Layers } from "lucide-react";
 import type { ProjectMetadata } from "@/lib/content";
 import Link from "next/link";
 import { Chip } from "@/components/ui";
+import { useI18n } from "@/i18n";
 
 interface ProjectQuickViewModalProps {
   project: ProjectMetadata | null;
@@ -12,6 +13,7 @@ interface ProjectQuickViewModalProps {
 }
 
 export function ProjectQuickViewModal({ project, onClose }: ProjectQuickViewModalProps) {
+  const { t } = useI18n();
   if (!project) return null;
 
   return (
@@ -32,12 +34,12 @@ export function ProjectQuickViewModal({ project, onClose }: ProjectQuickViewModa
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl glass-panel border border-cyan-400/30 bg-slate-950/90 shadow-[0_0_50px_rgba(184,255,60,0.15)] text-slate-100 z-10"
+          className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl glass-panel border border-cyan-400/30 bg-slate-950/90 shadow-[0_0_50px_rgba(202,164,86,0.15)] text-slate-100 z-10"
         >
           {/* Close Button */}
           <button
             onClick={onClose}
-            aria-label="Chiudi anteprima"
+            aria-label={t.work.modal.closePreviewAria}
             className="absolute top-6 right-6 z-30 p-2.5 rounded-full bg-slate-900/80 text-slate-300 hover:text-white hover:bg-cyan-500/20 border border-slate-700/50 hover:border-cyan-400/50 transition-all cursor-pointer"
           >
             <X className="w-5 h-5" />
@@ -66,7 +68,7 @@ export function ProjectQuickViewModal({ project, onClose }: ProjectQuickViewModa
                   </Chip>
                   <span className="font-mono text-xs text-slate-400">{project.startDate}</span>
                 </div>
-                <h2 className="font-headline text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                <h2 className="[font-family:var(--font-display)] uppercase text-3xl sm:text-4xl font-bold text-white tracking-tight">
                   {project.title}
                 </h2>
               </div>
@@ -79,7 +81,7 @@ export function ProjectQuickViewModal({ project, onClose }: ProjectQuickViewModa
             <div>
               <h3 className="font-mono text-xs text-cyan-400 uppercase tracking-widest mb-2 flex items-center gap-2">
                 <Layers className="w-3.5 h-3.5" />
-                <span>Panoramica Progetto</span>
+                <span>{t.work.modal.overview}</span>
               </h3>
               <p className="font-headline text-lg text-slate-300 leading-relaxed font-light">
                 {project.shortDescription}
@@ -105,7 +107,7 @@ export function ProjectQuickViewModal({ project, onClose }: ProjectQuickViewModa
             <div>
               <h3 className="font-mono text-xs text-cyan-400 uppercase tracking-widest mb-3 flex items-center gap-2">
                 <Code2 className="w-3.5 h-3.5" />
-                <span>Tech Stack Utilizzato</span>
+                <span>{t.work.modal.techStackUsed}</span>
               </h3>
               <div className="flex flex-wrap gap-2">
                 {project.stack.map((tech) => (
@@ -122,12 +124,12 @@ export function ProjectQuickViewModal({ project, onClose }: ProjectQuickViewModa
             {/* Role & Company info */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-800/80">
               <div>
-                <span className="font-mono text-xs text-slate-400 block">Ruolo svolto</span>
+                <span className="font-mono text-xs text-slate-400 block">{t.work.modal.role}</span>
                 <span className="font-headline text-sm font-medium text-slate-200">{project.role}</span>
               </div>
               {project.company && (
                 <div>
-                  <span className="font-mono text-xs text-slate-400 block">Azienda / Client</span>
+                  <span className="font-mono text-xs text-slate-400 block">{t.work.modal.company}</span>
                   <span className="font-headline text-sm font-medium text-slate-200">{project.company}</span>
                 </div>
               )}
@@ -139,14 +141,14 @@ export function ProjectQuickViewModal({ project, onClose }: ProjectQuickViewModa
                 onClick={onClose}
                 className="px-5 py-2.5 rounded-full font-mono text-xs text-slate-400 hover:text-white transition-colors cursor-pointer"
               >
-                Chiudi anteprima
+                {t.work.modal.close}
               </button>
               <Link
                 href={`/work/${project.slug}`}
                 onClick={onClose}
-                className="px-6 py-3 rounded-full bg-cyan-400 text-slate-950 font-medium text-sm hover:bg-cyan-300 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(184,255,60,0.3)] hover:shadow-[0_0_30px_rgba(184,255,60,0.5)] cursor-pointer"
+                className="px-6 py-3 rounded-full bg-cyan-400 text-slate-950 font-medium text-sm hover:bg-cyan-300 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(202,164,86,0.3)] hover:shadow-[0_0_30px_rgba(202,164,86,0.5)] cursor-pointer"
               >
-                <span>Leggi Case Study Completa</span>
+                <span>{t.work.modal.readFullCaseStudy}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

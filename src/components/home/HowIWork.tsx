@@ -1,104 +1,181 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { GlassPanel } from "@/components/ui";
-import { useI18n } from "@/i18n";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Search, Layout, Code2, Rocket } from "lucide-react";
+import { useI18n } from "@/i18n";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+// Tag values are proper nouns/tech names — kept literal in every locale.
+const STEP_TAGS: Record<string, string[]> = {
+  analysis: ["Model Design", "API Contracts", "Type-Safety"],
+  design: ["React 19", "Design System", "Responsive UX"],
+  development: ["Node.js / Express", "Prisma / Mongo", "AI Automation"],
+  deploy: ["Docker", "Vercel Cloud", "Performance 99+"],
+};
+const STEP_ICONS: Record<string, React.ReactNode> = {
+  analysis: <Search className="w-5 h-5 text-accent" />,
+  design: <Layout className="w-5 h-5 text-accent" />,
+  development: <Code2 className="w-5 h-5 text-accent" />,
+  deploy: <Rocket className="w-5 h-5 text-accent" />,
+};
+const STEP_ORDER = ["analysis", "design", "development", "deploy"] as const;
 
 export function HowIWork() {
   const { t } = useI18n();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
 
-  const steps = [
-    {
-      step: "01",
-      icon: <Search className="w-5 h-5 text-accent" />,
-      title: "Analisi & Architettura Dati",
-      desc: "Definizione dei requisiti aziendali, modellazione del database e scelta dell'architettura ideale.",
-      tags: ["Model Design", "API Contracts", "Type-Safety"],
-    },
-    {
-      step: "02",
-      icon: <Layout className="w-5 h-5 text-accent" />,
-      title: "Progettazione UI & Componenti",
-      desc: "Creazione di interfacce pulite, reattive e modulari per un'esperienza utente veloce ed intuitiva.",
-      tags: ["React 19", "Design System", "Responsive UX"],
-    },
-    {
-      step: "03",
-      icon: <Code2 className="w-5 h-5 text-accent" />,
-      title: "Sviluppo Fullstack & Integrazioni",
-      desc: "Scrittura di codice pulito in TypeScript con gestione delle API, integrazioni OCR ed intelligenza artificiale.",
-      tags: ["Node.js / Express", "Prisma / Mongo", "Automazioni AI"],
-    },
-    {
-      step: "04",
-      icon: <Rocket className="w-5 h-5 text-accent" />,
-      title: "Deploy & Ottimizzazione",
-      desc: "Containerizzazione Docker, rilascio continuo ed ottimizzazione delle prestazioni con tempi di risposta minimi.",
-      tags: ["Docker", "Vercel Cloud", "Prestazioni 99+"],
-    },
-  ];
+  const steps = STEP_ORDER.map((key, i) => ({
+    key,
+    step: String(i + 1).padStart(2, "0"),
+    icon: STEP_ICONS[key],
+    title: t.howIWork.steps[key].title,
+    desc: t.howIWork.steps[key].desc,
+    tags: STEP_TAGS[key],
+  }));
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      // The spine grows as the visitor scrolls through the steps.
+      if (lineRef.current) {
+        gsap.fromTo(
+          lineRef.current,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 60%",
+              end: "bottom 70%",
+              scrub: 0.6,
+            },
+          }
+        );
+      }
+
+      section.querySelectorAll<HTMLElement>("[data-step]").forEach((el, i) => {
+        const fromLeft = i % 2 === 0;
+        gsap.fromTo(
+          el,
+          { opacity: 0, x: fromLeft ? -60 : 60 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 82%", once: true },
+          }
+        );
+        const dot = el.querySelector<HTMLElement>("[data-dot]");
+        if (dot) {
+          gsap.fromTo(
+            dot,
+            { scale: 0 },
+            {
+              scale: 1,
+              duration: 0.5,
+              ease: "back.out(2)",
+              scrollTrigger: { trigger: el, start: "top 82%", once: true },
+            }
+          );
+        }
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="how-i-work" className="w-full py-20 relative">
+    <section id="how-i-work" ref={sectionRef} className="w-full py-20 relative">
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8">
-        
-        {/* Section Header */}
-        <div className="mb-12 border-b border-slate-800 pb-6">
-          <h2 className="font-headline text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
-            Come lavoro
+        <div className="mb-16 border-b border-slate-800 pb-6">
+          <h2 className="[font-family:var(--font-display)] uppercase text-4xl sm:text-5xl text-slate-100 tracking-tight">
+            {t.howIWork.title}
           </h2>
-          <p className="mt-2 text-slate-400 text-base max-w-xl font-headline font-light">
-            Il mio metodo per trasformare idee e requisiti in software reattivo, sicuro e pronto per la produzione.
+          <p className="mt-2 text-slate-400 text-base max-w-xl">
+            {t.howIWork.subtitle}
           </p>
         </div>
 
-        {/* 4 Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((item, i) => (
-            <motion.div
-              key={item.step}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <GlassPanel
-                variant="hover"
-                padding="lg"
-                className="rounded-2xl h-full border border-slate-800 bg-slate-900/60 hover:border-accent/40 transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
-                      {item.icon}
-                    </div>
-                    <span className="font-mono text-xs text-accent/80 font-bold px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/20">
+        {/* Vertical process spine */}
+        <div className="relative">
+          <div
+            className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-slate-800 hidden md:block"
+            aria-hidden="true"
+          >
+            <div
+              ref={lineRef}
+              className="absolute inset-0 bg-accent origin-top"
+              style={{ transform: "scaleY(0)" }}
+            />
+          </div>
+
+          <div className="space-y-16 md:space-y-24">
+            {steps.map((item, i) => {
+              const fromLeft = i % 2 === 0;
+              return (
+                <div
+                  key={item.key}
+                  data-step
+                  className={`relative md:flex items-center gap-10 ${fromLeft ? "" : "md:flex-row-reverse"}`}
+                >
+                  {/* Center dot on the spine */}
+                  <span
+                    data-dot
+                    className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent ring-4 ring-background z-10 items-center justify-center"
+                    aria-hidden="true"
+                  />
+
+                  {/* Ghost number */}
+                  <div className={`hidden md:block md:w-1/2 ${fromLeft ? "text-right pr-16" : "text-left pl-16"}`}>
+                    <span className="[font-family:var(--font-display)] text-[10rem] leading-none text-slate-900 select-none">
                       {item.step}
                     </span>
                   </div>
 
-                  <h3 className="font-headline text-lg font-bold text-slate-100 mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="font-headline text-sm text-slate-400 font-light leading-relaxed mb-6">
-                    {item.desc}
-                  </p>
+                  {/* Content card */}
+                  <div className="md:w-1/2 glass-panel p-6 rounded-2xl">
+                    <div className="flex items-center gap-3 mb-4 md:hidden">
+                      <span className="font-mono text-xs text-accent/80 font-bold px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/20">
+                        {item.step}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800">
+                        {item.icon}
+                      </div>
+                      <h3 className="[font-family:var(--font-display)] uppercase text-xl text-slate-100">
+                        {item.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm text-slate-400 leading-relaxed mb-5">
+                      {item.desc}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/60">
+                      {item.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 rounded-md font-mono text-3xs bg-slate-950 border border-slate-800 text-slate-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-
-                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/60">
-                  {item.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-0.5 rounded-md font-mono text-3xs bg-slate-950 border border-slate-800 text-slate-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </GlassPanel>
-            </motion.div>
-          ))}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

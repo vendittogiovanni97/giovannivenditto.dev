@@ -16,7 +16,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles = "inline-flex items-center justify-center font-label-technical transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
     
     const variants = {
-      primary: "bg-accent text-slate-950 hover:bg-accent hover:text-slate-950 shadow-[0_0_15px_rgba(184,255,60,0.2)]",
+      primary: "bg-accent text-slate-950 hover:bg-accent hover:text-slate-950 shadow-[0_0_15px_rgba(202,164,86,0.2)]",
       secondary: "border border-accent/30 text-accent hover:bg-accent/10",
       ghost: "border border-slate-400/30 text-slate-400 hover:bg-slate-400/5",
       magnetic: "btn-magnetic",

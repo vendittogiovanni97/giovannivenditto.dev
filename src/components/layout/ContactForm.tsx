@@ -65,7 +65,7 @@ export function ContactForm() {
           <input
             id="contact-name"
             {...register("name")}
-            className="w-full bg-slate-900 border border-accent/10 rounded-lg px-4 py-3 font-headline text-sm text-slate-100 placeholder:text-slate-400/40 focus:border-accent/50 focus:shadow-[0_0_15px_rgba(184,255,60,0.1)] transition-all"
+            className="w-full bg-slate-900 border border-accent/10 rounded-lg px-4 py-3 font-headline text-sm text-slate-100 placeholder:text-slate-400/40 focus:border-accent/50 focus:shadow-[0_0_15px_rgba(202,164,86,0.1)] transition-all"
             placeholder={t.contact.name}
           />
           {errors.name && <p className="font-code-snippet text-2xs text-red-400 mt-1">{errors.name.message}</p>}
@@ -76,7 +76,7 @@ export function ContactForm() {
             id="contact-email"
             {...register("email")}
             type="email"
-            className="w-full bg-slate-900 border border-accent/10 rounded-lg px-4 py-3 font-headline text-sm text-slate-100 placeholder:text-slate-400/40 focus:border-accent/50 focus:shadow-[0_0_15px_rgba(184,255,60,0.1)] transition-all"
+            className="w-full bg-slate-900 border border-accent/10 rounded-lg px-4 py-3 font-headline text-sm text-slate-100 placeholder:text-slate-400/40 focus:border-accent/50 focus:shadow-[0_0_15px_rgba(202,164,86,0.1)] transition-all"
             placeholder="you@example.com"
           />
           {errors.email && <p className="font-code-snippet text-2xs text-red-400 mt-1">{errors.email.message}</p>}
@@ -88,8 +88,8 @@ export function ContactForm() {
         <input
           id="contact-subject"
           {...register("subject")}
-          className="w-full bg-slate-900 border border-accent/10 rounded-lg px-4 py-3 font-headline text-sm text-slate-100 placeholder:text-slate-400/40 focus:border-accent/50 focus:shadow-[0_0_15px_rgba(184,255,60,0.1)] transition-all"
-          placeholder="Project inquiry, collaboration, etc."
+          className="w-full bg-slate-900 border border-accent/10 rounded-lg px-4 py-3 font-headline text-sm text-slate-100 placeholder:text-slate-400/40 focus:border-accent/50 focus:shadow-[0_0_15px_rgba(202,164,86,0.1)] transition-all"
+          placeholder={t.contact.subjectPlaceholder}
         />
         {errors.subject && <p className="font-code-snippet text-2xs text-red-400 mt-1">{errors.subject.message}</p>}
       </div>
@@ -100,7 +100,7 @@ export function ContactForm() {
           id="contact-message"
           {...register("message")}
           rows={6}
-          className="w-full bg-slate-900 border border-accent/10 rounded-lg px-4 py-3 font-headline text-sm text-slate-100 placeholder:text-slate-400/40 focus:border-accent/50 focus:shadow-[0_0_15px_rgba(184,255,60,0.1)] transition-all resize-none"
+          className="w-full bg-slate-900 border border-accent/10 rounded-lg px-4 py-3 font-headline text-sm text-slate-100 placeholder:text-slate-400/40 focus:border-accent/50 focus:shadow-[0_0_15px_rgba(202,164,86,0.1)] transition-all resize-none"
           placeholder={t.contact.message}
         />
         {errors.message && <p className="font-code-snippet text-2xs text-red-400 mt-1">{errors.message.message}</p>}

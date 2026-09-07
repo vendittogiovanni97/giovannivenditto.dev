@@ -10,7 +10,7 @@ export default async function Image() {
     (
       <div
         style={{
-          background: "#0b1410",
+          background: "#14100b",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -31,7 +31,7 @@ export default async function Image() {
             width: "500px",
             height: "500px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(184, 255, 60, 0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(202,164,86, 0.15) 0%, transparent 70%)",
           }}
         />
         <div
@@ -52,7 +52,7 @@ export default async function Image() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "linear-gradient(rgba(184, 255, 60, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(184, 255, 60, 0.03) 1px, transparent 1px)",
+              "linear-gradient(rgba(202,164,86, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(202,164,86, 0.03) 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
@@ -70,7 +70,7 @@ export default async function Image() {
           <div
             style={{
               fontSize: "18px",
-              color: "#b8ff3c",
+              color: "#caa456",
               letterSpacing: "4px",
               textTransform: "uppercase",
             }}
@@ -93,7 +93,7 @@ export default async function Image() {
             style={{
               fontSize: "72px",
               fontWeight: "bold",
-              color: "#b8ff3c",
+              color: "#caa456",
               letterSpacing: "-2px",
               lineHeight: "0.9",
               textAlign: "center",
@@ -127,7 +127,7 @@ export default async function Image() {
                   fontSize: "12px",
                   color: "#b4c7bb",
                   padding: "6px 12px",
-                  border: "1px solid rgba(184, 255, 60, 0.2)",
+                  border: "1px solid rgba(202,164,86, 0.2)",
                   borderRadius: "9999px",
                 }}
               >

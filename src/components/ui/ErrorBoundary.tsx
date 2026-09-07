@@ -23,12 +23,16 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       return (
         this.props.fallback || (
           <div className="p-8 text-center glass-panel rounded-2xl m-4">
-            <p className="font-headline text-lg text-slate-400 mb-4">Something went wrong.</p>
+            <p className="font-headline text-lg text-slate-400 mb-4">
+              {typeof document !== "undefined" && document.documentElement.lang === "en"
+                ? "Something went wrong."
+                : "Qualcosa è andato storto."}
+            </p>
             <button
               onClick={() => this.setState({ hasError: false })}
               className="font-code-snippet text-sm text-accent hover:underline"
             >
-              Try again
+              {typeof document !== "undefined" && document.documentElement.lang === "en" ? "Try again" : "Riprova"}
             </button>
           </div>
         )

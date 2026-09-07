@@ -13,12 +13,14 @@ export function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t } = useI18n();
   const progressBarRef = useRef<HTMLDivElement>(null);
+  const linksRef = useRef<HTMLDivElement>(null);
+  const [hoverRect, setHoverRect] = useState<{ left: number; width: number } | null>(null);
 
   const navLinks = [
     { href: "/#work", label: t.nav.work },
     { href: "/lab", label: "Lab Demo" },
     { href: "/writing", label: t.nav.writing },
-    { href: "/CV_Giovanni_Venditto.pdf", label: "Curriculum", isDownload: true },
+    { href: "/documents/CV_Giovanni_Venditto.pdf", label: "Curriculum", isDownload: true },
   ];
 
   const socialLinks = [
@@ -65,6 +67,13 @@ export function NavBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleLinkHover = (e: React.MouseEvent<HTMLElement>) => {
+    if (!linksRef.current) return;
+    const linkRect = e.currentTarget.getBoundingClientRect();
+    const containerRect = linksRef.current.getBoundingClientRect();
+    setHoverRect({ left: linkRect.left - containerRect.left, width: linkRect.width });
+  };
+
   return (
     <>
       {/* Scrim */}
@@ -88,23 +97,48 @@ export function NavBar() {
         />
       </div>
 
-      <nav
+      <motion.nav
         id="main-nav"
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 w-full z-50 transition-all duration-300 px-4 sm:px-6 ${
           scrolled ? "py-3" : "py-4"
         }`}
         role="navigation"
         aria-label="Main navigation"
       >
-        <div className="max-w-[1400px] mx-auto flex justify-between items-center glass-panel rounded-full px-5 sm:px-6 py-2 bg-slate-950/85 border border-slate-800 shadow-xl backdrop-blur-md">
-          
+        <div className="max-w-[1400px] mx-auto flex justify-between items-center glass-panel rounded-full px-5 sm:px-6 py-2">
+
           {/* Logo */}
-          <Link href="/" className="font-headline text-base sm:text-lg font-extrabold tracking-tighter text-slate-100 hover:text-accent transition-colors">
-            GV
+          <Link
+            href="/"
+            className="group [font-family:var(--font-display)] uppercase text-lg text-slate-100 hover:text-accent transition-colors"
+          >
+            <span className="inline-block transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">GV</span>
+            <span className="text-accent">.</span>
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-8">
+          <div
+            ref={linksRef}
+            onMouseLeave={() => setHoverRect(null)}
+            className="hidden md:flex items-center gap-1 relative"
+          >
+            {/* Sliding hover indicator */}
+            <AnimatePresence>
+              {hoverRect && (
+                <motion.div
+                  layoutId="nav-hover-pill"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1, left: hoverRect.left, width: hoverRect.width }}
+                  exit={{ opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                  className="absolute top-0 h-full rounded-md bg-accent/10 border border-accent/20 pointer-events-none"
+                />
+              )}
+            </AnimatePresence>
+
             {navLinks.map((link) =>
               link.isDownload ? (
                 <a
@@ -113,7 +147,8 @@ export function NavBar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   download="CV_Giovanni_Venditto.pdf"
-                  className="text-slate-300 font-mono text-xs hover:text-accent px-2 py-1 rounded-md transition-colors duration-200 flex items-center gap-1.5"
+                  onMouseEnter={handleLinkHover}
+                  className="relative z-10 text-slate-100 font-mono text-xs hover:text-accent px-3 py-1.5 rounded-md transition-colors duration-200 flex items-center gap-1.5"
                 >
                   <Download className="w-3.5 h-3.5 text-accent" />
                   <span>{link.label}</span>
@@ -122,7 +157,8 @@ export function NavBar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-slate-300 font-mono text-xs hover:text-accent px-2 py-1 rounded-md transition-colors duration-200"
+                  onMouseEnter={handleLinkHover}
+                  className="relative z-10 text-slate-100 font-mono text-xs hover:text-accent px-3 py-1.5 rounded-md transition-colors duration-200"
                 >
                   {link.label}
                 </Link>
@@ -140,7 +176,7 @@ export function NavBar() {
                   href={s.href}
                   target={s.href.startsWith("mailto") ? undefined : "_blank"}
                   rel={s.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                  className="p-1.5 rounded-full text-slate-300 hover:text-accent hover:bg-slate-900 transition-all hover:scale-110"
+                  className="p-1.5 rounded-full text-slate-100 hover:text-accent hover:bg-slate-900 transition-all hover:scale-110"
                   aria-label={s.label}
                   title={s.label}
                 >
@@ -152,7 +188,7 @@ export function NavBar() {
             <LanguageToggle />
             <Link
               href="/contact"
-              className="px-4 py-1.5 rounded-full bg-accent text-slate-950 font-mono text-xs font-semibold hover:bg-accent-bright transition-all shadow-[0_0_15px_rgba(184,255,60,0.3)]"
+              className="px-4 py-1.5 rounded-full bg-accent text-slate-950 font-mono text-xs font-semibold hover:bg-accent-bright transition-all shadow-[0_0_15px_rgba(202,164,86,0.3)] hover:scale-105"
             >
               {t.nav.contact}
             </Link>
@@ -160,7 +196,7 @@ export function NavBar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-slate-200 p-1"
+            className="md:hidden text-slate-100 p-1"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-expanded={mobileMenuOpen}
             aria-label="Toggle menu"
@@ -177,32 +213,41 @@ export function NavBar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden mt-3 max-w-4xl mx-auto glass-panel rounded-2xl p-5 bg-slate-950/95 border border-slate-800 shadow-2xl backdrop-blur-xl flex flex-col gap-4"
+              className="md:hidden mt-3 max-w-4xl mx-auto glass-panel rounded-2xl p-5 flex flex-col gap-4"
             >
               <div className="flex flex-col gap-2">
-                {navLinks.map((link) =>
+                {navLinks.map((link, i) =>
                   link.isDownload ? (
-                    <a
+                    <motion.a
                       key={link.href}
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       download="CV_Giovanni_Venditto.pdf"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="text-slate-200 font-headline text-sm font-semibold hover:text-accent py-2 border-b border-slate-900 flex items-center gap-2"
+                      className="text-slate-100 [font-family:var(--font-display)] uppercase text-sm hover:text-accent py-2 border-b border-slate-900 flex items-center gap-2"
                     >
                       <Download className="w-4 h-4 text-accent" />
                       <span>{link.label} (PDF)</span>
-                    </a>
+                    </motion.a>
                   ) : (
-                    <Link
+                    <motion.div
                       key={link.href}
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="text-slate-200 font-headline text-sm font-semibold hover:text-accent py-2 border-b border-slate-900"
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.05 }}
                     >
-                      {link.label}
-                    </Link>
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="text-slate-100 [font-family:var(--font-display)] uppercase text-sm hover:text-accent py-2 border-b border-slate-900 block"
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
                   )
                 )}
               </div>
@@ -215,7 +260,7 @@ export function NavBar() {
                       href={s.href}
                       target={s.href.startsWith("mailto") ? undefined : "_blank"}
                       rel={s.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-                      className="p-2 rounded-full border border-slate-800 text-slate-400 hover:text-accent"
+                      className="p-2 rounded-full border border-slate-800 text-slate-300 hover:text-accent"
                     >
                       {s.icon}
                     </a>
@@ -227,14 +272,14 @@ export function NavBar() {
               <Link
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-2.5 text-center rounded-xl bg-accent text-slate-950 font-headline font-bold text-sm shadow-[0_0_15px_rgba(184,255,60,0.3)]"
+                className="w-full py-2.5 text-center rounded-xl bg-accent text-slate-950 [font-family:var(--font-display)] uppercase text-sm shadow-[0_0_15px_rgba(202,164,86,0.3)]"
               >
                 {t.nav.contact}
               </Link>
             </motion.div>
           )}
         </AnimatePresence>
-      </nav>
+      </motion.nav>
     </>
   );
 }

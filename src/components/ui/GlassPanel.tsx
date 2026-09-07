@@ -15,7 +15,7 @@ const GlassPanel = React.forwardRef<HTMLDivElement, GlassPanelProps>(
     const variants = {
       default: "",
       hover: "group hover:-translate-y-2 transition-transform duration-300",
-      floating: "backdrop-blur-[20px] bg-slate-900/60 border-border-slate-700/20",
+      floating: "",
     };
 
     const paddings = {

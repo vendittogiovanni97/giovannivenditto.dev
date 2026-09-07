@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { GlassPanel } from "@/components/ui";
+import { useI18n } from "@/i18n";
 import { Play, RotateCcw, Sparkles, Terminal, Copy, Check } from "lucide-react";
 import { EditorView, basicSetup } from "codemirror";
 import { EditorState } from "@codemirror/state";
@@ -31,21 +32,21 @@ const PRESETS: SnippetPreset[] = [
   background: rgba(15, 27, 20, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(184, 255, 60, 0.3);
-  box-shadow: 0 10px 40px rgba(184, 255, 60, 0.15);
+  border: 1px solid rgba(202,164,86, 0.3);
+  box-shadow: 0 10px 40px rgba(202,164,86, 0.15);
   border-radius: 24px;
   padding: 32px;
   max-width: 380px;
-  color: #e7efe9;
+  color: #f3ece0;
   font-family: system-ui, sans-serif;
 ">
   <div style="
     display: inline-block;
     padding: 4px 12px;
-    background: rgba(184, 255, 60, 0.15);
-    border: 1px solid rgba(184, 255, 60, 0.3);
+    background: rgba(202,164,86, 0.15);
+    border: 1px solid rgba(202,164,86, 0.3);
     border-radius: 99px;
-    color: #b8ff3c;
+    color: #caa456;
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 16px;
@@ -59,10 +60,10 @@ const PRESETS: SnippetPreset[] = [
   <button onclick="alert('Inizializzazione completata!')" style="
     width: 100%;
     padding: 12px;
-    background: #b8ff3c;
+    background: #caa456;
     border: none;
     border-radius: 12px;
-    color: #0b1410;
+    color: #14100b;
     font-weight: 700;
     cursor: pointer;
   ">Esegui Azione Test</button>
@@ -74,7 +75,7 @@ const PRESETS: SnippetPreset[] = [
     category: "Canvas & Graphics",
     language: "html",
     description: "Generatore di particelle interattivo con simulazione su canvas HTML5.",
-    code: `<canvas id="canvas" style="width: 100%; height: 260px; background: #0b1410; border-radius: 16px;"></canvas>
+    code: `<canvas id="canvas" style="width: 100%; height: 260px; background: #14100b; border-radius: 16px;"></canvas>
 <script>
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
@@ -99,9 +100,9 @@ const PRESETS: SnippetPreset[] = [
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#b8ff3c';
+      ctx.fillStyle = '#caa456';
       ctx.shadowBlur = 8;
-      ctx.shadowColor = '#b8ff3c';
+      ctx.shadowColor = '#caa456';
       ctx.fill();
     });
     requestAnimationFrame(animate);
@@ -133,6 +134,7 @@ submitLike(42);`
 ];
 
 export function InteractiveSnippetLab() {
+  const { t } = useI18n();
   const [activePreset, setActivePreset] = useState<SnippetPreset>(PRESETS[0]);
   const [code, setCode] = useState<string>(PRESETS[0].code);
   const editorRef = useRef<HTMLDivElement>(null);
@@ -201,14 +203,14 @@ export function InteractiveSnippetLab() {
           <div>
             <div className="font-mono text-xs text-cyan-400 uppercase tracking-widest mb-2 flex items-center gap-2">
               <Terminal className="w-3.5 h-3.5" />
-              <span>LIVE CODE PLAYGROUND PRESETS</span>
+              <span>{t.studio.snippetLabEyebrow}</span>
             </div>
-            <h2 className="font-headline text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
-              Interactive Snippet Lab
+            <h2 className="[font-family:var(--font-display)] uppercase text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+              {t.studio.snippetLabTitle}
             </h2>
           </div>
           <p className="font-mono text-xs text-slate-400 max-w-sm">
-            Modifica il codice in tempo reale nel CodeMirror per testare la resa dal vivo.
+            {t.studio.snippetLabSubtitle}
           </p>
         </div>
 
@@ -220,7 +222,7 @@ export function InteractiveSnippetLab() {
               onClick={() => handleSelectPreset(preset)}
               className={`px-4 py-2.5 rounded-full font-mono text-xs transition-all flex items-center gap-2 cursor-pointer border ${
                 activePreset.id === preset.id
-                  ? "bg-cyan-400 text-slate-950 font-semibold shadow-[0_0_15px_rgba(184,255,60,0.3)] border-cyan-400"
+                  ? "bg-cyan-400 text-slate-950 font-semibold shadow-[0_0_15px_rgba(202,164,86,0.3)] border-cyan-400"
                   : "glass-panel text-slate-300 border-slate-800 hover:text-white hover:border-slate-700"
               }`}
             >
@@ -246,14 +248,14 @@ export function InteractiveSnippetLab() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleReset}
-                    title="Ripristina Codice"
+                    title={t.studio.resetCode}
                     className="p-1.5 rounded-lg text-slate-400 hover:text-cyan-400 hover:bg-slate-800 transition-colors cursor-pointer"
                   >
                     <RotateCcw className="w-4 h-4" />
                   </button>
                   <button
                     onClick={handleCopy}
-                    title="Copia Codice"
+                    title={t.studio.copyCode}
                     className="p-1.5 rounded-lg text-slate-400 hover:text-cyan-400 hover:bg-slate-800 transition-colors cursor-pointer"
                   >
                     {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -265,7 +267,7 @@ export function InteractiveSnippetLab() {
 
               <div className="px-5 py-2.5 border-t border-slate-800 bg-slate-950/40 flex items-center justify-between font-mono text-2xs text-slate-500">
                 <span>{activePreset.category}</span>
-                <span className="text-cyan-400">Live Editor</span>
+                <span className="text-cyan-400">{t.studio.liveEditor}</span>
               </div>
             </div>
           </div>
@@ -276,7 +278,7 @@ export function InteractiveSnippetLab() {
               <div className="font-mono text-xs text-cyan-400 uppercase tracking-widest mb-4 flex items-center justify-between border-b border-slate-800 pb-3">
                 <span className="flex items-center gap-2">
                   <Play className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Output in Tempo Reale</span>
+                  <span>{t.studio.outputRealTime}</span>
                 </span>
                 <span className="text-3xs text-slate-500">PREVIEW</span>
               </div>
@@ -285,10 +287,10 @@ export function InteractiveSnippetLab() {
                 {activePreset.language === "html" ? (
                   <iframe
                     key={code}
-                    srcDoc={`<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="margin:0;padding:24px;background:#0b1410;display:flex;align-items:center;justify-content:center;min-height:100vh;">${code}</body></html>`}
+                    srcDoc={`<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="margin:0;padding:24px;background:#14100b;display:flex;align-items:center;justify-content:center;min-height:100vh;">${code}</body></html>`}
                     className="w-full h-full border-0 min-h-[280px] rounded-xl"
                     sandbox="allow-scripts"
-                    title="Live HTML Preview"
+                    title={t.studio.liveHtmlPreview}
                   />
                 ) : (
                   <div className="w-full h-full flex flex-col font-mono text-xs text-emerald-400 bg-slate-950 p-4 rounded-xl border border-slate-800 overflow-auto">

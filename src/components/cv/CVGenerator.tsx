@@ -23,7 +23,7 @@ export function CVGenerator() {
           className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-accent/20 pb-8"
         >
           <div>
-            <h2 className="font-headline text-4xl md:text-5xl text-slate-100 tracking-tight mb-4">CV</h2>
+            <h2 className="[font-family:var(--font-display)] uppercase text-4xl md:text-5xl text-slate-100 tracking-tight mb-4">CV</h2>
             <p className="font-headline text-slate-400 max-w-xl text-lg font-light">
               Download or print my resume.
             </p>
@@ -41,7 +41,7 @@ export function CVGenerator() {
         <div ref={cvRef} className="bg-slate-900 rounded-3xl p-8 md:p-12 print:bg-white print:text-black print:rounded-none print:p-0">
           <div className="flex flex-col md:flex-row justify-between items-start mb-12">
             <div>
-              <h1 className="font-headline text-4xl md:text-5xl text-slate-100 tracking-tight print:text-black mb-2">
+              <h1 className="[font-family:var(--font-display)] uppercase text-4xl md:text-5xl text-slate-100 tracking-tight print:text-black mb-2">
                 Giovanni Venditto
               </h1>
               <p className="font-headline text-lg text-slate-400 print:text-gray-600">

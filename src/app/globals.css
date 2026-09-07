@@ -17,20 +17,26 @@
 }
 
 /*
-  Palette: "Deep Green Terminal"
-  Single source of truth. One base (green-black) + one accent (acid lime).
-  Legacy Tailwind color families (cyan/sky/indigo/violet) are remapped to the
-  single accent below so existing utility classes reskin without per-file edits.
+  Palette: "Editorial Poster" (replaces the former "Deep Green Terminal").
+  Warm ink-black ground by default, one committed brass/gold accent. Specific
+  surfaces (the Hero, and any other section that wants the flip) invert to
+  the paper tone as a deliberate light/dark section device, not a user theme
+  toggle. --color-mark is a rare, hero-only flourish color, not a reusable
+  utility accent — the discipline stays one base + one accent.
 */
 :root {
-  --background: #0b1410;
-  --foreground: #e7efe9;
-  --color-surface: #0f1b14;
-  --color-border: rgba(184, 255, 60, 0.1);
-  --color-accent: #b8ff3c;
-  --color-accent-bright: #cbff6b;
-  --color-accent-deep: #84c70f;
+  --background: #14100b;
+  --foreground: #f3ece0;
+  --color-surface: #1c1712;
+  --color-border: rgba(202,164,86, 0.14);
+  --color-accent: #caa456;
+  --color-accent-bright: #e0bd70;
+  --color-accent-deep: #9c7d3c;
   --spacing-gutter: 24px;
+
+  --color-paper: #f2ece0;
+  --color-ink: #14100b;
+  --color-mark: #ff5a36;
 }
 
 @theme {
@@ -39,34 +45,58 @@
   --text-3xs: 0.625rem; /* 10px */
   --text-4xs: 0.5625rem; /* 9px */
 
-  /* Single brand accent (acid lime) */
-  --color-accent: #b8ff3c;
-  --color-accent-bright: #cbff6b;
-  --color-accent-deep: #84c70f;
+  /* The flip-section colors as real utilities: bg-paper, text-ink, etc. */
+  --color-paper: #f2ece0;
+  --color-ink: #14100b;
+  --color-mark: #ff5a36;
 
-  /* Remap legacy accent families -> single lime accent (kills cyan+violet mix) */
-  --color-cyan-300: #cbff6b;
-  --color-cyan-400: #b8ff3c;
-  --color-cyan-500: #a2ee22;
-  --color-cyan-900: #213a08;
-  --color-sky-400: #b8ff3c;
-  --color-indigo-400: #b8ff3c;
-  --color-indigo-500: #a2ee22;
-  --color-violet-500: #a2ee22;
-  --color-violet-600: #84c70f;
+  /*
+    `font-headline` previously resolved to nothing (no matching @theme key),
+    so every "font-headline" element silently inherited body's plain sans
+    stack. Wiring it to Manrope keeps that large existing surface coherent;
+    genuine page/section titles are upgraded individually to the Anton
+    display face via an explicit [font-family:var(--font-display)] override,
+    since Anton (all-caps, ultra-condensed) is unreadable at body/label sizes.
+  */
+  --font-headline: var(--font-body), "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
 
-  /* Neutral ramp: green-tinted ink (replaces blue-tinted slate) */
-  --color-slate-50: #f2f7f3;
-  --color-slate-100: #e7efe9;
-  --color-slate-200: #d0ddd4;
-  --color-slate-300: #b4c7bb;
-  --color-slate-400: #8aa294;
-  --color-slate-500: #5c7565;
-  --color-slate-600: #405648;
-  --color-slate-700: #2c4034;
-  --color-slate-800: #1c2b22;
-  --color-slate-900: #0f1b14;
-  --color-slate-950: #0a130e;
+  /* Single brand accent (warm brass/gold) */
+  --color-accent: #caa456;
+  --color-accent-bright: #e0bd70;
+  --color-accent-deep: #9c7d3c;
+
+  /* Remap legacy accent families -> single gold accent */
+  --color-cyan-300: #e0bd70;
+  --color-cyan-400: #caa456;
+  --color-cyan-500: #b8943f;
+  --color-cyan-900: #3d2f14;
+  --color-sky-400: #caa456;
+  --color-indigo-400: #caa456;
+  --color-indigo-500: #b8943f;
+  --color-violet-500: #b8943f;
+  --color-violet-600: #9c7d3c;
+
+  /*
+    Neutral ramp: warm GRAY, not brown. The first pass here (commented values
+    below) had a 30-40pt gap between the red and blue channels at every step —
+    that reads as tan/khaki, not as a sophisticated warm neutral, and was
+    flagged as "the brown text" once it was live on real copy. Tightened to a
+    ~10-15pt gap (in the spirit of a warm-gray/"stone" ramp) so body text
+    stays legibly gray with only a whisper of warmth.
+    was: #f7f3ec #f0e9dc #ddd3bf #c2b49a #9c8d76 #766a58 #564d40 #3a3329
+  */
+  --color-slate-50: #f6f4f1;
+  --color-slate-100: #ece9e4;
+  --color-slate-200: #d6d2c9;
+  --color-slate-300: #b7b2a7;
+  --color-slate-400: #928d81;
+  --color-slate-500: #6d685e;
+  --color-slate-600: #4d4941;
+  --color-slate-700: #36322b;
+  --color-slate-800: #241f19;
+  --color-slate-900: #1c1712;
+  --color-slate-950: #14100b;
 }
 
 @theme inline {
@@ -77,75 +107,71 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: "Geist", system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body), "Geist", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* Glassmorphism & Panel System */
+/*
+  Panel system: solid ink surface with a hairline border and a hard-edged
+  offset shadow (the poster world's "sticker" depth, not a soft glow) rather
+  than glass/blur. The class name stays so every existing usage reskins from
+  this one place.
+*/
 .glass-panel {
-  background: rgba(15, 27, 20, 0.72);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  background: var(--color-slate-900);
+  border: 1px solid var(--color-slate-800);
+  box-shadow: 5px 6px 0 rgba(0, 0, 0, 0.28);
   transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel:hover {
-  border-color: rgba(184, 255, 60, 0.28);
-  box-shadow: 0 14px 40px -10px rgba(184, 255, 60, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-
-/* Background Gradients (subtle single-hue green glow) */
-.aurora-bg {
-  background:
-    radial-gradient(circle at 18% 20%, rgba(184, 255, 60, 0.05) 0%, transparent 42%),
-    radial-gradient(circle at 82% 30%, rgba(132, 199, 15, 0.04) 0%, transparent 42%),
-    radial-gradient(circle at 50% 82%, rgba(184, 255, 60, 0.03) 0%, transparent 46%);
-}
-
-/*
-  Former gradient-text classes are now solid (gradient text is a decorative
-  AI tell). Kept as classes so existing markup renders correctly.
-*/
-.text-gradient-cyan {
-  color: var(--foreground);
-  -webkit-text-fill-color: currentColor;
-  background: none;
+  border-color: color-mix(in oklab, var(--color-accent) 55%, var(--color-slate-800));
+  box-shadow: 7px 8px 0 rgba(0, 0, 0, 0.32);
+  transform: translate(-2px, -2px);
 }
 
 .text-accent {
   color: var(--color-accent);
 }
 
-.text-gradient-subtle {
-  color: var(--foreground);
-  -webkit-text-fill-color: currentColor;
-  background: none;
-}
-
 /* Scrollbar Customization */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b1410;
+  background: #14100b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1c2b22;
+  background: #241f19;
   border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b8ff3c;
+  background: #caa456;
+}
+
+/*
+  Fully hidden scrollbar for horizontal galleries that already carry their
+  own visual scroll indicator (a path/dot, arrows, etc.) — the native bar
+  (default ~15px tall in Chromium, ignoring `scrollbar-width` in some
+  versions) reads as an unstyled leftover rather than part of the design.
+*/
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 /* Focus Visible Access */
 :focus-visible {
-  outline: 2px solid #b8ff3c;
+  outline: 2px solid #caa456;
   outline-offset: 2px;
   border-radius: 6px;
 }

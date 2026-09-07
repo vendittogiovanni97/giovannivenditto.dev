@@ -29,7 +29,33 @@
       "product": "Products & Web Apps",
       "client": "Client Work",
       "experimental": "Projects"
-    }
+    },
+    "caseStudy": {
+      "backToWork": "Back to Work",
+      "role": "Role",
+      "company": "Company",
+      "period": "Period",
+      "present": "Present",
+      "screenshot": "Screenshot",
+      "keyMetrics": "Key Metrics",
+      "techStack": "Tech Stack",
+      "liveDemo": "Live Demo",
+      "sourceCode": "Source Code",
+      "previous": "Previous",
+      "next": "Next",
+      "current": "Current"
+    },
+    "modal": {
+      "overview": "Project Overview",
+      "techStackUsed": "Tech Stack Used",
+      "role": "Role",
+      "company": "Company / Client",
+      "close": "Close preview",
+      "readFullCaseStudy": "Read Full Case Study",
+      "closePreviewAria": "Close project preview"
+    },
+    "quickView": "Quick Preview",
+    "openDetail": "Open Detail"
   },
   "writing": {
     "title": "Blog",
@@ -84,7 +110,23 @@
       "currentRole": "Fullstack Engineer",
       "currentCompany": "Agilae",
       "currentDesc": "Developing the SaaS platform for insurance agency digitalization."
-    }
+    },
+    "liveEditor": "Live Editor",
+    "outputRealTime": "Real-Time Output",
+    "resetCode": "Reset Code",
+    "copyCode": "Copy Code",
+    "liveHtmlPreview": "Live HTML Preview",
+    "snippetLabEyebrow": "LIVE CODE PLAYGROUND PRESETS",
+    "snippetLabTitle": "Interactive Snippet Lab",
+    "snippetLabSubtitle": "Edit the code in real time in CodeMirror to test the live render.",
+    "educationDesc": {
+      "linkCampus": "Academic specialization path in full-stack development, web architectures, relational/NoSQL databases, and agile methodologies.",
+      "nexusPozzuoli": "Intensive frontend engineering course: TypeScript, React, reusable components, responsive design, and UX optimization.",
+      "claude101": "Official certification on advanced LLM usage, prompt engineering, and agentic integration with Anthropic models."
+    },
+    "experienceYears": "2+ years",
+    "languagesValue": "Italian (Native), English",
+    "locationValue": "Italy"
   },
   "techStack": {
     "title": "Complete Tech Stack",
@@ -166,7 +208,8 @@
         "description": "Creating and managing isolated development environments.",
         "highlight": "Simple and reproducible deployments."
       }
-    }
+    },
+    "pauseHint": "Hover to pause the scroll"
   },
   "experience": {
     "title": "Experience",
@@ -193,7 +236,8 @@
     "title": "GitHub",
     "subtitle": "My repositories and code on GitHub.",
     "error": "Unable to load data at this time.",
-    "viewOnGithub": "View on GitHub"
+    "viewOnGithub": "View on GitHub",
+    "liveData": "Live data from GitHub"
   },
   "contact": {
     "title": "Contact Me",
@@ -215,7 +259,8 @@
     "availability": "Availability",
     "availableForFreelance": "Available for projects",
     "openTo": "Open to new opportunities and collaborations",
-    "social": "Social"
+    "social": "Social",
+    "subjectPlaceholder": "Project inquiry, collaboration, etc."
   },
   "footer": {
     "builtWith": "Built with Next.js",
@@ -224,7 +269,12 @@
   },
   "credentials": {
     "title": "Education & Studies",
-    "subtitle": "My studies, training courses, and certifications."
+    "subtitle": "My studies, training courses, and certifications.",
+    "enlarge": "Enlarge",
+    "officialCertificate": "Official Anthropic Certificate",
+    "prevAria": "Previous credential",
+    "nextAria": "Next credential",
+    "goToAria": "Go to credential {n}"
   },
   "lab": {
     "title": "Interactive Lab",
@@ -234,6 +284,79 @@
     "gridTitle": "AG Grid Benchmark (10,000 Records)",
     "gridSubtitle": "Performance and rendering test for 60fps enterprise data tables.",
     "themeTitle": "Design System & Glassmorphism Inspector",
-    "themeSubtitle": "Customize gradients, blur, and colors in real time."
+    "themeSubtitle": "Customize gradients, blur, and colors in real time.",
+    "eyebrow": "Interactive Engineering Playground",
+    "liveEditor": "Live Editor",
+    "tabOcr": "OCR Extractor",
+    "tabGrid": "10k Grid Benchmark",
+    "tabTheme": "UI Inspector",
+    "ocrSelectPrompt": "1. Select a Sample Document",
+    "ocrScanning": "Running OCR & AI extraction...",
+    "ocrRunScan": "Run OCR + LLM Scan",
+    "ocrPdfPreview": "Digitized PDF Preview",
+    "ocrExtractedTable": "EXTRACTED DATA TABLE",
+    "ocrStatusLabel": "OCR Status:",
+    "ocrStatusProcessing": "Processing...",
+    "ocrStatusReady": "Ready to analyze",
+    "ocrJsonResult": "Extracted JSON Result",
+    "ocrAccuracy": "Accuracy",
+    "ocrAnalyzingShort": "Analyzing...",
+    "ocrAnalyzingFull": "Running OCR & AI extraction...",
+    "ocrNotExtracted": "No JSON extracted yet",
+    "ocrClickToStart": "Click the {button} button to start real-time extraction.",
+    "ocrReadyForDb": "Structured data, ready to insert into a database",
+    "gridGenerate1k": "Generate 1,000 Records",
+    "gridGenerate10k": "Generate 10,000 Records",
+    "gridRecordsInMemory": "Records in Memory",
+    "gridRenderTime": "Render Time",
+    "gridFramerate": "Render Framerate",
+    "gridReactiveFilter": "Reactive Filter",
+    "gridImmediate": "Instant",
+    "gridSearchPlaceholder": "Filter 10,000 records in real time by name, id or role...",
+    "gridEmptyState": "Click \"Generate 10,000 Records\" to start the real-time render benchmark.",
+    "gridColId": "RECORD ID",
+    "gridColName": "USER NAME",
+    "gridColRole": "ROLE",
+    "gridColStatus": "STATUS",
+    "gridColScore": "MATCH SCORE",
+    "gridColTimestamp": "TIMESTAMP",
+    "themeAccentColor": "Primary Accent Color",
+    "themeBlur": "Glass Blur (Backdrop Blur)",
+    "themeGlow": "Neon Glow Intensity",
+    "themeLivePreviewToken": "Live Preview Token",
+    "themeCardTitle": "Glassmorphic UI Card",
+    "themeCardDesc": "A reactive component with dynamic CSS styles. Drag the sliders on the left to test the design system's visual output.",
+    "themeCardButton": "Reactive Accent Button"
+  },
+  "howIWork": {
+    "title": "How I Work",
+    "subtitle": "My method for turning ideas and requirements into responsive, secure, production-ready software.",
+    "steps": {
+      "analysis": {
+        "title": "Analysis & Data Architecture",
+        "desc": "Defining business requirements, modeling the database, and choosing the right architecture."
+      },
+      "design": {
+        "title": "UI & Component Design",
+        "desc": "Building clean, responsive, modular interfaces for a fast and intuitive user experience."
+      },
+      "development": {
+        "title": "Fullstack Development & Integrations",
+        "desc": "Writing clean TypeScript code, handling APIs, and integrating OCR and AI automation."
+      },
+      "deploy": {
+        "title": "Deploy & Optimization",
+        "desc": "Docker containerization, continuous deployment, and performance tuning for minimal response times."
+      }
+    }
+  },
+  "common": {
+    "somethingWentWrong": "Something went wrong.",
+    "tryAgain": "Try again",
+    "pageNotFound": "This page has drifted into the void.",
+    "returnHome": "Return Home",
+    "konamiTitle": "Konami Code Activated!",
+    "konamiDesc": "You found the easter egg. Impressed?",
+    "close": "Close"
   }
 }

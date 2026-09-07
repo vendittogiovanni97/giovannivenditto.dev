@@ -1,14 +1,60 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import dynamic from "next/dynamic";
+import { gsap } from "gsap";
+import Image from "next/image";
 import { useI18n } from "@/i18n";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
-const WebGLBackground = dynamic(
-  () => import("./WebGLBackground").then((m) => ({ default: m.WebGLBackground })),
-  { ssr: false }
-);
+function SplitHeadline({ text }: { text: string }) {
+  const wrapRef = useRef<HTMLSpanElement>(null);
+  const reduce = useReducedMotion();
+
+  useEffect(() => {
+    if (!wrapRef.current) return;
+    const chars = wrapRef.current.querySelectorAll<HTMLElement>("[data-char]");
+    if (reduce) {
+      gsap.set(chars, { opacity: 1, y: 0, skewX: 0, filter: "blur(0px)" });
+      return;
+    }
+    const tween = gsap.fromTo(
+      chars,
+      { opacity: 0, y: "0.6em", skewX: -12, filter: "blur(10px)" },
+      {
+        opacity: 1,
+        y: "0em",
+        skewX: 0,
+        filter: "blur(0px)",
+        duration: 0.9,
+        ease: "power4.out",
+        stagger: { each: 0.028, from: "start" },
+        delay: 0.15,
+      }
+    );
+    // Safety net: the name is the first thing a visitor reads, so it must
+    // never stay invisible — e.g. a tab loaded in the background can leave
+    // requestAnimationFrame (and this tween) fully paused. Force the resting
+    // state well past the tween's own ~1.05s runtime if it hasn't finished.
+    const safety = window.setTimeout(() => {
+      if (tween.progress() < 1) tween.progress(1).kill();
+    }, 2500);
+    return () => {
+      window.clearTimeout(safety);
+      tween.kill();
+    };
+  }, [reduce]);
+
+  return (
+    <span ref={wrapRef} className="inline-block">
+      {text.split("").map((ch, i) => (
+        <span key={i} data-char className="inline-block will-change-transform">
+          {ch === " " ? " " : ch}
+        </span>
+      ))}
+    </span>
+  );
+}
 
 export function Hero() {
   const { t } = useI18n();
@@ -18,7 +64,7 @@ export function Hero() {
     reduce
       ? {}
       : {
-          initial: { opacity: 0, y: 24 },
+          initial: { opacity: 0, y: 18 },
           animate: { opacity: 1, y: 0 },
           transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] as const },
         };
@@ -26,101 +72,99 @@ export function Hero() {
   return (
     <header
       id="about"
-      className="relative min-h-[88vh] flex items-center overflow-hidden pt-28 pb-16 aurora-bg"
+      className="relative overflow-hidden pt-32 pb-24 lg:pt-40 lg:pb-32"
+      style={{ background: "var(--color-paper)", color: "var(--color-ink)" }}
     >
-      <WebGLBackground />
-
-      {/* Single ambient glow */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-40">
-        <div className="absolute top-[10%] left-[4%] w-[46vw] h-[46vw] rounded-full bg-accent/5 blur-[150px]" />
-      </div>
+      {/* Faint print-grain texture, not a gradient glow */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-[0.04] mix-blend-multiply pointer-events-none"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, currentColor 0, currentColor 1px, transparent 1px, transparent 3px)",
+        }}
+      />
 
       <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 sm:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Dominant Hero Text */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+          {/* Left: the poster */}
           <div className="lg:col-span-7">
-            {/* Name: the one dominant idea */}
-            <motion.h1
-              {...reveal(0)}
-              className="font-headline text-6xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-[0.92] text-slate-100"
-            >
-              GIOVANNI<br />
-              <span className="text-accent">VENDITTO</span>
-            </motion.h1>
-
-            {/* Role */}
-            <motion.div
-              {...reveal(0.08)}
-              className="mt-6 sm:mt-8 flex items-center gap-3 font-mono text-xl sm:text-2xl text-accent"
-            >
-              <Sparkles className="w-6 h-6" />
-              <span className="font-semibold">{t.hero.role}</span>
-            </motion.div>
-
-            {/* Positioning line */}
             <motion.p
-              {...reveal(0.16)}
-              className="mt-6 text-slate-200 text-xl sm:text-2xl font-light leading-relaxed text-balance"
+              {...reveal(0)}
+              className="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 opacity-70"
+            >
+              {t.hero.role}
+            </motion.p>
+
+            <h1
+              className="[font-family:var(--font-display)] uppercase text-[15vw] sm:text-[9vw] lg:text-[6.4vw] leading-[0.86] tracking-tight"
+            >
+              <SplitHeadline text="Giovanni" />
+              <br />
+              <span className="relative inline-block">
+                <SplitHeadline text="Venditto" />
+                <motion.span
+                  aria-hidden="true"
+                  initial={reduce ? undefined : { scaleX: 0 }}
+                  animate={reduce ? undefined : { scaleX: 1 }}
+                  transition={{ duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute left-0 -bottom-[6%] h-[10%] w-full origin-left"
+                  style={{ background: "var(--color-mark)" }}
+                />
+              </span>
+            </h1>
+
+            <motion.p
+              {...reveal(0.5)}
+              className="mt-8 max-w-xl text-lg sm:text-xl leading-relaxed [font-family:var(--font-body)]"
             >
               {t.hero.tagline}
             </motion.p>
 
-            {/* Bio */}
             <motion.p
-              {...reveal(0.24)}
-              className="mt-5 text-slate-400 text-base sm:text-lg leading-relaxed"
+              {...reveal(0.58)}
+              className="mt-4 max-w-lg text-base opacity-70 leading-relaxed [font-family:var(--font-body)]"
             >
               {t.hero.bio}
             </motion.p>
 
-            {/* Primary action */}
-            <motion.div {...reveal(0.32)} className="mt-8 sm:mt-10">
+            <motion.div {...reveal(0.66)} className="mt-10">
               <a
                 href="#work"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-slate-950 font-semibold text-sm hover:bg-accent-bright transition-all shadow-[0_0_25px_rgba(184,255,60,0.3)] hover:shadow-[0_0_35px_rgba(184,255,60,0.5)] cursor-pointer"
+                className="group inline-flex items-center gap-3 border-b-2 pb-1 text-base font-semibold [font-family:var(--font-body)] transition-colors"
+                style={{ borderColor: "var(--color-ink)" }}
               >
                 <span>{t.hero.exploreWork}</span>
-                <ArrowDown className="w-4 h-4" />
+                <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-1" />
               </a>
             </motion.div>
           </div>
 
-          {/* Right Column: Brand-Coherent Architecture Terminal Card */}
+          {/* Right: real product proof, framed as a browser specimen */}
           <motion.div
-            {...reveal(0.28)}
+            {...reveal(0.4)}
             className="lg:col-span-5 hidden lg:block"
           >
-            <div className="glass-panel rounded-3xl border border-slate-800 bg-slate-900/80 p-6 sm:p-8 relative overflow-hidden shadow-2xl">
-              {/* Terminal Window Header */}
-              <div className="flex items-center justify-between pb-4 mb-6 border-b border-slate-800">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-                  <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-                  <span className="font-mono text-xs text-slate-400 ml-2">architecture.config.ts</span>
-                </div>
-                <span className="font-mono text-xs text-accent bg-accent/10 px-2.5 py-0.5 rounded-full border border-accent/20">
+            <div
+              className="relative rotate-2 rounded-lg overflow-hidden shadow-[16px_20px_0_var(--color-ink)] border-2"
+              style={{ borderColor: "var(--color-ink)", background: "var(--color-ink)" }}
+            >
+              <div className="flex items-center gap-1.5 px-3 py-2">
+                <span className="w-2.5 h-2.5 rounded-full" style={{ background: "var(--color-paper)", opacity: 0.5 }} />
+                <span className="w-2.5 h-2.5 rounded-full" style={{ background: "var(--color-paper)", opacity: 0.5 }} />
+                <span className="w-2.5 h-2.5 rounded-full" style={{ background: "var(--color-paper)", opacity: 0.5 }} />
+                <span className="font-mono text-[10px] ml-2 opacity-60" style={{ color: "var(--color-paper)" }}>
                   {t.hero.currentFocus}
                 </span>
               </div>
-
-              {/* Stack Architecture Entries */}
-              <div className="space-y-3 font-mono text-xs">
-                {[
-                  { label: "FRAMEWORK", value: "Next.js 16 (App Router) & React 19" },
-                  { label: "TYPE SYSTEM", value: "TypeScript Strict Architecture" },
-                  { label: "API & DATA", value: "Node.js, Express 5, MongoDB & Prisma" },
-                  { label: "UI & TABLES", value: "Material UI (MUI) & AG Grid 32" },
-                  { label: "AUTOMATION", value: "OCR (Tesseract) & LLM Integration" },
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/80 hover:border-accent/30 transition-all flex flex-col gap-1"
-                  >
-                    <span className="text-slate-500 text-2xs uppercase tracking-wider">{item.label}</span>
-                    <span className="text-slate-200 font-semibold">{item.value}</span>
-                  </div>
-                ))}
+              <div className="relative w-full aspect-[16/9] bg-slate-950">
+                <Image
+                  src="/projects/assicurativo-studio/elaborazione-polizze.png"
+                  alt="Portale Assicurativo — pipeline AI di elaborazione polizze"
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 0px"
+                  className="object-contain"
+                />
               </div>
             </div>
           </motion.div>

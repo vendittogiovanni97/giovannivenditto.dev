@@ -1,9 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { GlassPanel, Chip } from "@/components/ui";
 import { useI18n } from "@/i18n";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface GitHubRepo {
   id: number;
@@ -23,6 +29,34 @@ interface ContributionWallProps {
   username: string;
 }
 
+function CountUp({ value, className }: { value: number; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.textContent = String(value);
+      return;
+    }
+    const counter = { n: 0 };
+    const ctx = gsap.context(() => {
+      gsap.to(counter, {
+        n: value,
+        duration: 1.1,
+        ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 95%", once: true },
+        onUpdate: () => {
+          if (el) el.textContent = String(Math.round(counter.n));
+        },
+      });
+    });
+    return () => ctx.revert();
+  }, [value]);
+
+  return <span ref={ref} className={className}>0</span>;
+}
+
 function RepoCard({ repo, delay = 0 }: { repo: GitHubRepo; delay?: number }) {
   const langColors: Record<string, string> = {
     TypeScript: "#3178c6",
@@ -38,10 +72,10 @@ function RepoCard({ repo, delay = 0 }: { repo: GitHubRepo; delay?: number }) {
       href={repo.html_url}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 24, scale: 0.96, filter: "blur(4px)" }}
+      whileInView={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -4 }}
       className="group"
     >
@@ -52,7 +86,7 @@ function RepoCard({ repo, delay = 0 }: { repo: GitHubRepo; delay?: number }) {
               <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
               <path d="M9 18c-4.51 2-5-2-7-2" />
             </svg>
-            <h3 className="font-headline text-sm text-slate-100 group-hover:text-accent transition-colors truncate">
+            <h3 className="font-mono text-sm text-slate-100 group-hover:text-accent transition-colors truncate">
               {repo.name}
             </h3>
           </div>
@@ -62,14 +96,14 @@ function RepoCard({ repo, delay = 0 }: { repo: GitHubRepo; delay?: number }) {
         </div>
 
         {repo.description && (
-          <p className="font-headline text-xs text-slate-400 mb-4 flex-1 line-clamp-2 font-light">
+          <p className="text-xs text-slate-400 mb-4 flex-1 line-clamp-2">
             {repo.description}
           </p>
         )}
 
         <div className="flex flex-wrap gap-1.5 mb-3">
           {repo.topics.slice(0, 3).map((topic) => (
-            <span key={topic} className="px-2 py-0.5 bg-slate-900 rounded font-code-snippet text-4xs text-slate-400 border border-slate-800">
+            <span key={topic} className="px-2 py-0.5 bg-slate-900 rounded font-mono text-4xs text-slate-400 border border-slate-800">
               {topic}
             </span>
           ))}
@@ -78,15 +112,18 @@ function RepoCard({ repo, delay = 0 }: { repo: GitHubRepo; delay?: number }) {
         <div className="flex items-center gap-4 pt-3 border-t border-slate-800">
           {repo.language && (
             <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full" style={{ backgroundColor: langColors[repo.language] || "#5c7565" }} />
-              <span className="font-code-snippet text-3xs text-slate-400">{repo.language}</span>
+              <div
+                className="w-2 h-2 rounded-full group-hover:animate-pulse"
+                style={{ backgroundColor: langColors[repo.language] || "#928d81" }}
+              />
+              <span className="font-mono text-3xs text-slate-400">{repo.language}</span>
             </div>
           )}
           <div className="flex items-center gap-1">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-400">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
-            <span className="font-code-snippet text-3xs text-slate-400">{repo.stargazers_count}</span>
+            <CountUp value={repo.stargazers_count} className="font-mono text-3xs text-slate-400" />
           </div>
           <div className="flex items-center gap-1">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-400">
@@ -96,7 +133,7 @@ function RepoCard({ repo, delay = 0 }: { repo: GitHubRepo; delay?: number }) {
               <path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9" />
               <path d="M12 12v3" />
             </svg>
-            <span className="font-code-snippet text-3xs text-slate-400">{repo.forks_count}</span>
+            <CountUp value={repo.forks_count} className="font-mono text-3xs text-slate-400" />
           </div>
         </div>
       </GlassPanel>
@@ -140,10 +177,16 @@ export function ContributionWall({ username }: ContributionWallProps) {
           className="mb-10 border-b border-slate-800 pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4"
         >
           <div>
-            <h2 className="font-headline text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+            <h2 className="[font-family:var(--font-display)] uppercase text-4xl sm:text-5xl text-slate-100 tracking-tight flex items-center gap-3">
               {t.openSource.title}
+              {!loading && repos.length > 0 && (
+                <span className="relative flex h-2.5 w-2.5" title={t.openSource.liveData}>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent" />
+                </span>
+              )}
             </h2>
-            <p className="mt-2 text-slate-400 text-base max-w-xl font-headline font-light">
+            <p className="mt-2 text-slate-400 text-base max-w-xl">
               {t.openSource.subtitle}
             </p>
           </div>
@@ -151,10 +194,12 @@ export function ContributionWall({ username }: ContributionWallProps) {
             href={`https://github.com/${username}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-code-snippet text-2xs text-accent hover:underline mt-4 md:mt-0 flex items-center gap-1"
+            className="group font-mono text-2xs text-accent flex items-center gap-1 mt-4 md:mt-0"
           >
-            github.com/{username}
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <span className="border-b border-transparent group-hover:border-accent transition-colors">
+              github.com/{username}
+            </span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
               <polyline points="15 3 21 3 21 9" />
               <line x1="10" y1="14" x2="21" y2="3" />

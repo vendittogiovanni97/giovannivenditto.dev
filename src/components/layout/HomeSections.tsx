@@ -37,17 +37,17 @@ export function HomeSections({ projects }: { projects: ProjectMetadata[] }) {
   return (
     <>
       <ImpactMetrics />
-      <ScrollDivider color="#b8ff3c" height={80} />
+      <ScrollDivider color="#caa456" height={80} />
       <Credentials />
-      <ScrollDivider color="#b8ff3c" height={80} />
+      <ScrollDivider color="#caa456" height={80} />
       <HowIWork />
-      <ScrollDivider color="#b8ff3c" height={80} />
+      <ScrollDivider color="#caa456" height={80} />
       <SelectedWork projects={projects} />
-      <ScrollDivider color="#b8ff3c" height={80} />
+      <ScrollDivider color="#caa456" height={80} />
       <TechRadar />
-      <ScrollDivider color="#b8ff3c" height={80} />
+      <ScrollDivider color="#caa456" height={80} />
       <ExperienceTimeline />
-      <ScrollDivider color="#b8ff3c" height={80} />
+      <ScrollDivider color="#caa456" height={80} />
       <ErrorBoundary>
         <ContributionWall username={config.github} />
       </ErrorBoundary>

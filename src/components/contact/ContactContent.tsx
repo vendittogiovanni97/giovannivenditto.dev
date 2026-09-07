@@ -11,7 +11,7 @@ export function ContactContent() {
   return (
     <>
       <div className="mb-16 border-b border-slate-800 pb-8">
-        <h1 className="font-headline text-4xl md:text-5xl text-slate-100 tracking-tight">{t.contact.title}</h1>
+        <h1 className="[font-family:var(--font-display)] uppercase text-4xl md:text-5xl text-slate-100 tracking-tight">{t.contact.title}</h1>
         <p className="mt-2 text-slate-400 text-base max-w-xl">{t.contact.subtitle}</p>
       </div>
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
@@ -31,7 +31,7 @@ export function ContactContent() {
         <GlassPanel padding="lg" className="rounded-2xl">
           <div className="font-label-technical text-3xs text-accent uppercase tracking-widest mb-4">{t.contact.availability}</div>
           <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_rgba(184,255,60,0.5)]" />
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_rgba(202,164,86,0.5)]" />
             <span className="font-headline text-sm text-slate-100">{t.contact.availableForFreelance}</span>
           </div>
           <div className="font-code-snippet text-2xs text-slate-400">

@@ -64,7 +64,7 @@ export function WritingPostLayout({ post, children }: WritingPostLayoutProps) {
         </motion.div>
 
         <motion.h1
-          className="text-3xl md:text-5xl lg:text-6xl font-headline text-slate-100 mb-6"
+          className="text-3xl md:text-5xl lg:text-6xl [font-family:var(--font-display)] uppercase text-slate-100 mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}

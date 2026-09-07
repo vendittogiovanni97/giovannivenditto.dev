@@ -7,7 +7,7 @@ interface ScrollDividerProps {
   height?: number;
 }
 
-export function ScrollDivider({ color = "#b8ff3c", height = 120 }: ScrollDividerProps) {
+export function ScrollDivider({ color = "#caa456", height = 120 }: ScrollDividerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);

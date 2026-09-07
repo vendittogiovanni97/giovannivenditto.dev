@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useI18n } from "@/i18n";
 
 interface KonamiOverlayProps {
   isActive: boolean;
@@ -9,6 +10,7 @@ interface KonamiOverlayProps {
 }
 
 export function KonamiOverlay({ isActive, onClose }: KonamiOverlayProps) {
+  const { t } = useI18n();
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -52,11 +54,11 @@ export function KonamiOverlay({ isActive, onClose }: KonamiOverlayProps) {
             >
               🎮
             </motion.div>
-            <h2 className="font-headline text-4xl md:text-6xl text-slate-100 tracking-tight mb-4">
-              Konami Code Activated!
+            <h2 className="[font-family:var(--font-display)] uppercase text-4xl md:text-6xl text-slate-100 tracking-tight mb-4">
+              {t.common.konamiTitle}
             </h2>
             <p className="font-headline text-slate-400 text-lg mb-8">
-              You found the easter egg. Impressed?
+              {t.common.konamiDesc}
             </p>
             <div className="flex gap-4 justify-center">
               <button
@@ -64,7 +66,7 @@ export function KonamiOverlay({ isActive, onClose }: KonamiOverlayProps) {
                 onClick={onClose}
                 className="px-6 py-3 bg-accent text-slate-950 rounded-full font-label-technical text-sm hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
-                Close
+                {t.common.close}
               </button>
             </div>
             <div className="mt-8 font-code-snippet text-2xs text-slate-400" aria-hidden="true">

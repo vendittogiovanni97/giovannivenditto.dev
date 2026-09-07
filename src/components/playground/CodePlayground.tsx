@@ -178,7 +178,7 @@ export function CodePlayground({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleRun}
-            className="px-5 py-2 text-sm font-semibold text-slate-950 bg-accent rounded-lg hover:bg-accent-bright transition-all shadow-[0_0_15px_rgba(184,255,60,0.3)]"
+            className="px-5 py-2 text-sm font-semibold text-slate-950 bg-accent rounded-lg hover:bg-accent-bright transition-all shadow-[0_0_15px_rgba(202,164,86,0.3)]"
           >
             Esegui
           </motion.button>
