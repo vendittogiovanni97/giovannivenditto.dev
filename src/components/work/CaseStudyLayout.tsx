@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Chip, Button, GlassPanel } from "@/components/ui";
 import Link from "next/link";
 import type { ProjectMetadata } from "@/lib/content";
@@ -94,6 +95,35 @@ export function CaseStudyLayout({ project, prevProject, nextProject, children }:
                 >
                   <div className="font-headline text-2xl md:text-3xl text-slate-100 mb-1">{value}</div>
                   <div className="font-code-snippet text-2xs text-slate-400">{label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {project.images?.gallery && project.images.gallery.length > 0 && (
+        <section className="w-full py-16 border-b border-accent/10">
+          <div className="max-w-container-max mx-auto px-gutter">
+            <div className="font-label-technical text-3xs text-accent uppercase tracking-widest mb-8">Screenshot</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {project.images.gallery.map((src, i) => (
+                <motion.div
+                  key={src}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className={`relative rounded-2xl overflow-hidden border border-slate-800 glass-panel ${i === 0 ? "md:col-span-2" : ""}`}
+                >
+                  <Image
+                    src={src}
+                    alt={`${project.title} — schermata ${i + 1}`}
+                    width={1600}
+                    height={900}
+                    className="w-full h-auto"
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                  />
                 </motion.div>
               ))}
             </div>
