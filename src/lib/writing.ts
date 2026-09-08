@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { cache } from "react";
 
 export interface WritingMetadata {
   title: string;
@@ -29,7 +30,9 @@ function getWritingFilePath(slug: string, locale?: string): string | null {
   return null;
 }
 
-export function getWritingSlugs(locale?: string): string[] {
+// cache() dedupes repeated calls with the same args within a single render —
+// the writing list, the sitemap and rss.xml all read the same slugs/files.
+export const getWritingSlugs = cache(function getWritingSlugs(locale?: string): string[] {
   const slugs = new Set<string>();
 
   // If locale is specified, prefer locale directory
@@ -51,9 +54,9 @@ export function getWritingSlugs(locale?: string): string[] {
   }
 
   return Array.from(slugs);
-}
+});
 
-export function getWritingPost(slug: string, locale?: string): WritingPost | null {
+export const getWritingPost = cache(function getWritingPost(slug: string, locale?: string): WritingPost | null {
   const filePath = getWritingFilePath(slug, locale);
   if (!filePath) return null;
 
@@ -64,7 +67,7 @@ export function getWritingPost(slug: string, locale?: string): WritingPost | nul
     metadata: data as WritingMetadata,
     content,
   };
-}
+});
 
 export function getAllWritingPosts(locale?: string): WritingPost[] {
   const slugs = getWritingSlugs(locale);

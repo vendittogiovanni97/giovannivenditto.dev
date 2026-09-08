@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { cache } from "react";
 
 export interface ProjectMetadata {
   slug: string;
@@ -49,7 +50,10 @@ function getProjectFilePath(slug: string, locale?: string): string | null {
   return null;
 }
 
-export function getProjectSlugs(locale?: string): string[] {
+// cache() dedupes repeated calls with the same args within a single render —
+// every section on the homepage (SelectedWork, sitemap, etc.) reads the same
+// slugs/files, so without this each one re-hits the filesystem separately.
+export const getProjectSlugs = cache(function getProjectSlugs(locale?: string): string[] {
   const slugs = new Set<string>();
 
   // If locale is specified, prefer locale directory
@@ -71,9 +75,9 @@ export function getProjectSlugs(locale?: string): string[] {
   }
 
   return Array.from(slugs);
-}
+});
 
-export function getProject(slug: string, locale?: string): ProjectContent | null {
+export const getProject = cache(function getProject(slug: string, locale?: string): ProjectContent | null {
   const filePath = getProjectFilePath(slug, locale);
   if (!filePath) return null;
 
@@ -87,7 +91,7 @@ export function getProject(slug: string, locale?: string): ProjectContent | null
     } as ProjectMetadata,
     content,
   };
-}
+});
 
 export function getAllProjects(locale?: string): ProjectMetadata[] {
   const slugs = getProjectSlugs(locale);
