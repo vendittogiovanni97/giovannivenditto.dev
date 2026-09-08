@@ -208,8 +208,7 @@
         "description": "Creazione e gestione di ambienti di sviluppo isolati.",
         "highlight": "Deploy semplici e riproducibili."
       }
-    },
-    "pauseHint": "Passa con il mouse per interrompere lo scorrimento"
+    }
   },
   "experience": {
     "title": "Esperienza",

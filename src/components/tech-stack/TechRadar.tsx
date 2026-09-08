@@ -207,19 +207,13 @@ export function TechRadar() {
     <section id="tech-stack" className="w-full py-16 relative overflow-hidden">
       
       {/* Section Header */}
-      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 mb-12 border-b border-slate-800/80 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-        <div>
-          <h2 className="[font-family:var(--font-display)] uppercase text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
-            {t.techRadar.title}
-          </h2>
-          <p className="mt-2 text-slate-400 text-base max-w-xl font-headline font-light">
-            {t.techRadar.subtitle}
-          </p>
-        </div>
-        <span className="font-mono text-xs text-slate-400 bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-full inline-flex items-center gap-2 self-start sm:self-auto shrink-0 shadow-sm">
-          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" aria-hidden="true" />
-          <span>{t.techRadar.pauseHint}</span>
-        </span>
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8 mb-12 border-b border-slate-800/80 pb-6">
+        <h2 className="[font-family:var(--font-display)] uppercase text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
+          {t.techRadar.title}
+        </h2>
+        <p className="mt-2 text-slate-400 text-base max-w-xl font-headline font-light">
+          {t.techRadar.subtitle}
+        </p>
       </div>
 
       {/* Side Vignette Gradient Fades */}

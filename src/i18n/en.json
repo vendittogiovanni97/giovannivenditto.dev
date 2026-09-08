@@ -208,8 +208,7 @@
         "description": "Creating and managing isolated development environments.",
         "highlight": "Simple and reproducible deployments."
       }
-    },
-    "pauseHint": "Hover to pause the scroll"
+    }
   },
   "experience": {
     "title": "Experience",
