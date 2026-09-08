@@ -1,86 +1,86 @@
 %PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document (opensource)
 1 0 obj
 <<
-  /Type /Catalog
-  /Pages 2 0 R
+/F1 2 0 R /F2 3 0 R /F3 4 0 R /F4 5 0 R
 >>
 endobj
 2 0 obj
 <<
-  /Type /Pages
-  /Kids [3 0 R]
-  /Count 1
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
 >>
 endobj
 3 0 obj
 <<
-  /Type /Page
-  /Parent 2 0 R
-  /Resources <<
-    /Font <<
-      /F1 4 0 R
-    >>
-  >>
-  /MediaBox [0 0 595.28 841.89]
-  /Contents 5 0 R
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
 >>
 endobj
 4 0 obj
 <<
-  /Type /Font
-  /Subtype /Type1
-  /BaseFont /Helvetica
+/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
 >>
 endobj
 5 0 obj
-<< /Length 650 >>
+<<
+/BaseFont /ZapfDingbats /Name /F4 /Subtype /Type1 /Type /Font
+>>
+endobj
+6 0 obj
+<<
+/Contents 10 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 9 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+7 0 obj
+<<
+/PageMode /UseNone /Pages 9 0 R /Type /Catalog
+>>
+endobj
+8 0 obj
+<<
+/Author (Giovanni Venditto) /CreationDate (D:20260908125609+02'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260908125609+02'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (\(unspecified\)) /Title (Giovanni Venditto - CV) /Trapped /False
+>>
+endobj
+9 0 obj
+<<
+/Count 1 /Kids [ 6 0 R ] /Type /Pages
+>>
+endobj
+10 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 3801
+>>
 stream
-BT
-/F1 24 Tf
-50 780 Td
-(GIOVANNI VENDITTO) Tj
-/F1 14 Tf
-0 -25 Td
-(Fullstack Engineer - Curriculum Vitae) Tj
-/F1 11 Tf
-0 -30 Td
-(Email: vendittogiovanni97@gmail.com | GitHub: github.com/vendittogiovanni97) Tj
-/F1 13 Tf
-0 -35 Td
-(ESPERIENZA PROFESSIONALE) Tj
-/F1 10 Tf
-0 -20 Td
-(Agilae - Fullstack Engineer \(Marzo 2025 - Oggi\)) Tj
-0 -15 Td
-(- Sviluppo di piattaforme web e software gestionali per aziende.) Tj
-0 -15 Td
-(- Sviluppo di interfacce reattive in React 19 / Next.js 16 e API REST in Node.js.) Tj
-/F1 13 Tf
-0 -35 Td
-(PERCORSO STUDI & FORMAZIONE) Tj
-/F1 10 Tf
-0 -20 Td
-(- Full Stack Developer \(2025\) - Universita degli Studi Link Campus) Tj
-0 -15 Td
-(- Frontend Developer \(2025\) - Corso TEMP presso Nexus Pozzuoli) Tj
-0 -15 Td
-(- Claude 101 \(2026\) - Anthropic Certification) Tj
-ET
-endstream
+Gb!#^>BAM#&q801kbh]A_ofPto!AO0%iJ`1+l94J=)At9@lP-qUX=c@rq5#o,_Ri_$_(\8P4AcLVsduBh3%e"r\N'UDuoHW![hUb(a_ot^p#[8-5SA']_UlQ;."$?RcF1?LH"/S])"O[]ij0kX'<hS2ekg-O/@9<D&K#2Y3FULI`L=sO%tQ%3a[(fdkVms>gu"LD"q*1;9IkVQhEa?7ro*V2o'K>c16jZ!e-trB,cTgJnA5<Bt2]M%?4f%5QN27lgm35S*RE>`AQHC7`3^@[kRUk-GPYpO8*XkBLDCBU0[PGf6hh<R:JDE@"N"#j:Sm^=8(sa!5f(!h/VY_#f_4P``P'X%dZI$dfS"'"'F6df-XkXA13pb$5pr$VO3*M2S<.<:%QJ`(e2h+"+,ek1f;B5"14rTZQb:4S;!SD&C3bgH.kRgh/97^Eg$`2_Ge;28+sSl2qSDpC[F$0"W#.QKj;qf:41*0b$0[Cc!uKPR'T>jnZM7!-`!Xa94TUA73qFcbLTmR[`i4c[YH;s94/;IE[`,&jc&AJRm?9YL&;j6l<dmmHBZJ?H(dtEBZ?)6-HA'68&(cj(JI4K9Q>L*4^K+p4J%EmQSTeO<2kHCn%$Y6'i!a@ZpDWSO(&!taF>`.>6qSo,5GF6B-NrapKAs]-ek5+ToEb--hnK%rlh:X\:mI:3+i(5-!8+."X6-5=hjOIo*X0%H(5QcMcShbrO<0<Bs0GVb8*]0)b'cF&A&ccSUVQb&8AbFo4&oe2Z;dc099Mo#3.U=1gEa>?5,'G2!(+IZ_Bl%[]gY57klro76GA%2Cs>&G-A=I!jabA,W4B_Sn17./8Cr6j)&K"MPQdOqS0jkdd-qi7]`Qm5:1A%bAJC".eq!4RE\q)(X"KhqqtT9J@R%pPA^aLLT*i8/pq&"f)3(j;Pu>IQHs-#mXW0Dg:c8dB;pi2`5EE8SY-jRQ4CacpGh5gZS2V/ke\)7RVRCb3#m/$<oeYqNX>9?0-ZuSIm!/9--L;B@1dl*G2Xu`MtM2B\Wf,*7i*NDP]JsgKfukiS>:Ilj'FeX>5AV)C+h\SaXLBHKu)@d7=64JB).4%$UkKi38&AqEd#d_5bm;Q,^]6Odn"*H/EPoQ(RQ!oT#oIU>o9C^>L]4;F+&,_KlN6^<RGS/`4#34jOse7gkK.obNgF+Im?5]7>nfD=DWY#=7B:cCG5$u+GuMQO"$A-:I?1G!@]tl1-Ffn[a<"IKY:GDO#-EXmuQH#<=@AfR',TOR-%i@LXQ6e]\H2)SNa"G4"s\C*fMk8AC>)-'DO4oa>h2+3`m5@X43m![HOIiGGa]B-fhTPcqFIg[Rc8kW/%JNd.PS2B2lS)&6F,Q`]iNuY.u)VA2'1-O+iNr[!2E:Gnr]ph<g#I`/6"ah[MPr5/K(()au<-O==LBj&'04Om2$eeDg^"a7juBQ9OU*1`$ZHA<5@m"n^f%T#sHS>8hp;U051;ek;PBqJ<k"p,.aDff$8thfTC^D-%gmGdiZ":]lC[_DZuG4n*S5YaeG2Z*mrBMN4\&a4*p)LZ.oCn*4Wn[tCa1iFLAK^Q!kDUKKT-cduR3m<iQsVWnBqcH@$@FE];XnT]bBgPRi7d.0:nf=g,>B]s>o.#3,7)A-.c2'3dEfOaha"*HLsp?aVRM34lc>bEMpR\^sS94n%'l!]XJlI8PYj0mbNTo=O@4bsrt!OW;<_F#T-ipi/m&n3^mAP3UM8KqRmJ0dcdf>ADR%lI)F,_G,<UC--;6XHUd0**%)027O@n?.q1(\*m\kJ6S>W<bL073k\Lrd_@,02L3X<2.TMbt]1gQ1q'1g[/R'!o^:L8C,bd>QVg-cVTmH?D%T6oY5a21.?k2U`#S%Mo)HKcXPnZn?BcG72b2#h!Dm_Js^SUe?:u'^S#JGaCQn=GfI+8ekMiC,SA?_!fuSs\m!L61:#!X;N)0B*_s+OOg84CAT^ijrXN\IFlO4+/Jq/XVNfHB\_Onj$!ceO<u*>206216;PoV!j00bZ.Z\Dfm*.r:pm.^.9]_G@e#DSg0k3'MmnfHP,>K&tWJ<i8hW_3F[@=!m)IE/VnF+&aen.FbZ"&8`0b;:!_9Hq<og]OkXp<uA1:Q+/$h!.:rm%@PO4kF7:eu&8q]Jm]&:G%D/B@>TnT'gY"2Vn)bS<&I.Y>=b)*>Z%APFDrcYS6)#$HAK:cU#h6kq=R2tkF4]X*OC7OrnO;"5B=eCUgg'=RArG"D[)Ue<s18od6IldJA&K'/=25]\NG(/T^8&=2rJ3O;dgX`!LDFilrEbP-N)`\kCQg9O1J0NAj</.i7%d:jru-Ml-OLnQUk;uF?6#$r&H3TR(T0I2=$?m,SsMEj]N&H&Z]'hI`Cq[+h&d1C1"isB#_9MsE:@&I"IgR_c9T\UEoDM(V)TeIfUSAPMC;k+ZU78gJhZ:]#\CY2[r[Fq;/%=i\/]o:)=ORaFYl6/uuGDGC"q%LP(O(0M9NEM%dR,rXR\T+Ca4A-(]c5IWZMJ>jV@"J8:jj]11)QW]h?_q4,AHuWhn/cE=M59_&eEB7X`O]i,c+gI[7O"N85:9Hf[o=[cqcKLT+]HAQL#q9`1:#B$bKjY?;Be>(^rt1AT]"Aq"\,D&YXI&o-!8oGLT-kV4N3K'qgO6WMb?1tS1d8]mb[qRMgo4cH66uMPEk#cU>e8EH/IpT<^9:$%+l8Z437hgm=3[4>sLlX`]:OK?4LAZAg2p*D`Q.p$e0mO`N4(c'"L#qH\b4ukU.<pb-LiV6q`(C5u`D'S7,:/6'G;fHfo@>MCDZ)b2a6sFW)HnIh5JK$5M^,$!'8eZDVsU.((s?=L+uig+F+.XP=l\K(Ur@C^g2uT"fpNqHC#&Tt0(<=B%Ljdt6'$=I-S1('`DdD8;`5,Z\EX4$kUa;tH2%Fop2*p2Qr=6EVYu(/G)ce(D/!HppDI3ZC31%.$?MJSEesQgOdURK6RFBECu7T4&tnd07*J(H!u-s.&393>`4)!il^Vk9g?u&"+K51UX)ZYq1V89NfreVN--t&XFpi5_pah=:._epmoCu%)K,*Yj,lN`\:ag=Qa$=Vh5l3Ic;^o2o3dk_``jB#[9#N;Ths(6T(=W="UH"e><TL1*1)Xp/GftS#CPeFn"_c3;L<p_g7#dK<HGZ:AX#*T,kO#S0R7VBUuFdl_#*6aT?.tR3aE&5#gJ[o]79ZZnf`1]MBgrL(?JpQSn(G7I8cq<6XKA+PkQGjsKnL82mX4L3+f?2]kGjn\'M9JA88!dr&tT+%"A-)Z7-p8d0sY%UWGi2uJXo6XM_.htA\*Dh`3lKT"^SohC@HS`+FuJTgt%^1gj<*O-*gJ\(43*:(GmXWQ%mS&F-bU]4k1LYT.23M">_=Zj0OXB,5`-nGalatDK@(h>[;EOC)QJ-2X(Lm5'A)5BV?:H@egYo^,9p8:(M9=#)RJq0EuDB!LRUuro@hr7<G<r9fE$?iB4f/'4>)9;$7.L\S$<^#Z=]RCk=MOZ`WIe.Zckpb)$Jr5SI<C]SKOUJR+T_E(0[B$P;=NG1g0qt7Q+@_;"-QADpLNkueEW*1gB=/@g&^I/>h*X>FBWGJS<r1psl;cXBm/@O1VnI>CZ"ek?1,?'t&8:m@,)U@nC9.@a=Hj,X&\lBum0*s[h[TCDiZ3e'cY6q,n0%E?&X&W9Xfg8Vji!;'BM#%gV"-^dZ&i!PBQ_OQWmp]V*NM[*>WfF$@9+Ccdk;f><gRYfBPT0oC2D\3)u?8T]_M^$^i@Ju>,tT8W0-3Q35E\e1P(];K_2'pkiarN"W0KM5'';RnL;ln7N%N`0GYh.(pnU7oAdi7Gk4-pSVig~>endstream
 endobj
 xref
-0 6
+0 11
 0000000000 65535 f 
-0000000009 00000 n 
-0000000058 00000 n 
-0000000115 00000 n 
-0000000262 00000 n 
-0000000330 00000 n 
+0000000061 00000 n 
+0000000122 00000 n 
+0000000229 00000 n 
+0000000341 00000 n 
+0000000456 00000 n 
+0000000539 00000 n 
+0000000743 00000 n 
+0000000811 00000 n 
+0000001104 00000 n 
+0000001163 00000 n 
 trailer
 <<
-  /Size 6
-  /Root 1 0 R
+/ID 
+[<5f9844130c8980cee1814770b4b9b910><5f9844130c8980cee1814770b4b9b910>]
+% ReportLab generated PDF document -- digest (opensource)
+
+/Info 8 0 R
+/Root 7 0 R
+/Size 11
 >>
 startxref
-1030
+5056
 %%EOF
