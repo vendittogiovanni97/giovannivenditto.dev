@@ -149,7 +149,7 @@ function TechBrandIcon({ id, className = "w-10 h-10" }: { id: string; className?
       return (
         <svg viewBox="0 0 128 128" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M64 19.2L108.8 99.8H19.2L64 19.2Z" stroke="#00F0FF" strokeWidth="8" strokeLinejoin="round" fill="none" />
-          <path d="M64 44.8L89.6 89.6H38.4L64 44.8Z" fill="#B8FF3C" opacity="0.85" />
+          <path d="M64 44.8L89.6 89.6H38.4L64 44.8Z" fill="#caa456" opacity="0.85" />
         </svg>
       );
     case "framer":
@@ -190,7 +190,7 @@ function TechBrandIcon({ id, className = "w-10 h-10" }: { id: string; className?
     default:
       return (
         <svg viewBox="0 0 128 128" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="64" cy="64" r="28" fill="#B8FF3C" />
+          <circle cx="64" cy="64" r="28" fill="#caa456" />
         </svg>
       );
   }

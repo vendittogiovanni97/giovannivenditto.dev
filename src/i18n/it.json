@@ -274,7 +274,12 @@
     "officialCertificate": "Certificato Ufficiale Anthropic",
     "prevAria": "Credenziale precedente",
     "nextAria": "Credenziale successiva",
-    "goToAria": "Vai alla credenziale {n}"
+    "goToAria": "Vai alla credenziale {n}",
+    "badges": {
+      "official": "Certificazione Ufficiale",
+      "academic": "Attestato Accademico",
+      "specialization": "Corso di Specializzazione"
+    }
   },
   "lab": {
     "title": "Interactive Lab",

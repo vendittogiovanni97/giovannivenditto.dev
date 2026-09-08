@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight, Code2, Layers } from "lucide-react";
 import type { ProjectMetadata } from "@/lib/content";
@@ -14,11 +15,26 @@ interface ProjectQuickViewModalProps {
 
 export function ProjectQuickViewModal({ project, onClose }: ProjectQuickViewModalProps) {
   const { t } = useI18n();
+
+  useEffect(() => {
+    if (!project) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [project, onClose]);
+
   if (!project) return null;
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="quickview-title"
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10"
+      >
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -68,7 +84,7 @@ export function ProjectQuickViewModal({ project, onClose }: ProjectQuickViewModa
                   </Chip>
                   <span className="font-mono text-xs text-slate-400">{project.startDate}</span>
                 </div>
-                <h2 className="[font-family:var(--font-display)] uppercase text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                <h2 id="quickview-title" className="[font-family:var(--font-display)] uppercase text-3xl sm:text-4xl font-bold text-white tracking-tight">
                   {project.title}
                 </h2>
               </div>

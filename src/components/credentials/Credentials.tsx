@@ -5,12 +5,14 @@ import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer
 import { Award, GraduationCap, Code2, X, ZoomIn, FileText, ArrowLeft, ArrowRight } from "lucide-react";
 import { useI18n } from "@/i18n";
 
+type BadgeKey = "official" | "academic" | "specialization";
+
 interface Credential {
   id: string;
   year: string;
   title: string;
   issuer: string;
-  badge: string;
+  badgeKey: BadgeKey;
   image?: string;
   icon: React.ReactNode;
 }
@@ -21,7 +23,7 @@ const credentials: Credential[] = [
     year: "2026",
     title: "Claude 101",
     issuer: "Anthropic",
-    badge: "Certificazione Ufficiale",
+    badgeKey: "official",
     image: "/certificates/claude-101.png",
     icon: <Award className="w-5 h-5" />,
   },
@@ -30,7 +32,7 @@ const credentials: Credential[] = [
     year: "2026",
     title: "Claude Code 101",
     issuer: "Anthropic",
-    badge: "Certificazione Ufficiale",
+    badgeKey: "official",
     image: "/certificates/claude-code-101.png",
     icon: <Award className="w-5 h-5" />,
   },
@@ -39,7 +41,7 @@ const credentials: Credential[] = [
     year: "2026",
     title: "Claude Platform 101",
     issuer: "Anthropic",
-    badge: "Certificazione Ufficiale",
+    badgeKey: "official",
     image: "/certificates/claude-platform-101.png",
     icon: <Award className="w-5 h-5" />,
   },
@@ -48,7 +50,7 @@ const credentials: Credential[] = [
     year: "2026",
     title: "Claude Cowork",
     issuer: "Anthropic",
-    badge: "Certificazione Ufficiale",
+    badgeKey: "official",
     image: "/certificates/claude-cowork.png",
     icon: <Award className="w-5 h-5" />,
   },
@@ -57,7 +59,7 @@ const credentials: Credential[] = [
     year: "2025",
     title: "Full Stack Developer",
     issuer: "Università degli Studi Link Campus",
-    badge: "Attestato Accademico",
+    badgeKey: "academic",
     icon: <GraduationCap className="w-8 h-8" />,
   },
   {
@@ -65,7 +67,7 @@ const credentials: Credential[] = [
     year: "2025",
     title: "Frontend Developer",
     issuer: "Corso presso Nexus Pozzuoli",
-    badge: "Corso di Specializzazione",
+    badgeKey: "specialization",
     icon: <Code2 className="w-8 h-8" />,
   },
 ];
@@ -105,6 +107,16 @@ export function Credentials() {
 
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
   const prev = useCallback(() => goTo(index - 1), [goTo, index]);
+
+  // Escape closes the certificate modal, matching native <dialog> expectations.
+  useEffect(() => {
+    if (!selectedImage) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedImage(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedImage]);
 
   // Autoplay: advances on a timer, pauses on hover/focus and resets whenever
   // the user navigates manually so it never fights an intentional click.
@@ -156,7 +168,7 @@ export function Credentials() {
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-                  {current.badge} · {current.year}
+                  {t.credentials.badges[current.badgeKey]} · {current.year}
                 </span>
                 <h3 className="mt-3 [font-family:var(--font-display)] uppercase text-4xl sm:text-5xl leading-[0.95] text-slate-100">
                   {current.title}
@@ -257,6 +269,9 @@ export function Credentials() {
             className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 cursor-pointer"
           >
             <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="certificate-modal-title"
               initial={{ scale: 0.96, opacity: 0, y: 8 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.96, opacity: 0, y: 8 }}
@@ -265,7 +280,7 @@ export function Credentials() {
               className="relative max-w-4xl w-full bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl overflow-hidden"
             >
               <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
-                <h3 className="[font-family:var(--font-display)] uppercase text-lg text-slate-100">
+                <h3 id="certificate-modal-title" className="[font-family:var(--font-display)] uppercase text-lg text-slate-100">
                   {selectedImage.title} — {t.credentials.officialCertificate}
                 </h3>
                 <button

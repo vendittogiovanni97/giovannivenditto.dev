@@ -10,9 +10,11 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import Script from "next/script";
 import { getLocale } from "@/i18n/server";
 import { displayFont, bodyFont } from "@/lib/fonts";
+import { config } from "@/lib/config";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(config.siteUrl),
   title: `${process.env.NEXT_PUBLIC_AUTHOR_NAME || "Giovanni Venditto"} | Creative Engineering`,
   description: "Senior Frontend Developer & Creative Engineer. Tech Lead at Agilae. Building interfaces that bridge high-end design and robust technical architecture.",
   keywords: ["Frontend Developer", "React", "Next.js", "TypeScript", "WebGL", "Creative Engineering", "Design Systems", "Agilae", "Tech Lead"],
