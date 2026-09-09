@@ -120,7 +120,11 @@ export function Hero() {
             <motion.div {...reveal(0.66)} className="mt-10">
               <a
                 href="#work"
-                className="group inline-flex items-center gap-3 border-b-2 pb-1 text-base font-semibold [font-family:var(--font-body)] transition-colors"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="group inline-flex items-center gap-3 border-b-2 pb-1 text-base font-semibold [font-family:var(--font-body)] transition-colors cursor-pointer"
                 style={{ borderColor: "var(--color-ink)" }}
               >
                 <span>{t.hero.exploreWork}</span>

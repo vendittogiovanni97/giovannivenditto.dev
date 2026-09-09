@@ -6,9 +6,11 @@ import { LanguageToggle } from "@/components/ui/LanguageToggle";
 import { useI18n } from "@/i18n";
 import { config } from "@/lib/config";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Download } from "lucide-react";
 
 export function NavBar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t } = useI18n();
@@ -157,6 +159,12 @@ export function NavBar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => {
+                    if (link.href === "/#work" && pathname === "/") {
+                      e.preventDefault();
+                      document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
                   onMouseEnter={handleLinkHover}
                   className="relative z-10 text-slate-100 font-mono text-xs hover:text-accent px-3 py-1.5 rounded-md transition-colors duration-200"
                 >
@@ -242,7 +250,13 @@ export function NavBar() {
                     >
                       <Link
                         href={link.href}
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={(e) => {
+                          setMobileMenuOpen(false);
+                          if (link.href === "/#work" && pathname === "/") {
+                            e.preventDefault();
+                            document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+                          }
+                        }}
                         className="text-slate-100 [font-family:var(--font-display)] uppercase text-sm hover:text-accent py-2 border-b border-slate-900 block"
                       >
                         {link.label}

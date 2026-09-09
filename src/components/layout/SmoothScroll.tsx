@@ -51,6 +51,8 @@ export function SmoothScroll() {
         if (target && lenisRef.current) {
           setTimeout(() => {
             lenisRef.current?.scrollTo(target as HTMLElement, { offset: -80 });
+            // Clean hash from URL so future browser reloads start at top (Hero)
+            history.replaceState(null, "", window.location.pathname);
           }, 100);
         }
       } else {
