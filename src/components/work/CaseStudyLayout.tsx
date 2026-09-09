@@ -30,24 +30,18 @@ export function CaseStudyLayout({ project, prevProject, nextProject, children }:
             {t.work.caseStudy.backToWork}
           </Link>
 
-          <motion.div
-            layoutId={`card-${project.slug}`}
-            className="flex flex-wrap items-center gap-3 mb-6"
-          >
+          <div className="flex flex-wrap items-center gap-3 mb-6">
             <Chip variant="status" size="md">{t.work.category[project.category]}</Chip>
             {project.current && (
               <Chip variant="status" size="md" className="bg-accent/20 text-accent border-accent/50">
                 {t.work.caseStudy.current}
               </Chip>
             )}
-          </motion.div>
+          </div>
 
-          <motion.h1
-            layoutId={`title-${project.slug}`}
-            className="[font-family:var(--font-display)] uppercase text-4xl md:text-6xl lg:text-7xl text-slate-100 tracking-tight leading-[0.9] mb-6"
-          >
+          <h1 className="[font-family:var(--font-display)] uppercase text-4xl md:text-6xl lg:text-7xl text-slate-100 tracking-tight leading-[0.9] mb-6">
             {project.title}
-          </motion.h1>
+          </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}

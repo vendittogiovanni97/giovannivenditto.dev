@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { usePathname } from "next/navigation";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -14,14 +15,11 @@ if (typeof window !== "undefined") {
  * effects and native anchor links (#work, #credentials) all read from the
  * browser's real scroll position, which Lenis keeps in sync while it eases
  * the motion — no other component needs to know it's there.
- *
- * Driven by GSAP's own ticker (not a separate requestAnimationFrame loop) and
- * wired into ScrollTrigger's scroll event: without this, Lenis and every
- * ScrollTrigger instance on the page (Hero, SelectedWork, HowIWork, etc.) run
- * on two independent rAF loops that drift out of sync, so trigger points fire
- * a frame early/late relative to where Lenis has actually eased the scroll to.
  */
 export function SmoothScroll() {
+  const pathname = usePathname();
+  const lenisRef = useRef<Lenis | null>(null);
+
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -29,6 +27,7 @@ export function SmoothScroll() {
       duration: 1.1,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
+    lenisRef.current = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -41,8 +40,19 @@ export function SmoothScroll() {
     return () => {
       gsap.ticker.remove(tick);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && !window.location.hash) {
+      if (lenisRef.current) {
+        lenisRef.current.scrollTo(0, { immediate: true });
+      }
+      window.scrollTo(0, 0);
+      ScrollTrigger.refresh();
+    }
+  }, [pathname]);
 
   return null;
 }

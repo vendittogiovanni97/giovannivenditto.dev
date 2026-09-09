@@ -77,8 +77,6 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
   return (
     <motion.article
       ref={articleRef}
-      layout
-      layoutId={`card-${project.slug}`}
       initial={{ opacity: 0, y: 25 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
