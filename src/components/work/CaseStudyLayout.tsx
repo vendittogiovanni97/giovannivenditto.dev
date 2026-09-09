@@ -22,6 +22,7 @@ export function CaseStudyLayout({ project, prevProject, nextProject, children }:
         <div className="max-w-container-max mx-auto px-gutter">
           <Link
             href="/#work"
+            scroll={false}
             prefetch={true}
             className="inline-flex items-center gap-2 font-code-snippet text-2xs text-slate-400 hover:text-accent transition-colors mb-8 group"
           >

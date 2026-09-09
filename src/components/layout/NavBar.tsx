@@ -103,7 +103,7 @@ export function NavBar() {
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 w-full z-50 transition-all duration-300 px-4 sm:px-6 ${
+        className={`fixed top-0 w-full z-50 transition-[padding] duration-200 px-4 sm:px-6 ${
           scrolled ? "py-3" : "py-4"
         }`}
         role="navigation"
