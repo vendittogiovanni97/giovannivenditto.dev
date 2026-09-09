@@ -20,13 +20,13 @@ function SplitHeadline({ text }: { text: string }) {
     }
     const tween = gsap.fromTo(
       chars,
-      { opacity: 0, y: "6px" },
+      { opacity: 0, y: "40px" },
       {
         opacity: 1,
         y: "0px",
-        duration: 0.9,
-        ease: "power2.out",
-        stagger: { each: 0.012, from: "start" },
+        duration: 1.25,
+        ease: "power3.out",
+        stagger: { each: 0.035, from: "start" },
       }
     );
     return () => {
@@ -53,9 +53,9 @@ export function Hero() {
     reduce
       ? {}
       : {
-          initial: { opacity: 0, y: 8 },
+          initial: { opacity: 0, y: 22 },
           animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.85, delay: delay * 0.4, ease: [0.16, 1, 0.3, 1] as const },
+          transition: { duration: 1.1, delay: delay * 0.45, ease: [0.16, 1, 0.3, 1] as const },
         };
 
   return (
@@ -96,7 +96,7 @@ export function Hero() {
                   aria-hidden="true"
                   initial={reduce ? undefined : { scaleX: 0 }}
                   animate={reduce ? undefined : { scaleX: 1 }}
-                  transition={{ duration: 1.0, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 1.4, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
                   className="absolute left-0 -bottom-[6%] h-[10%] w-full origin-left"
                   style={{ background: "var(--color-mark)" }}
                 />
