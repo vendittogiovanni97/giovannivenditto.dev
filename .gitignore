@@ -45,3 +45,6 @@ next-env.d.ts
 
 # design-review snapshots (local tooling)
 .impeccable/
+
+# local editor / agent configs
+.claude/

@@ -39,9 +39,6 @@ export const metadata: Metadata = {
     icon: "/favicon.svg",
   },
   manifest: "/manifest.json",
-  other: {
-    "rss.xml": "/rss.xml",
-  },
 };
 
 export const viewport: Viewport = {

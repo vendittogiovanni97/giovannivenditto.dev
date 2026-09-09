@@ -1,7 +1,6 @@
 {
   "nav": {
     "work": "Projects",
-    "writing": "Blog",
     "contact": "Contact",
     "available": "Available"
   },
@@ -56,13 +55,6 @@
     },
     "quickView": "Quick Preview",
     "openDetail": "Open Detail"
-  },
-  "writing": {
-    "title": "Blog",
-    "subtitle": "Articles and thoughts on software development and technology.",
-    "articles": "{{count}} articles",
-    "readMore": "Read",
-    "backToWriting": "Back to Blog"
   },
   "studio": {
     "title": "About Me",
