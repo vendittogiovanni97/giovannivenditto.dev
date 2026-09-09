@@ -15,32 +15,21 @@ function SplitHeadline({ text }: { text: string }) {
     if (!wrapRef.current) return;
     const chars = wrapRef.current.querySelectorAll<HTMLElement>("[data-char]");
     if (reduce) {
-      gsap.set(chars, { opacity: 1, y: 0, skewX: 0, filter: "blur(0px)" });
+      gsap.set(chars, { opacity: 1, y: 0 });
       return;
     }
     const tween = gsap.fromTo(
       chars,
-      { opacity: 0, y: "0.6em", skewX: -12, filter: "blur(10px)" },
+      { opacity: 0, y: "0.25em" },
       {
         opacity: 1,
         y: "0em",
-        skewX: 0,
-        filter: "blur(0px)",
-        duration: 0.9,
-        ease: "power4.out",
-        stagger: { each: 0.028, from: "start" },
-        delay: 0.15,
+        duration: 0.45,
+        ease: "power3.out",
+        stagger: { each: 0.018, from: "start" },
       }
     );
-    // Safety net: the name is the first thing a visitor reads, so it must
-    // never stay invisible — e.g. a tab loaded in the background can leave
-    // requestAnimationFrame (and this tween) fully paused. Force the resting
-    // state well past the tween's own ~1.05s runtime if it hasn't finished.
-    const safety = window.setTimeout(() => {
-      if (tween.progress() < 1) tween.progress(1).kill();
-    }, 2500);
     return () => {
-      window.clearTimeout(safety);
       tween.kill();
     };
   }, [reduce]);
@@ -64,9 +53,9 @@ export function Hero() {
     reduce
       ? {}
       : {
-          initial: { opacity: 0, y: 18 },
+          initial: { opacity: 0, y: 12 },
           animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] as const },
+          transition: { duration: 0.4, delay: Math.min(delay * 0.35, 0.22), ease: [0.16, 1, 0.3, 1] as const },
         };
 
   return (
@@ -107,7 +96,7 @@ export function Hero() {
                   aria-hidden="true"
                   initial={reduce ? undefined : { scaleX: 0 }}
                   animate={reduce ? undefined : { scaleX: 1 }}
-                  transition={{ duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.45, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                   className="absolute left-0 -bottom-[6%] h-[10%] w-full origin-left"
                   style={{ background: "var(--color-mark)" }}
                 />

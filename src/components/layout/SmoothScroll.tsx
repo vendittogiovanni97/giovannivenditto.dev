@@ -45,12 +45,25 @@ export function SmoothScroll() {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && !window.location.hash) {
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(0, { immediate: true });
+    if (typeof window !== "undefined") {
+      if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target && lenisRef.current) {
+          setTimeout(() => {
+            lenisRef.current?.scrollTo(target as HTMLElement, { offset: -80 });
+          }, 100);
+        }
+      } else {
+        if (lenisRef.current) {
+          lenisRef.current.scrollTo(0, { immediate: true });
+        }
+        window.scrollTo(0, 0);
       }
-      window.scrollTo(0, 0);
-      ScrollTrigger.refresh();
+
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
+      return () => clearTimeout(timer);
     }
   }, [pathname]);
 

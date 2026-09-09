@@ -22,6 +22,7 @@ export function CaseStudyLayout({ project, prevProject, nextProject, children }:
         <div className="max-w-container-max mx-auto px-gutter">
           <Link
             href="/#work"
+            prefetch={true}
             className="inline-flex items-center gap-2 font-code-snippet text-2xs text-slate-400 hover:text-accent transition-colors mb-8 group"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:-translate-x-1 transition-transform">
@@ -180,6 +181,7 @@ export function CaseStudyLayout({ project, prevProject, nextProject, children }:
           {prevProject ? (
             <Link
               href={`/work/${prevProject.slug}`}
+              prefetch={true}
               className="flex-1 py-8 pr-8 group hover:bg-slate-900/30 transition-colors -mx-4 px-4"
             >
               <div className="font-code-snippet text-3xs text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
@@ -195,6 +197,7 @@ export function CaseStudyLayout({ project, prevProject, nextProject, children }:
           {nextProject ? (
             <Link
               href={`/work/${nextProject.slug}`}
+              prefetch={true}
               className="flex-1 py-8 pl-8 group hover:bg-slate-900/30 transition-colors text-right -mx-4 px-4"
             >
               <div className="font-code-snippet text-3xs text-slate-400 uppercase tracking-widest mb-2 flex items-center justify-end gap-2">

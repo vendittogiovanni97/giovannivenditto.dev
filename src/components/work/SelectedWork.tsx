@@ -79,16 +79,16 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
       ref={articleRef}
       initial={{ opacity: 0, y: 25 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, amount: 0.1 }}
       whileHover={{ y: -6, rotate: -0.6 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.5, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.4, delay, ease: [0.16, 1, 0.3, 1] }}
       className={`group relative rounded-2xl overflow-hidden glass-panel flex flex-col ${className ?? ""}`}
     >
       {/* Real hero screenshot — the proof, not a decoration */}
       <div ref={frameRef} className="relative">
         <Link
           href={`/work/${project.slug}`}
+          prefetch={true}
           className="relative block aspect-[16/9] overflow-hidden border-b border-slate-800 bg-slate-950"
           style={{ perspective: 800 }}
           onMouseMove={handleMove}
@@ -133,6 +133,7 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
 
             <Link
               href={`/work/${project.slug}`}
+              prefetch={true}
               title={t.work.openDetail}
               className="w-9 h-9 rounded-full flex items-center justify-center border border-slate-700 text-slate-200 hover:bg-accent hover:text-slate-950 hover:border-accent transition-all cursor-pointer"
             >
@@ -141,7 +142,7 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
           </div>
         </div>
 
-        <Link href={`/work/${project.slug}`}>
+        <Link href={`/work/${project.slug}`} prefetch={true}>
           <h3 className="[font-family:var(--font-display)] uppercase text-3xl sm:text-4xl leading-[0.95] text-slate-100 mb-3 group-hover:text-accent transition-colors">
             {project.title}
           </h3>

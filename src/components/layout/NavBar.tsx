@@ -112,6 +112,7 @@ export function NavBar() {
           {/* Logo */}
           <Link
             href="/"
+            prefetch={true}
             className="group [font-family:var(--font-display)] uppercase text-lg text-slate-100 hover:text-accent transition-colors"
           >
             <span className="inline-block transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">GV</span>
