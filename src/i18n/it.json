@@ -223,13 +223,6 @@
       }
     }
   },
-  "openSource": {
-    "title": "GitHub",
-    "subtitle": "I miei repository ed il codice su GitHub.",
-    "error": "Impossibile caricare i dati in questo momento.",
-    "viewOnGithub": "Vedi su GitHub",
-    "liveData": "Dati live da GitHub"
-  },
   "contact": {
     "title": "Contattami",
     "subtitle": "Hai un progetto in mente o vuoi collaborare? Scrivimi pure.",
