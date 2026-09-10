@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "Giovanni Venditto | Creative Engineering";
+export const alt = "Giovanni Venditto | Fullstack & AI-Ready Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -31,7 +31,7 @@ export default async function Image() {
             width: "500px",
             height: "500px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(202,164,86, 0.15) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(202,164,86, 0.18) 0%, transparent 70%)",
           }}
         />
         <div
@@ -42,7 +42,7 @@ export default async function Image() {
             width: "400px",
             height: "400px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(132, 199, 15, 0.10) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(202, 164, 86, 0.12) 0%, transparent 70%)",
           }}
         />
 
@@ -52,7 +52,7 @@ export default async function Image() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "linear-gradient(rgba(202,164,86, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(202,164,86, 0.03) 1px, transparent 1px)",
+              "linear-gradient(rgba(202,164,86, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(202,164,86, 0.04) 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
         />
@@ -64,26 +64,33 @@ export default async function Image() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "16px",
+            gap: "14px",
           }}
         >
+          {/* Top Pill */}
           <div
             style={{
-              fontSize: "18px",
+              fontSize: "13px",
               color: "#caa456",
-              letterSpacing: "4px",
+              letterSpacing: "3px",
               textTransform: "uppercase",
+              padding: "6px 16px",
+              borderRadius: "9999px",
+              border: "1px solid rgba(202,164,86, 0.4)",
+              background: "rgba(202,164,86, 0.08)",
+              fontWeight: "600",
             }}
           >
-            Creative Engineering
+            Anthropic Claude Certified · Fullstack & AI-Ready
           </div>
+
           <div
             style={{
-              fontSize: "72px",
+              fontSize: "82px",
               fontWeight: "bold",
               color: "#ffffff",
               letterSpacing: "-2px",
-              lineHeight: "0.9",
+              lineHeight: "0.88",
               textAlign: "center",
             }}
           >
@@ -91,44 +98,48 @@ export default async function Image() {
           </div>
           <div
             style={{
-              fontSize: "72px",
+              fontSize: "82px",
               fontWeight: "bold",
               color: "#caa456",
               letterSpacing: "-2px",
-              lineHeight: "0.9",
+              lineHeight: "0.88",
               textAlign: "center",
             }}
           >
             VENDITTO
           </div>
+
           <div
             style={{
               fontSize: "20px",
-              color: "#b4c7bb",
-              marginTop: "24px",
-              maxWidth: "600px",
+              color: "#d6d2c9",
+              marginTop: "16px",
+              maxWidth: "700px",
               textAlign: "center",
-              lineHeight: "1.5",
+              lineHeight: "1.4",
+              fontWeight: "500",
             }}
           >
-            Senior Frontend Developer & Creative Engineer
+            Fullstack Engineer · React 19, Next.js 16, Node.js & AI Automations
           </div>
+
           <div
             style={{
               display: "flex",
-              gap: "12px",
-              marginTop: "16px",
+              gap: "10px",
+              marginTop: "12px",
             }}
           >
-            {["React", "Next.js", "TypeScript", "WebGL"].map((tech) => (
+            {["Next.js 16", "React 19", "Node.js", "Anthropic Claude", "AI Process Automation"].map((tech) => (
               <div
                 key={tech}
                 style={{
                   fontSize: "12px",
-                  color: "#b4c7bb",
-                  padding: "6px 12px",
-                  border: "1px solid rgba(202,164,86, 0.2)",
+                  color: "#ece9e4",
+                  padding: "6px 14px",
+                  border: "1px solid rgba(202,164,86, 0.3)",
                   borderRadius: "9999px",
+                  background: "rgba(20, 16, 11, 0.7)",
                 }}
               >
                 {tech}

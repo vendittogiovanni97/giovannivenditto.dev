@@ -15,25 +15,58 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(config.siteUrl),
-  title: `${process.env.NEXT_PUBLIC_AUTHOR_NAME || "Giovanni Venditto"} | Creative Engineering`,
-  description: "Senior Frontend Developer & Creative Engineer. Tech Lead at Agilae. Building interfaces that bridge high-end design and robust technical architecture.",
-  keywords: ["Frontend Developer", "React", "Next.js", "TypeScript", "WebGL", "Creative Engineering", "Design Systems", "Agilae", "Tech Lead"],
-  authors: [{ name: process.env.NEXT_PUBLIC_AUTHOR_NAME || "Giovanni Venditto" }],
-  creator: process.env.NEXT_PUBLIC_AUTHOR_NAME || "Giovanni Venditto",
-  publisher: process.env.NEXT_PUBLIC_AUTHOR_NAME || "Giovanni Venditto",
-  robots: "index, follow",
+  title: {
+    default: `${config.authorName} — Fullstack & AI-Ready Engineer`,
+    template: `%s | ${config.authorName}`,
+  },
+  description:
+    "Fullstack Engineer specializzato in React 19, Next.js 16, Node.js e soluzioni AI-first certificate Anthropic Claude. Sviluppo piattaforme enterprise, CRM su misura e automazioni ad alte prestazioni.",
+  keywords: [
+    "Giovanni Venditto",
+    "Fullstack Engineer",
+    "AI Engineer",
+    "Next.js 16",
+    "React 19",
+    "Anthropic Claude Certified",
+    "Sviluppatore Fullstack",
+    "Napoli",
+    "Node.js",
+    "TypeScript",
+    "CRM Custom",
+    "Enterprise Web Apps",
+    "OCR Automation",
+    "Agilae",
+  ],
+  authors: [{ name: config.authorName, url: config.siteUrl }],
+  creator: config.authorName,
+  publisher: config.authorName,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://giovannivenditto.dev",
-    title: `${process.env.NEXT_PUBLIC_AUTHOR_NAME || "Giovanni Venditto"} | Creative Engineering`,
-    description: "Senior Frontend Developer & Creative Engineer. Tech Lead at Agilae.",
-    siteName: `${process.env.NEXT_PUBLIC_AUTHOR_NAME || "Giovanni Venditto"} Portfolio`,
+    locale: "it_IT",
+    alternateLocale: ["en_US"],
+    url: config.siteUrl,
+    title: `${config.authorName} — Fullstack & AI-Ready Engineer`,
+    description:
+      "Fullstack Engineer specializzato in React 19, Next.js 16 e soluzioni AI-first certificate Anthropic Claude. Piattaforme enterprise e automazioni ad alte prestazioni.",
+    siteName: `${config.authorName} Portfolio`,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${process.env.NEXT_PUBLIC_AUTHOR_NAME || "Giovanni Venditto"} | Creative Engineering`,
-    description: "Senior Frontend Developer & Creative Engineer. Tech Lead at Agilae.",
+    creator: `@${config.twitter}`,
+    title: `${config.authorName} — Fullstack & AI-Ready Engineer`,
+    description:
+      "Fullstack Engineer specializzato in Next.js 16, Node.js e soluzioni AI-first certificate Anthropic Claude.",
   },
   icons: {
     icon: "/favicon.svg",
@@ -62,6 +95,44 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           }`}
         </Script>
         <SmoothScroll />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: config.authorName,
+              jobTitle: "Fullstack & AI-Ready Engineer",
+              url: config.siteUrl,
+              email: `mailto:${config.email}`,
+              sameAs: [
+                `https://linkedin.com/in/${config.linkedin}`,
+                `https://github.com/${config.github}`,
+                `https://twitter.com/${config.twitter}`,
+              ],
+              knowsAbout: [
+                "Next.js",
+                "React",
+                "TypeScript",
+                "Node.js",
+                "Anthropic Claude",
+                "AI Engineering",
+                "Fullstack Development",
+                "AG Grid",
+                "OCR Pipelines",
+                "Docker",
+              ],
+              worksFor: {
+                "@type": "Organization",
+                name: "Agilae",
+              },
+              alumniOf: {
+                "@type": "CollegeOrUniversity",
+                name: "Università degli Studi Link Campus",
+              },
+            }),
+          }}
+        />
         <I18nProvider initialLocale={locale}>
           <a
             href="#main-content"

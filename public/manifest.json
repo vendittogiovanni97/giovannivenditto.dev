@@ -1,11 +1,11 @@
 {
-  "name": "Giovanni Venditto | Creative Engineering",
+  "name": "Giovanni Venditto | Fullstack & AI-Ready Engineer",
   "short_name": "GV Portfolio",
-  "description": "Senior Frontend Developer & Creative Engineer. Tech Lead at Agilae.",
+  "description": "Fullstack Engineer specializzato in React 19, Next.js 16, Node.js e soluzioni AI-first certificate Anthropic Claude.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0c12",
-  "theme_color": "#0a0c12",
+  "background_color": "#14100b",
+  "theme_color": "#14100b",
   "icons": [
     {
       "src": "/favicon.svg",
