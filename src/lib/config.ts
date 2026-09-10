@@ -6,5 +6,5 @@ export const config = {
   github: process.env.NEXT_PUBLIC_GITHUB_USERNAME || "vendittogiovanni97",
   linkedin: process.env.NEXT_PUBLIC_LINKEDIN_USERNAME || "giovannivenditto",
   twitter: process.env.NEXT_PUBLIC_TWITTER_USERNAME || "giovannivenditto",
-  calendarUrl: process.env.NEXT_PUBLIC_CALENDAR_URL || "https://cal.com/giovannivenditto/15min",
+  calendarUrl: process.env.NEXT_PUBLIC_CALENDAR_URL || "https://calendly.com/vendittogiovanni97/30min",
 } as const;

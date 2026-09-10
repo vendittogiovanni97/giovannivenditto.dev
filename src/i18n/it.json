@@ -246,9 +246,9 @@
     "openTo": "Aperto a contratti B2B, freelance o ruoli strategici",
     "social": "Social",
     "subjectPlaceholder": "Richiesta progetto, collaborazione, ecc.",
-    "bookCallTitle": "Prenota una Call di 15 Minuti",
-    "bookCallDesc": "Nessun impegno. Parliamo della tua idea, della fattibilità tecnica o di come posso aiutare la tua azienda.",
-    "bookCallButton": "Scegli Data e Ora su Cal.com",
+    "bookCallTitle": "Prenota una Call (30 min)",
+    "bookCallDesc": "Scegli data e ora su Calendly per una chiacchierata conoscitiva sulla tua idea o sulle sfide tecniche del tuo progetto.",
+    "bookCallButton": "Scegli Data e Ora su Calendly",
     "bookCallEmailDirect": "Oppure scrivimi via email"
   },
   "footer": {
@@ -350,8 +350,8 @@
     "eyebrow": "SOLUZIONI & SERVIZI",
     "title": "Cosa Posso Fare Per Te",
     "subtitle": "Combino ingegneria fullstack moderna e intelligenza artificiale per creare software ad alto impatto di business.",
-    "ctaText": "Hai un progetto da realizzare? Prenota 15 minuti di call conoscitiva senza impegno.",
-    "bookCall": "Fissa una Call di 15 Minuti",
+    "ctaText": "Hai un progetto da realizzare? Prenota una call di 30 minuti su Calendly.",
+    "bookCall": "Fissa una Call di 30 Min",
     "items": {
       "platforms": {
         "tag": "FULLSTACK & SAAS",

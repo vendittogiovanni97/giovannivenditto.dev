@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { LayoutGrid, Sparkles, ShieldCheck, CheckCircle2, ArrowRight, Calendar } from "lucide-react";
 import Link from "next/link";
 import { useI18n } from "@/i18n";
+import { config } from "@/lib/config";
 
 const SERVICE_ICONS = {
   platforms: LayoutGrid,
@@ -53,14 +54,16 @@ export function Services() {
             </p>
           </div>
 
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 self-start md:self-auto px-5 py-2.5 rounded-full border border-accent/40 bg-accent/10 text-accent hover:bg-accent hover:text-slate-950 transition-all font-headline text-sm font-semibold cursor-pointer group"
+          <a
+            href={config.calendarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 self-start md:self-auto px-5 py-2.5 rounded-full bg-accent text-slate-950 hover:bg-accent-bright transition-all font-headline text-sm font-semibold shadow-[0_0_15px_rgba(202,164,86,0.25)] cursor-pointer group"
           >
-            <Calendar className="w-4 h-4 text-accent group-hover:text-slate-950 transition-colors" />
-            <span>{t.services.bookCall}</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </Link>
+            <Calendar className="w-4 h-4 text-slate-950 shrink-0" />
+            <span className="text-slate-950">{t.services.bookCall}</span>
+            <ArrowRight className="w-4 h-4 text-slate-950 transition-transform group-hover:translate-x-1 shrink-0" />
+          </a>
         </div>
 
         {/* 3 Services Grid */}

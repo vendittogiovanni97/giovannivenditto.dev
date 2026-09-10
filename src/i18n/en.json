@@ -246,9 +246,9 @@
     "openTo": "Open to B2B contracts, freelance projects, or strategic roles",
     "social": "Social",
     "subjectPlaceholder": "Project inquiry, collaboration, etc.",
-    "bookCallTitle": "Book a 15-Minute Discovery Call",
-    "bookCallDesc": "No strings attached. Let's discuss your project, technical feasibility, and how I can help your team.",
-    "bookCallButton": "Pick a Date & Time on Cal.com",
+    "bookCallTitle": "Book a Call (30 min)",
+    "bookCallDesc": "Pick a convenient date and time on Calendly to discuss your idea or technical project requirements.",
+    "bookCallButton": "Pick Date & Time on Calendly",
     "bookCallEmailDirect": "Or reach out directly via email"
   },
   "footer": {
@@ -350,8 +350,8 @@
     "eyebrow": "SOLUTIONS & SERVICES",
     "title": "How I Can Help You",
     "subtitle": "Combining modern fullstack engineering and artificial intelligence to deliver high-ROI business software.",
-    "ctaText": "Have a project in mind? Book a free 15-minute discovery call with no obligations.",
-    "bookCall": "Book a 15-Min Call",
+    "ctaText": "Have a project in mind? Book a 30-minute discovery call on Calendly.",
+    "bookCall": "Book a 30-Min Call",
     "items": {
       "platforms": {
         "tag": "FULLSTACK & SAAS",
