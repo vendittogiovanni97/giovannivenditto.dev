@@ -29,7 +29,7 @@ export function Faq() {
   };
 
   return (
-    <section id="faq" className="w-full py-24 relative overflow-hidden">
+    <section id="faq" className="w-full py-24 relative overflow-hidden scroll-mt-24">
       {/* Schema.org FAQPage JSON-LD for rich Google search snippets */}
       <script
         type="application/ld+json"

@@ -28,6 +28,9 @@ export function SmoothScroll() {
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
     lenisRef.current = lenis;
+    if (typeof window !== "undefined") {
+      (window as unknown as { __lenis?: Lenis | null }).__lenis = lenis;
+    }
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -41,6 +44,9 @@ export function SmoothScroll() {
       gsap.ticker.remove(tick);
       lenis.destroy();
       lenisRef.current = null;
+      if (typeof window !== "undefined") {
+        (window as unknown as { __lenis?: Lenis | null }).__lenis = null;
+      }
     };
   }, []);
 

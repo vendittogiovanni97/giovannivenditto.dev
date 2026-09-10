@@ -19,10 +19,10 @@ export function NavBar() {
   const [hoverRect, setHoverRect] = useState<{ left: number; width: number } | null>(null);
 
   const navLinks = [
-    { href: "/#work", label: t.nav.work },
-    { href: "/#faq", label: "FAQ" },
+    { href: "/#work", label: t.nav.work, targetId: "work" },
     { href: "/lab", label: "Lab Demo" },
     { href: "/documents/CV_Giovanni_Venditto.pdf", label: "Curriculum", isDownload: true },
+    { href: "/#faq", label: "FAQ", targetId: "faq" },
   ];
 
   const socialLinks = [
@@ -74,6 +74,19 @@ export function NavBar() {
     const linkRect = e.currentTarget.getBoundingClientRect();
     const containerRect = linksRef.current.getBoundingClientRect();
     setHoverRect({ left: linkRect.left - containerRect.left, width: linkRect.width });
+  };
+
+  const scrollToTarget = (targetId: string) => {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    const lenis = (window as unknown as {
+      __lenis?: { scrollTo: (el: HTMLElement, opts?: { offset?: number }) => void };
+    }).__lenis;
+    if (lenis) {
+      lenis.scrollTo(target, { offset: -90 });
+    } else {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -161,9 +174,9 @@ export function NavBar() {
                   key={link.href}
                   href={link.href}
                   onClick={(e) => {
-                    if (link.href === "/#work" && pathname === "/") {
+                    if (link.targetId && pathname === "/") {
                       e.preventDefault();
-                      document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+                      scrollToTarget(link.targetId);
                     }
                   }}
                   onMouseEnter={handleLinkHover}
@@ -253,9 +266,9 @@ export function NavBar() {
                         href={link.href}
                         onClick={(e) => {
                           setMobileMenuOpen(false);
-                          if (link.href === "/#work" && pathname === "/") {
+                          if (link.targetId && pathname === "/") {
                             e.preventDefault();
-                            document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+                            scrollToTarget(link.targetId);
                           }
                         }}
                         className="text-slate-100 [font-family:var(--font-display)] uppercase text-sm hover:text-accent py-2 border-b border-slate-900 block"
