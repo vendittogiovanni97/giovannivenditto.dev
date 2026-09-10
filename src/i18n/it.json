@@ -385,6 +385,41 @@
       }
     }
   },
+  "faq": {
+    "eyebrow": "DOMANDE FREQUENTI",
+    "title": "Tutto Quello Che Devi Sapere",
+    "subtitle": "Trasparenza totale su modalità di collaborazione, pagamenti, tempi di sviluppo e affidabilità dell'AI.",
+    "stillQuestions": "Hai un progetto o un dubbio specifico?",
+    "askDirectly": "Prenota una call conoscitiva di 30 minuti senza impegno oppure scrivimi.",
+    "bookCall": "Fissa una Call di 30 Min",
+    "emailMe": "Inviami un'Email",
+    "items": [
+      {
+        "q": "Come gestisci i pagamenti e la contrattualizzazione?",
+        "a": "Lavoro con contratti trasparenti a milestone verificabili. Tipicamente la struttura prevede un anticipo del 30-40% all'avvio dei lavori, quote intermedie a rilascio dei moduli concordati e il saldo al collaudo finale. Tutte le prestazioni sono fatturate con preventivo fisso e dettagliato approvato in anticipo, senza sorprese sui costi."
+      },
+      {
+        "q": "Quali sono le tempistiche tipiche di rilascio?",
+        "a": "Per un MVP completo, un portale aziendale o una dashboard gestionale custom le tempistiche medie sono di 3-5 settimane. Per automazioni AI mirate (es. pipeline OCR su documenti o agenti intelligenti) i primi prototipi testabili sono pronti in 7-14 giorni. Lavoro con sprint settimanali e demo live continue per darti sempre piena visibilità."
+      },
+      {
+        "q": "Come garantisci l'accuratezza e la scalabilità dell'AI?",
+        "a": "In qualità di sviluppatore certificato Anthropic Claude, applico un'architettura 'deterministic-first': l'output degli LLM (Claude, Gemini) viene validato con schemi rigorosi (es. Zod, JSON Schema) e combinato con preprocessori OCR specializzati. Questo azzera le allucinazioni e garantisce precisione >99%. Il deploy su infrastruttura serverless o Docker assicura scalabilità immediata all'aumentare del carico."
+      },
+      {
+        "q": "Chi possiede il codice sorgente e la proprietà intellettuale?",
+        "a": "Al saldo del progetto, il 100% del codice sorgente, delle configurazioni di deploy e della proprietà intellettuale appartiene alla tua azienda. Ricevi accesso completo alla repository Git, documentazione tecnica e piena autonomia senza alcun vendor lock-in o canoni di licenza ricorrenti."
+      },
+      {
+        "q": "Cosa include il supporto post-consegna?",
+        "a": "Ogni progetto include 30 giorni di garanzia e supporto tecnico post-rilascio per correzione bug o chiarimenti operativi. Successivamente offro accordi flessibili di manutenzione evolutiva programmata o supporto on-demand per garantire longevità e aggiornamento costante del software."
+      },
+      {
+        "q": "Come possiamo iniziare a collaborare?",
+        "a": "Il modo più rapido è prenotare una call conoscitiva di 30 minuti tramite Calendly (trovi il pulsante qui sotto). Parleremo dei tuoi obiettivi, dei requisiti e dei vincoli tecnici. Entro 48 ore ti invierò una proposta tecnico-economica con roadmap chiara e stima dei tempi di consegna."
+      }
+    ]
+  },
   "common": {
     "somethingWentWrong": "Qualcosa è andato storto.",
     "tryAgain": "Riprova",

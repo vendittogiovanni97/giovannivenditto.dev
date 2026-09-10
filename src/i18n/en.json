@@ -385,6 +385,41 @@
       }
     }
   },
+  "faq": {
+    "eyebrow": "FREQUENTLY ASKED QUESTIONS",
+    "title": "Everything You Need to Know",
+    "subtitle": "Complete transparency regarding collaboration models, milestone payments, delivery timelines, and AI reliability.",
+    "stillQuestions": "Have a specific project or questions?",
+    "askDirectly": "Book a 30-minute discovery call or drop me an email.",
+    "bookCall": "Book a 30-Min Call",
+    "emailMe": "Send an Email",
+    "items": [
+      {
+        "q": "How do you handle pricing and contracts?",
+        "a": "I work with transparent contracts structured around verifiable milestones. Typically, this involves an upfront deposit of 30-40% at project start, intermediate payments upon delivery of agreed modules, and the final balance upon acceptance. All work is formally invoiced with a detailed, fixed quote agreed upon in advance—no hidden costs."
+      },
+      {
+        "q": "What is the typical project timeline?",
+        "a": "For a complete MVP, enterprise portal, or custom management dashboard, average delivery time is 3 to 5 weeks. For targeted AI automation (e.g. document OCR pipelines or intelligent agents), working testable prototypes are ready in 7 to 14 days. I operate in weekly agile sprints with continuous live demos for full visibility."
+      },
+      {
+        "q": "How do you ensure AI accuracy and scalability?",
+        "a": "As an Anthropic Claude Certified Developer, I apply a 'deterministic-first' architecture: LLM outputs (Claude, Gemini) are validated against strict data schemas (e.g. Zod, JSON Schema) and paired with specialized OCR preprocessors. This eliminates hallucinations and yields 99%+ accuracy. Serverless or Docker-based deployment guarantees seamless scaling under load."
+      },
+      {
+        "q": "Who owns the source code and intellectual property?",
+        "a": "Upon final balance, 100% of the source code, deployment setups, and intellectual property belong exclusively to your company. You receive full Git repository access, architecture documentation, and complete operational independence without vendor lock-in or recurring license fees."
+      },
+      {
+        "q": "What does post-launch support look like?",
+        "a": "Every project includes a 30-day warranty and free technical support window for bug fixes or operational questions. Afterward, flexible ongoing maintenance agreements and on-demand feature development are available to ensure the longevity of your software."
+      },
+      {
+        "q": "How do we get started?",
+        "a": "The fastest way is to book a 30-minute discovery call via Calendly (use the button below). We will discuss your goals, requirements, and technical constraints. Within 48 hours, I will send you a detailed technical and financial proposal with a roadmap and milestone timeline."
+      }
+    ]
+  },
   "common": {
     "somethingWentWrong": "Something went wrong.",
     "tryAgain": "Try again",

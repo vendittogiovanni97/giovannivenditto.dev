@@ -20,6 +20,7 @@ export function NavBar() {
 
   const navLinks = [
     { href: "/#work", label: t.nav.work },
+    { href: "/#faq", label: "FAQ" },
     { href: "/lab", label: "Lab Demo" },
     { href: "/documents/CV_Giovanni_Venditto.pdf", label: "Curriculum", isDownload: true },
   ];

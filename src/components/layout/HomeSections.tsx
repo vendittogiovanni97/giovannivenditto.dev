@@ -9,6 +9,7 @@ import { ExperienceTimeline } from "@/components/studio/ExperienceTimeline";
 import { Credentials } from "@/components/credentials/Credentials";
 import { HowIWork } from "@/components/home/HowIWork";
 import { Services } from "@/components/home/Services";
+import { Faq } from "@/components/home/Faq";
 
 const ScrollDivider = dynamic(
   () => import("@/components/ui/ScrollDivider").then((m) => ({ default: m.ScrollDivider })),
@@ -31,6 +32,8 @@ export function HomeSections({ projects }: { projects: ProjectMetadata[] }) {
       <TechRadar />
       <ScrollDivider color="#caa456" height={80} />
       <ExperienceTimeline />
+      <ScrollDivider color="#caa456" height={80} />
+      <Faq />
     </>
   );
 }
