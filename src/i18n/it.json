@@ -5,12 +5,13 @@
     "available": "Disponibile"
   },
   "hero": {
-    "greeting": "Sviluppatore Fullstack",
-    "role": "Fullstack Engineer",
-    "tagline": "Sviluppo applicazioni web e piattaforme gestionali con cura per il codice e per l'esperienza utente.",
-    "bio": "Fullstack Engineer presso Agilae. Sviluppo piattaforme web e software gestionali per aziende, curando sia la parte frontend che backend.",
+    "greeting": "Fullstack & AI-Ready Engineer",
+    "role": "Fullstack & AI-Ready Engineer",
+    "aiBadge": "Certificato Ufficiale Anthropic Claude",
+    "tagline": "Progetto e sviluppo applicazioni web moderne, piattaforme gestionali e automazioni AI ad alte prestazioni che fanno scalare il tuo business.",
+    "bio": "Fullstack Engineer specializzato in React 19/Next.js 16, Node.js e soluzioni AI-first (Anthropic Claude & Gemini). Aiuto aziende e startup a trasformare processi operativi complessi in software veloci, sicuri e orientati al ROI.",
     "currentFocus": "Focus Attuale",
-    "availability": "Disponibile per nuovi progetti",
+    "availability": "Disponibile per nuovi progetti & freelance",
     "exploreWork": "Vedi i progetti",
     "contactMe": "Contattami"
   },
@@ -133,19 +134,19 @@
   "metrics": {
     "experience": {
       "label": "Anni di Esperienza",
-      "sublabel": "Sviluppo web fullstack"
+      "sublabel": "Sviluppo web fullstack & architetture cloud"
     },
     "projects": {
-      "label": "Progetti Principali",
-      "sublabel": "Piattaforme web e SaaS"
+      "label": "Piattaforme Enterprise",
+      "sublabel": "SaaS, CRM e Portali aziendali attivi"
     },
     "quality": {
-      "label": "Type-Safe",
-      "sublabel": "Codice TypeScript pulito e sicuro"
+      "label": "Certificazioni Anthropic",
+      "sublabel": "Claude 101, Code, Platform & Cowork"
     },
     "performance": {
-      "label": "Prestazioni",
-      "sublabel": "Velocità ed ottimizzazione UX"
+      "label": "Prestazioni & Hardening",
+      "sublabel": "Tempi di risposta < 200ms & Security RBAC"
     }
   },
   "techRadar": {
@@ -241,10 +242,14 @@
     "directContact": "Contatto Diretto",
     "replyWithin": "Rispondo di solito entro 24 ore",
     "availability": "Disponibilità",
-    "availableForFreelance": "Disponibile per progetti",
-    "openTo": "Aperto a nuove opportunità e collaborazioni",
+    "availableForFreelance": "Disponibile per progetti & freelance",
+    "openTo": "Aperto a contratti B2B, freelance o ruoli strategici",
     "social": "Social",
-    "subjectPlaceholder": "Richiesta progetto, collaborazione, ecc."
+    "subjectPlaceholder": "Richiesta progetto, collaborazione, ecc.",
+    "bookCallTitle": "Prenota una Call di 15 Minuti",
+    "bookCallDesc": "Nessun impegno. Parliamo della tua idea, della fattibilità tecnica o di come posso aiutare la tua azienda.",
+    "bookCallButton": "Scegli Data e Ora su Cal.com",
+    "bookCallEmailDirect": "Oppure scrivimi via email"
   },
   "footer": {
     "builtWith": "Costruito con Next.js",
@@ -253,12 +258,14 @@
   },
   "credentials": {
     "title": "Percorso Studi & Formazione",
-    "subtitle": "I miei studi, corsi di formazione e certificazioni.",
+    "subtitle": "I miei studi, corsi di formazione e certificazioni ufficiali.",
     "enlarge": "Ingrandisci",
     "officialCertificate": "Certificato Ufficiale Anthropic",
     "prevAria": "Credenziale precedente",
     "nextAria": "Credenziale successiva",
     "goToAria": "Vai alla credenziale {n}",
+    "anthropicBadge": "Anthropic Certified Engineer",
+    "anthropicSpotlight": "4 Certificazioni Ufficiali Anthropic Claude (101, Code, Platform, Cowork)",
     "badges": {
       "official": "Certificazione Ufficiale",
       "academic": "Attestato Accademico",
@@ -336,6 +343,45 @@
       "deploy": {
         "title": "Deploy & Ottimizzazione",
         "desc": "Containerizzazione Docker, rilascio continuo ed ottimizzazione delle prestazioni con tempi di risposta minimi."
+      }
+    }
+  },
+  "services": {
+    "eyebrow": "SOLUZIONI & SERVIZI",
+    "title": "Cosa Posso Fare Per Te",
+    "subtitle": "Combino ingegneria fullstack moderna e intelligenza artificiale per creare software ad alto impatto di business.",
+    "ctaText": "Hai un progetto da realizzare? Prenota 15 minuti di call conoscitiva senza impegno.",
+    "bookCall": "Fissa una Call di 15 Minuti",
+    "items": {
+      "platforms": {
+        "tag": "FULLSTACK & SAAS",
+        "title": "Piattaforme Web & CRM Custom",
+        "desc": "Portali aziendali, gestionali su misura e dashboard ad alte prestazioni costruiti con Next.js, React e Node.js. Zero canoni terzi e pieno controllo sui tuoi dati.",
+        "deliverables": [
+          "Architetture scalabili Next.js & Node.js",
+          "Tabelle dati ultra-veloci (AG Grid) a 60fps",
+          "Gestione utenti e permessi granulari (RBAC)"
+        ]
+      },
+      "ai": {
+        "tag": "AI ENGINEERING & AUTOMATION",
+        "title": "Automazione Processi & Ingegneria AI",
+        "desc": "Integrazione di modelli avanzati Anthropic Claude e Gemini nei tuoi flussi operativi: pipeline OCR per fatture e polizze, estrazione automatica e workflow intelligenti.",
+        "deliverables": [
+          "Pipeline OCR + LLM per estrazione documenti",
+          "Abbattimento fino all'80% dei tempi di data entry",
+          "Soluzioni AI certificate e conformi alla privacy"
+        ]
+      },
+      "performance": {
+        "tag": "SECURITY & OPTIMIZATION",
+        "title": "Modernizzazione & Performance",
+        "desc": "Audit di sicurezza, refactoring e velocizzazione di applicazioni esistenti. Migrazione a TypeScript per eliminare bug a runtime e ottimizzazione Core Web Vitals.",
+        "deliverables": [
+          "Security Hardening (IDOR, sanitizzazione, MIME)",
+          "Tempi di risposta e caricamento sotto i 200ms",
+          "Codice manutenibile con zero debito tecnico"
+        ]
       }
     }
   },

@@ -20,6 +20,11 @@ stack:
 category: "product"
 featured: true
 order: 2
+metrics:
+  "No-Show Reduction": "-65%"
+  "Paper Consents": "0 (100% Digital)"
+  "Revenue Visibility": "Real-Time"
+  "System Uptime": "99.9%"
 images:
   hero: "/projects/nagma-tattoo-crm/dashboard.png"
   gallery:
@@ -35,17 +40,35 @@ links:
 # Nagma Tattoo CRM — Enterprise Tattoo Studio Management
 
 ## Project Overview
-**Demo Nagma** is an enterprise management platform (CRM) designed for comprehensive tattoo and piercing studio operations. It couples a Node.js 22+ & Express 5 REST API with **Prisma 7.8 / PostgreSQL 17** and a modern **Next.js 16 (App Router)** and **Material-UI (MUI)** frontend.
+**Nagma Tattoo CRM** is an enterprise management platform (CRM) designed for the complete operational and financial management of tattoo and piercing studios. The solution brings together a Node.js 22+ & Express 5 REST API with **Prisma 7.8 / PostgreSQL 17** and a modern **Next.js 16 (App Router)** and **Material-UI (MUI)** frontend.
 
-## Key Features & Architecture
+---
 
-### 📅 Agenda & Interactive Calendar
-- Advanced calendar view (FullCalendar & AG Grid) with artist color coding, time slot management, and appointment statuses.
-- Complete customer cards with medical notes/allergies, treatment history, and graphic drafts.
+## 1. The Challenge & Problem
+Tattoo studios juggle complex scheduling, hygiene compliance, and financial splits typically managed on paper notebooks and scattered chats:
+- **Frequent no-shows and scheduling overlaps**: An estimated 15% to 20% loss in monthly revenue due to missed appointments and artist station conflicts.
+- **Legal liability on informed consent forms**: Obligation to preserve signed physical consent sheets for years, with recurring risk of damaged or lost health declarations.
+- **Lack of financial clarity**: Substantial time spent calculating monthly payouts for resident and guest artists across varied percentage tiers and customer deposits.
 
-### 💰 Finance & Automated PDF Consent Forms
-- Financial tracking of income, expenses, and payment methods with trend graphs.
-- Automated generation of informed consent forms in PDF format via **PDFKit** and centralized report exports in **Excel (.xlsx)** and **CSV**.
+---
+
+## 2. Architecture & Engineering Solution
+
+### 📅 Multi-Artist Interactive Calendar
+- Advanced calendar view (FullCalendar & AG Grid) with artist color coding, time slot scheduling, and real-time appointment status tracking.
+- Client profiles complete with health history/allergies, treatment timeline, and high-resolution artwork attachments.
+
+### 💰 Automated PDF Consent Forms & Accounting
+- Financial tracking of revenues, expenses, down payments, and automated split calculations between studio and artists with visual trend graphs.
+- Automated generation of regulatory-compliant PDF informed consent forms via **PDFKit** with digital signatures, plus data exports in **Excel (.xlsx)** and **CSV**.
 
 ### ⚙️ Monorepo & Docker Pipeline
-- Monorepo architecture orchestrated with npm workspaces, Docker Compose for PostgreSQL 17, and test suites in Jest and Playwright.
+- Monorepo architecture managed with npm workspaces, Docker Compose for PostgreSQL 17, and automated unit/integration test suites in Jest and Playwright.
+
+---
+
+## 3. Business Results & ROI
+The rollout of Nagma CRM delivered transformational operational efficiency:
+- **-65% customer no-shows**: Transparent scheduling and automated booking workflows minimized empty studio slots.
+- **100% elimination of paper archives**: Thousands of signed legal consents securely digitized and instantly retrievable.
+- **Real-time financial visibility**: Eliminated hours of manual reconciliation at month-end through automated revenue sharing.

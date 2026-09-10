@@ -1,0 +1,143 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { LayoutGrid, Sparkles, ShieldCheck, CheckCircle2, ArrowRight, Calendar } from "lucide-react";
+import Link from "next/link";
+import { useI18n } from "@/i18n";
+
+const SERVICE_ICONS = {
+  platforms: LayoutGrid,
+  ai: Sparkles,
+  performance: ShieldCheck,
+} as const;
+
+export function Services() {
+  const { t } = useI18n();
+
+  const services = [
+    {
+      key: "platforms" as const,
+      data: t.services.items.platforms,
+      icon: SERVICE_ICONS.platforms,
+      gradient: "from-amber-500/10 via-transparent to-transparent",
+    },
+    {
+      key: "ai" as const,
+      data: t.services.items.ai,
+      icon: SERVICE_ICONS.ai,
+      gradient: "from-accent/15 via-amber-500/5 to-transparent",
+      featured: true,
+    },
+    {
+      key: "performance" as const,
+      data: t.services.items.performance,
+      icon: SERVICE_ICONS.performance,
+      gradient: "from-emerald-500/10 via-transparent to-transparent",
+    },
+  ];
+
+  return (
+    <section id="services" className="w-full py-24 relative overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8">
+        {/* Header */}
+        <div className="mb-16 border-b border-slate-800 pb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="max-w-2xl">
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent block mb-2">
+              {t.services.eyebrow}
+            </span>
+            <h2 className="[font-family:var(--font-display)] uppercase text-4xl sm:text-5xl text-slate-100 tracking-tight">
+              {t.services.title}
+            </h2>
+            <p className="mt-3 text-slate-400 text-base sm:text-lg">
+              {t.services.subtitle}
+            </p>
+          </div>
+
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 self-start md:self-auto px-5 py-2.5 rounded-full border border-accent/40 bg-accent/10 text-accent hover:bg-accent hover:text-slate-950 transition-all font-headline text-sm font-semibold cursor-pointer group"
+          >
+            <Calendar className="w-4 h-4 text-accent group-hover:text-slate-950 transition-colors" />
+            <span>{t.services.bookCall}</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+
+        {/* 3 Services Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {services.map((srv, idx) => {
+            const Icon = srv.icon;
+            return (
+              <motion.div
+                key={srv.key}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.12 }}
+                className={`relative rounded-2xl border p-8 flex flex-col justify-between transition-all duration-300 group ${
+                  srv.featured
+                    ? "border-accent/50 bg-slate-900/90 shadow-[0_0_40px_rgba(202,164,86,0.12)] hover:border-accent"
+                    : "border-slate-800 bg-slate-900/50 hover:border-slate-700"
+                }`}
+              >
+                {/* Subtle top gradient glow */}
+                <div
+                  className={`absolute inset-0 rounded-2xl bg-gradient-to-b ${srv.gradient} pointer-events-none opacity-60`}
+                />
+
+                <div className="relative z-10">
+                  {/* Category Pill + Icon */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div
+                      className={`p-3 rounded-xl border ${
+                        srv.featured
+                          ? "bg-accent text-slate-950 border-accent"
+                          : "bg-slate-950 border-slate-800 text-accent"
+                      }`}
+                    >
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <span className="font-mono text-2xs uppercase tracking-widest text-slate-400 font-semibold px-2.5 py-1 rounded-md bg-slate-950/80 border border-slate-800">
+                      {srv.data.tag}
+                    </span>
+                  </div>
+
+                  <h3 className="[font-family:var(--font-display)] uppercase text-2xl text-slate-100 tracking-tight mb-4">
+                    {srv.data.title}
+                  </h3>
+
+                  <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                    {srv.data.desc}
+                  </p>
+
+                  {/* Deliverables Bullet List */}
+                  <div className="border-t border-slate-800/80 pt-5 space-y-3">
+                    {srv.data.deliverables.map((item, dIdx) => (
+                      <div key={dIdx} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                        <span className="text-xs sm:text-sm text-slate-300 leading-snug">
+                          {item}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Card Action Link */}
+                <div className="relative z-10 mt-8 pt-6 border-t border-slate-800/60">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2 font-headline text-xs font-semibold text-accent hover:text-accent-bright transition-colors uppercase tracking-wider group-hover:translate-x-1 duration-200"
+                  >
+                    <span>{t.services.ctaText}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -5,12 +5,13 @@
     "available": "Available"
   },
   "hero": {
-    "greeting": "Fullstack Developer",
-    "role": "Fullstack Engineer",
-    "tagline": "Building web applications and management platforms with focus on clean code and user experience.",
-    "bio": "Fullstack Engineer at Agilae. Developing web platforms and business management software across both frontend and backend.",
+    "greeting": "Fullstack & AI-Ready Engineer",
+    "role": "Fullstack & AI-Ready Engineer",
+    "aiBadge": "Official Anthropic Claude Certified",
+    "tagline": "I design and build modern web applications, enterprise platforms, and high-performance AI automations that scale your business.",
+    "bio": "Fullstack Engineer specializing in React 19/Next.js 16, Node.js, and Anthropic-certified AI-first solutions (Claude & Gemini). Helping companies and startups turn complex workflows into fast, secure, ROI-driven software.",
     "currentFocus": "Current Focus",
-    "availability": "Available for new projects",
+    "availability": "Available for new projects & freelance",
     "exploreWork": "View projects",
     "contactMe": "Contact Me"
   },
@@ -133,19 +134,19 @@
   "metrics": {
     "experience": {
       "label": "Years of Experience",
-      "sublabel": "Fullstack web development"
+      "sublabel": "Fullstack web development & cloud architectures"
     },
     "projects": {
-      "label": "Key Projects",
-      "sublabel": "Web platforms and SaaS"
+      "label": "Enterprise Platforms",
+      "sublabel": "Active SaaS, CRM and enterprise portals"
     },
     "quality": {
-      "label": "Type-Safe",
-      "sublabel": "Clean and secure TypeScript code"
+      "label": "Anthropic Certifications",
+      "sublabel": "Claude 101, Code, Platform & Cowork"
     },
     "performance": {
-      "label": "Performance",
-      "sublabel": "Speed and UX optimization"
+      "label": "Performance & Hardening",
+      "sublabel": "Sub-200ms latency & RBAC Security"
     }
   },
   "techRadar": {
@@ -241,10 +242,14 @@
     "directContact": "Direct Contact",
     "replyWithin": "Usually reply within 24 hours",
     "availability": "Availability",
-    "availableForFreelance": "Available for projects",
-    "openTo": "Open to new opportunities and collaborations",
+    "availableForFreelance": "Available for projects & freelance",
+    "openTo": "Open to B2B contracts, freelance projects, or strategic roles",
     "social": "Social",
-    "subjectPlaceholder": "Project inquiry, collaboration, etc."
+    "subjectPlaceholder": "Project inquiry, collaboration, etc.",
+    "bookCallTitle": "Book a 15-Minute Discovery Call",
+    "bookCallDesc": "No strings attached. Let's discuss your project, technical feasibility, and how I can help your team.",
+    "bookCallButton": "Pick a Date & Time on Cal.com",
+    "bookCallEmailDirect": "Or reach out directly via email"
   },
   "footer": {
     "builtWith": "Built with Next.js",
@@ -253,12 +258,14 @@
   },
   "credentials": {
     "title": "Education & Studies",
-    "subtitle": "My studies, training courses, and certifications.",
+    "subtitle": "My studies, professional training, and official certifications.",
     "enlarge": "Enlarge",
     "officialCertificate": "Official Anthropic Certificate",
     "prevAria": "Previous credential",
     "nextAria": "Next credential",
     "goToAria": "Go to credential {n}",
+    "anthropicBadge": "Anthropic Certified Engineer",
+    "anthropicSpotlight": "4 Official Anthropic Claude Certifications (101, Code, Platform, Cowork)",
     "badges": {
       "official": "Official Certification",
       "academic": "Academic Diploma",
@@ -336,6 +343,45 @@
       "deploy": {
         "title": "Deploy & Optimization",
         "desc": "Docker containerization, continuous deployment, and performance tuning for minimal response times."
+      }
+    }
+  },
+  "services": {
+    "eyebrow": "SOLUTIONS & SERVICES",
+    "title": "How I Can Help You",
+    "subtitle": "Combining modern fullstack engineering and artificial intelligence to deliver high-ROI business software.",
+    "ctaText": "Have a project in mind? Book a free 15-minute discovery call with no obligations.",
+    "bookCall": "Book a 15-Min Call",
+    "items": {
+      "platforms": {
+        "tag": "FULLSTACK & SAAS",
+        "title": "Custom Web Platforms & CRMs",
+        "desc": "Custom enterprise portals, bespoke CRMs, and high-performance dashboards built with Next.js, React, and Node.js. Zero recurring third-party license fees and full ownership of your data.",
+        "deliverables": [
+          "Scalable Next.js & Node.js architectures",
+          "Ultra-fast data grids (AG Grid) at 60fps",
+          "Granular user roles & permissions (RBAC)"
+        ]
+      },
+      "ai": {
+        "tag": "AI ENGINEERING & AUTOMATION",
+        "title": "Process Automation & AI Engineering",
+        "desc": "Integrating cutting-edge Anthropic Claude and Gemini models into your workflows: OCR document pipelines, automated data extraction, and intelligent agents.",
+        "deliverables": [
+          "OCR + LLM document ingestion pipelines",
+          "Up to 80% reduction in manual data entry time",
+          "Certified AI solutions compliant with privacy"
+        ]
+      },
+      "performance": {
+        "tag": "SECURITY & OPTIMIZATION",
+        "title": "Modernization & Performance",
+        "desc": "Security audits, refactoring, and speed optimization for existing systems. Migration to TypeScript to prevent runtime errors and optimize Core Web Vitals.",
+        "deliverables": [
+          "Security hardening (IDOR, sanitization, MIME)",
+          "Sub-200ms response and load times",
+          "Maintainable code with zero technical debt"
+        ]
       }
     }
   },

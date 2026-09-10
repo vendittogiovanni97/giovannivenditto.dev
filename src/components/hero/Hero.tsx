@@ -5,7 +5,8 @@ import { motion, useReducedMotion } from "framer-motion";
 import { gsap } from "gsap";
 import Image from "next/image";
 import { useI18n } from "@/i18n";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 function SplitHeadline({ text }: { text: string }) {
   const wrapRef = useRef<HTMLSpanElement>(null);
@@ -78,12 +79,15 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           {/* Left: the poster */}
           <div className="lg:col-span-7">
-            <motion.p
-              {...reveal(0)}
-              className="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 opacity-70"
-            >
-              {t.hero.role}
-            </motion.p>
+            <motion.div {...reveal(0)} className="flex flex-wrap items-center gap-2.5 mb-5">
+              <span className="font-mono text-xs sm:text-sm tracking-[0.2em] uppercase font-bold opacity-80">
+                {t.hero.role}
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-2xs sm:text-xs font-mono tracking-wider uppercase border border-[var(--color-ink)]/20 bg-[var(--color-ink)]/5 font-semibold text-[var(--color-ink)] shadow-xs">
+                <Sparkles className="w-3 h-3 text-amber-600" />
+                {t.hero.aiBadge}
+              </span>
+            </motion.div>
 
             <h1
               className="[font-family:var(--font-display)] uppercase text-[15vw] sm:text-[9vw] lg:text-[6.4vw] leading-[0.86] tracking-tight"
@@ -105,19 +109,19 @@ export function Hero() {
 
             <motion.p
               {...reveal(0.5)}
-              className="mt-8 max-w-xl text-lg sm:text-xl leading-relaxed [font-family:var(--font-body)]"
+              className="mt-8 max-w-xl text-lg sm:text-xl font-medium leading-relaxed [font-family:var(--font-body)]"
             >
               {t.hero.tagline}
             </motion.p>
 
             <motion.p
               {...reveal(0.58)}
-              className="mt-4 max-w-lg text-base opacity-70 leading-relaxed [font-family:var(--font-body)]"
+              className="mt-4 max-w-lg text-base opacity-75 leading-relaxed [font-family:var(--font-body)]"
             >
               {t.hero.bio}
             </motion.p>
 
-            <motion.div {...reveal(0.66)} className="mt-10">
+            <motion.div {...reveal(0.66)} className="mt-10 flex flex-wrap items-center gap-6">
               <a
                 href="#work"
                 onClick={(e) => {
@@ -130,6 +134,19 @@ export function Hero() {
                 <span>{t.hero.exploreWork}</span>
                 <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-1" />
               </a>
+
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border-2 text-sm font-semibold font-headline transition-all hover:scale-[1.02] cursor-pointer"
+                style={{
+                  borderColor: "var(--color-ink)",
+                  background: "var(--color-ink)",
+                  color: "var(--color-paper)",
+                }}
+              >
+                <span>{t.hero.contactMe}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </motion.div>
           </div>
 

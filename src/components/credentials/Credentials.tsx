@@ -146,6 +146,34 @@ export function Credentials() {
           </div>
         </div>
 
+        {/* Anthropic Official AI Spotlight Strip */}
+        <div className="mb-10 p-4 sm:p-5 rounded-2xl border border-accent/40 bg-accent/5 backdrop-blur-xs flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="p-2.5 rounded-xl bg-accent text-slate-950 shrink-0">
+              <Award className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="font-headline text-sm font-bold text-slate-100 flex items-center gap-2">
+                <span>{t.credentials.anthropicBadge}</span>
+                <span className="font-mono text-3xs uppercase tracking-widest px-2 py-0.5 rounded bg-accent/20 text-accent font-bold">
+                  Official
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 mt-0.5">{t.credentials.anthropicSpotlight}</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            {["Claude 101", "Claude Code 101", "Claude Platform 101", "Claude Cowork"].map((badge, bIdx) => (
+              <span
+                key={bIdx}
+                className="inline-block font-mono text-3xs text-slate-300 px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-800"
+              >
+                ✓ {badge}
+              </span>
+            ))}
+          </div>
+        </div>
+
         {/* Stage */}
         <div className="relative">
           <AnimatePresence mode="wait" custom={direction} initial={false}>
