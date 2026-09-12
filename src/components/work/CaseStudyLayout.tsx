@@ -15,13 +15,13 @@ interface CaseStudyLayoutProps {
 }
 
 export function CaseStudyLayout({ project, prevProject, nextProject, children }: CaseStudyLayoutProps) {
-  const { t } = useI18n();
+  const { t, href } = useI18n();
   return (
     <article className="min-h-screen bg-background">
       <header className="relative w-full pt-32 pb-16">
         <div className="max-w-container-max mx-auto px-gutter">
           <Link
-            href="/#work"
+            href={`${href("/")}#work`}
             scroll={false}
             prefetch={true}
             className="inline-flex items-center gap-2 font-code-snippet text-2xs text-slate-400 hover:text-accent transition-colors mb-8 group"
@@ -169,7 +169,7 @@ export function CaseStudyLayout({ project, prevProject, nextProject, children }:
         <div className="max-w-container-max mx-auto px-gutter flex">
           {prevProject ? (
             <Link
-              href={`/work/${prevProject.slug}`}
+              href={href(`/work/${prevProject.slug}`)}
               prefetch={true}
               className="flex-1 py-8 pr-8 group hover:bg-slate-900/30 transition-colors -mx-4 px-4"
             >
@@ -185,7 +185,7 @@ export function CaseStudyLayout({ project, prevProject, nextProject, children }:
 
           {nextProject ? (
             <Link
-              href={`/work/${nextProject.slug}`}
+              href={href(`/work/${nextProject.slug}`)}
               prefetch={true}
               className="flex-1 py-8 pl-8 group hover:bg-slate-900/30 transition-colors text-right -mx-4 px-4"
             >

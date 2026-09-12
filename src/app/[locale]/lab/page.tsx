@@ -1,8 +1,13 @@
 import { Metadata } from "next";
 import { LabContent } from "@/components/lab/LabContent";
-import { getLocale } from "@/i18n/server";
+import { isLocale, type Locale } from "@/i18n/server";
+import { localeAlternates } from "@/lib/seo";
 
-const COPY = {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+const COPY: Record<Locale, { title: string; description: string; ogTitle: string; ogDescription: string }> = {
   it: {
     title: "Lab Interattivo & Demo AI",
     description:
@@ -19,14 +24,16 @@ const COPY = {
     ogDescription:
       "High-performance benchmarks and OCR + AI data extraction you can test live in the browser.",
   },
-} as const;
+};
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : "it";
   const c = COPY[locale];
   return {
     title: c.title,
     description: c.description,
+    alternates: localeAlternates(locale, "/lab"),
     openGraph: {
       title: c.ogTitle,
       description: c.ogDescription,

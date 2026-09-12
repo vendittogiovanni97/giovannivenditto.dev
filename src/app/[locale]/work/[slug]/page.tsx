@@ -4,10 +4,11 @@ import { getProject, getAllProjects, getProjectSlugs } from "@/lib/content";
 import { renderMarkdown } from "@/lib/markdown";
 import { CaseStudyLayout } from "@/components/work/CaseStudyLayout";
 import { config } from "@/lib/config";
-import { getLocale } from "@/i18n/server";
+import { isLocale, type Locale } from "@/i18n/server";
+import { localeAlternates } from "@/lib/seo";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -16,9 +17,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const resolvedParams = await params;
-  const locale = await getLocale();
-  const project = getProject(resolvedParams.slug, locale);
+  const { locale: rawLocale, slug } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : "it";
+  const project = getProject(slug, locale);
 
   if (!project) {
     return { title: "Project Not Found" };
@@ -26,8 +27,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const { metadata } = project;
   return {
-    title: `${metadata.title} | ${config.authorName}`,
+    // Plain string, not "title | author" — the root layout's title.template
+    // already appends " | {author}" to every page; doing it here too
+    // doubled the author name in the tab title ("X | Giovanni | Giovanni").
+    title: metadata.title,
     description: metadata.shortDescription,
+    alternates: localeAlternates(locale, `/work/${slug}`),
     openGraph: {
       title: metadata.title,
       description: metadata.shortDescription,
@@ -44,9 +49,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ProjectPage({ params }: PageProps) {
-  const resolvedParams = await params;
-  const locale = await getLocale();
-  const project = getProject(resolvedParams.slug, locale);
+  const { locale: rawLocale, slug } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : "it";
+  const project = getProject(slug, locale);
 
   if (!project) {
     notFound();
@@ -55,7 +60,7 @@ export default async function ProjectPage({ params }: PageProps) {
   const html = await renderMarkdown(project.content);
 
   const allProjects = getAllProjects(locale);
-  const currentIndex = allProjects.findIndex((p) => p.slug === resolvedParams.slug);
+  const currentIndex = allProjects.findIndex((p) => p.slug === slug);
   const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
   const nextProject = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null;
 

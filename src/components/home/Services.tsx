@@ -13,7 +13,7 @@ const SERVICE_ICONS = {
 } as const;
 
 export function Services() {
-  const { t } = useI18n();
+  const { t, href } = useI18n();
 
   const services = [
     {
@@ -129,7 +129,7 @@ export function Services() {
                 {/* Card Action Link */}
                 <div className="relative z-10 mt-8 pt-6 border-t border-slate-800/60">
                   <Link
-                    href="/contact"
+                    href={href("/contact")}
                     className="inline-flex items-center gap-2 font-headline text-xs font-semibold text-accent hover:text-accent-bright transition-colors uppercase tracking-wider group-hover:translate-x-1 duration-200"
                   >
                     <span>{t.services.ctaText}</span>
