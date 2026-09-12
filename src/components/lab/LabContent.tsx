@@ -212,6 +212,9 @@ export function LabContent() {
               
               {/* Document Selection Column */}
               <div className="lg:col-span-4 space-y-4">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-slate-400 font-mono text-3xs uppercase tracking-widest">
+                  <span>{t.lab.ocrMockDisclaimer}</span>
+                </div>
                 <h3 className="font-mono text-xs text-accent uppercase tracking-widest font-semibold mb-2">
                   {t.lab.ocrSelectPrompt}
                 </h3>

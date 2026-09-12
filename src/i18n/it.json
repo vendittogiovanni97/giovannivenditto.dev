@@ -249,7 +249,10 @@
     "bookCallTitle": "Prenota una Call (30 min)",
     "bookCallDesc": "Scegli data e ora su Calendly per una chiacchierata conoscitiva sulla tua idea o sulle sfide tecniche del tuo progetto.",
     "bookCallButton": "Scegli Data e Ora su Calendly",
-    "bookCallEmailDirect": "Oppure scrivimi via email"
+    "bookCallEmailDirect": "Oppure scrivimi via email",
+    "downloadCvTitle": "Curriculum Vitae",
+    "downloadCvDesc": "Scarica il CV completo in PDF con esperienze, stack e formazione.",
+    "downloadCvButton": "Scarica il CV (PDF)"
   },
   "footer": {
     "builtWith": "Costruito con Next.js",
@@ -264,8 +267,8 @@
     "prevAria": "Credenziale precedente",
     "nextAria": "Credenziale successiva",
     "goToAria": "Vai alla credenziale {n}",
-    "anthropicBadge": "Anthropic Certified Engineer",
-    "anthropicSpotlight": "4 Certificazioni Ufficiali Anthropic Claude (101, Code, Platform, Cowork)",
+    "anthropicBadge": "Formazione Ufficiale Anthropic Claude",
+    "anthropicSpotlight": "4 corsi ufficiali completati: Claude 101, Claude Code 101, Claude Platform 101, Claude Cowork",
     "badges": {
       "official": "Certificazione Ufficiale",
       "academic": "Attestato Accademico",
@@ -286,6 +289,7 @@
     "tabOcr": "OCR Extractor",
     "tabGrid": "10k Grid Benchmark",
     "tabTheme": "UI Inspector",
+    "ocrMockDisclaimer": "Demo simulata — dati mock, nessuna chiamata reale a LLM esterni",
     "ocrSelectPrompt": "1. Seleziona Documento di Prova",
     "ocrScanning": "Scansione OCR ed Estrazione AI...",
     "ocrRunScan": "Esegui Scansione OCR + LLM",
@@ -404,7 +408,7 @@
       },
       {
         "q": "Come garantisci l'accuratezza e la scalabilità dell'AI?",
-        "a": "In qualità di sviluppatore certificato Anthropic Claude, applico un'architettura 'deterministic-first': l'output degli LLM (Claude, Gemini) viene validato con schemi rigorosi (es. Zod, JSON Schema) e combinato con preprocessori OCR specializzati. Questo azzera le allucinazioni e garantisce precisione >99%. Il deploy su infrastruttura serverless o Docker assicura scalabilità immediata all'aumentare del carico."
+        "a": "Grazie alla formazione ufficiale Anthropic Claude, applico un'architettura 'deterministic-first': l'output degli LLM (Claude, Gemini) viene validato con schemi rigorosi (es. Zod, JSON Schema) e combinato con preprocessori OCR specializzati. Questo riduce drasticamente il rischio di allucinazioni e porta la precisione oltre il 99% nei casi testati. Il deploy su infrastruttura serverless o Docker assicura scalabilità immediata all'aumentare del carico."
       },
       {
         "q": "Chi possiede il codice sorgente e la proprietà intellettuale?",

@@ -249,7 +249,10 @@
     "bookCallTitle": "Book a Call (30 min)",
     "bookCallDesc": "Pick a convenient date and time on Calendly to discuss your idea or technical project requirements.",
     "bookCallButton": "Pick Date & Time on Calendly",
-    "bookCallEmailDirect": "Or reach out directly via email"
+    "bookCallEmailDirect": "Or reach out directly via email",
+    "downloadCvTitle": "Curriculum Vitae",
+    "downloadCvDesc": "Download the full PDF resume with experience, stack, and education.",
+    "downloadCvButton": "Download CV (PDF)"
   },
   "footer": {
     "builtWith": "Built with Next.js",
@@ -264,8 +267,8 @@
     "prevAria": "Previous credential",
     "nextAria": "Next credential",
     "goToAria": "Go to credential {n}",
-    "anthropicBadge": "Anthropic Certified Engineer",
-    "anthropicSpotlight": "4 Official Anthropic Claude Certifications (101, Code, Platform, Cowork)",
+    "anthropicBadge": "Official Anthropic Claude Training",
+    "anthropicSpotlight": "4 official courses completed: Claude 101, Claude Code 101, Claude Platform 101, Claude Cowork",
     "badges": {
       "official": "Official Certification",
       "academic": "Academic Diploma",
@@ -286,6 +289,7 @@
     "tabOcr": "OCR Extractor",
     "tabGrid": "10k Grid Benchmark",
     "tabTheme": "UI Inspector",
+    "ocrMockDisclaimer": "Simulated demo — mock data, no real calls to external LLMs",
     "ocrSelectPrompt": "1. Select a Sample Document",
     "ocrScanning": "Running OCR & AI extraction...",
     "ocrRunScan": "Run OCR + LLM Scan",
@@ -404,7 +408,7 @@
       },
       {
         "q": "How do you ensure AI accuracy and scalability?",
-        "a": "As an Anthropic Claude Certified Developer, I apply a 'deterministic-first' architecture: LLM outputs (Claude, Gemini) are validated against strict data schemas (e.g. Zod, JSON Schema) and paired with specialized OCR preprocessors. This eliminates hallucinations and yields 99%+ accuracy. Serverless or Docker-based deployment guarantees seamless scaling under load."
+        "a": "Thanks to official Anthropic Claude training, I apply a 'deterministic-first' architecture: LLM outputs (Claude, Gemini) are validated against strict data schemas (e.g. Zod, JSON Schema) and paired with specialized OCR preprocessors. This drastically reduces the risk of hallucinations and pushes accuracy above 99% in tested cases. Serverless or Docker-based deployment guarantees seamless scaling under load."
       },
       {
         "q": "Who owns the source code and intellectual property?",

@@ -4,7 +4,7 @@ import { useI18n } from "@/i18n";
 import { ContactForm } from "@/components/layout/ContactForm";
 import { GlassPanel } from "@/components/ui";
 import { config } from "@/lib/config";
-import { Calendar, ArrowRight } from "lucide-react";
+import { Calendar, ArrowRight, Download } from "lucide-react";
 
 export function ContactContent() {
   const { t } = useI18n();
@@ -51,6 +51,19 @@ export function ContactContent() {
             </a>
           </div>
         </div>
+        <GlassPanel padding="lg" className="rounded-2xl">
+          <div className="font-label-technical text-3xs text-accent uppercase tracking-widest mb-4">{t.contact.downloadCvTitle}</div>
+          <p className="font-body text-xs text-slate-300 leading-relaxed mb-4">{t.contact.downloadCvDesc}</p>
+          <a
+            href="/documents/CV_Giovanni_Venditto.pdf"
+            download="CV_Giovanni_Venditto.pdf"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-accent/50 text-accent font-headline text-xs sm:text-sm font-bold hover:bg-accent/10 transition-all cursor-pointer"
+          >
+            <Download className="w-4 h-4" />
+            <span>{t.contact.downloadCvButton}</span>
+          </a>
+        </GlassPanel>
+
         <GlassPanel padding="lg" className="rounded-2xl">
           <div className="font-label-technical text-3xs text-accent uppercase tracking-widest mb-4">{t.contact.directContact}</div>
           <a href={`mailto:${config.email}`} className="font-headline text-lg text-slate-100 hover:text-accent transition-colors block mb-2">
