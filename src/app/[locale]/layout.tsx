@@ -13,6 +13,7 @@ import { isLocale, locales, type Locale } from "@/i18n/server";
 import { displayFont, bodyFont } from "@/lib/fonts";
 import { config } from "@/lib/config";
 import { localeAlternates } from "@/lib/seo";
+import { AgentationLoader } from "@/components/dev/AgentationLoader";
 import "../globals.css";
 
 interface LayoutProps {
@@ -202,6 +203,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           <EasterEggs />
           <CursorSpotlight />
         </I18nProvider>
+        {process.env.NODE_ENV === "development" && <AgentationLoader />}
       </body>
     </html>
   );
