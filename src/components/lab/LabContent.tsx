@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { GlassPanel, Chip } from "@/components/ui";
 import { useI18n } from "@/i18n";
 import {
@@ -11,9 +11,7 @@ import {
   Sliders,
   CheckCircle2,
   Play,
-  RotateCcw,
   Sparkles,
-  Database,
   Search,
   Check,
 } from "lucide-react";
@@ -69,8 +67,17 @@ const sampleDocs = [
   },
 ];
 
+interface GridRecord {
+  id: string;
+  name: string;
+  role: string;
+  status: string;
+  score: string;
+  timestamp: string;
+}
+
 // Mock Generator for 10k Records
-function generateRecords(count: number) {
+function generateRecords(count: number): GridRecord[] {
   const names = ["Marco", "Giuseppe", "Elena", "Francesca", "Luca", "Sara", "Davide", "Chiara", "Alessandro", "Martina"];
   const surnames = ["Rossi", "Ferrari", "Russo", "Esposito", "Bianchi", "Romano", "Colombo", "Ricci", "Marino", "Greco"];
   const roles = ["Fullstack Engineer", "Frontend Lead", "Backend Dev", "UI Designer", "Project Manager"];
@@ -97,7 +104,7 @@ export function LabContent() {
 
   // AG Grid Benchmark State
   const [recordsCount, setRecordsCount] = useState<number>(0);
-  const [records, setRecords] = useState<any[]>([]);
+  const [records, setRecords] = useState<GridRecord[]>([]);
   const [renderTime, setRenderTime] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);

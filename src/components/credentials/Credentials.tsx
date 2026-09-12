@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
+import Image from "next/image";
 import { Award, GraduationCap, Code2, X, ZoomIn, FileText, ArrowLeft, ArrowRight } from "lucide-react";
 import { useI18n } from "@/i18n";
 
@@ -224,10 +225,12 @@ export function Credentials() {
                       onClick={() => setSelectedImage({ title: current.title, image: current.image! })}
                       className="group relative block w-full aspect-[4/3] overflow-hidden bg-slate-950 cursor-pointer rounded-sm"
                     >
-                      <img
+                      <Image
                         src={current.image}
                         alt={current.title}
-                        className="absolute inset-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                        fill
+                        sizes="(min-width: 1024px) 55vw, 90vw"
+                        className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
                       />
                       <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                         <span className="bg-ink/85 text-paper font-mono text-2xs px-3 py-1.5 rounded-lg flex items-center gap-1.5">
@@ -320,11 +323,13 @@ export function Credentials() {
                 </button>
               </div>
 
-              <div className="relative w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 p-2 flex items-center justify-center">
-                <img
+              <div className="relative w-full max-h-[75vh] aspect-[1600/1236] rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 p-2">
+                <Image
                   src={selectedImage.image}
                   alt={selectedImage.title}
-                  className="w-full max-h-[75vh] object-contain rounded-xl"
+                  fill
+                  sizes="(min-width: 1024px) 56rem, 90vw"
+                  className="object-contain rounded-xl"
                 />
               </div>
             </motion.div>

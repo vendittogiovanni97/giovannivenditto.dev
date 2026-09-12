@@ -10,11 +10,10 @@ interface ScrollDividerProps {
 export function ScrollDivider({ color = "#caa456", height = 120 }: ScrollDividerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.matchMedia("(max-width: 767px)").matches);
-  }, []);
+  // Safe to read window synchronously: this component is only ever mounted
+  // via next/dynamic({ ssr: false }) in HomeSections, so there is no
+  // server-rendered pass to mismatch against.
+  const [isMobile] = useState(() => window.matchMedia("(max-width: 767px)").matches);
 
   useEffect(() => {
     const canvas = canvasRef.current;

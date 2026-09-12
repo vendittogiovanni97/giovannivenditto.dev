@@ -24,7 +24,7 @@ export function CursorTrail() {
     if (!ctx) return;
 
     let particles: Particle[] = [];
-    let mouse = { x: 0, y: 0 };
+    const mouse = { x: 0, y: 0 };
     let animId: number;
 
     const resize = () => {
