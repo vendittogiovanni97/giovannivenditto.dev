@@ -23,7 +23,7 @@ interface ProjectCardProps {
 }
 
 function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCardProps) {
-  const { t } = useI18n();
+  const { t, href } = useI18n();
   const articleRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const imageWrapRef = useRef<HTMLDivElement>(null);
@@ -87,7 +87,7 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
       {/* Real hero screenshot — the proof, not a decoration */}
       <div ref={frameRef} className="relative">
         <Link
-          href={`/work/${project.slug}`}
+          href={href(`/work/${project.slug}`)}
           prefetch={true}
           className="relative block aspect-[16/9] overflow-hidden border-b border-slate-800 bg-slate-950"
           style={{ perspective: 800 }}
@@ -132,7 +132,7 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
             </button>
 
             <Link
-              href={`/work/${project.slug}`}
+              href={href(`/work/${project.slug}`)}
               prefetch={true}
               title={t.work.openDetail}
               className="w-9 h-9 rounded-full flex items-center justify-center border border-slate-700 text-slate-200 hover:bg-accent hover:text-slate-950 hover:border-accent transition-all cursor-pointer"
@@ -142,7 +142,7 @@ function ProjectCard({ project, delay = 0, className, onQuickView }: ProjectCard
           </div>
         </div>
 
-        <Link href={`/work/${project.slug}`} prefetch={true}>
+        <Link href={href(`/work/${project.slug}`)} prefetch={true}>
           <h3 className="[font-family:var(--font-display)] uppercase text-3xl sm:text-4xl leading-[0.95] text-slate-100 mb-3 group-hover:text-accent transition-colors">
             {project.title}
           </h3>

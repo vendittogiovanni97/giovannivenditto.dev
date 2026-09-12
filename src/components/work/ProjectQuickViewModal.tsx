@@ -14,7 +14,7 @@ interface ProjectQuickViewModalProps {
 }
 
 export function ProjectQuickViewModal({ project, onClose }: ProjectQuickViewModalProps) {
-  const { t } = useI18n();
+  const { t, href } = useI18n();
 
   useEffect(() => {
     if (!project) return;
@@ -160,7 +160,7 @@ export function ProjectQuickViewModal({ project, onClose }: ProjectQuickViewModa
                 {t.work.modal.close}
               </button>
               <Link
-                href={`/work/${project.slug}`}
+                href={href(`/work/${project.slug}`)}
                 onClick={onClose}
                 className="px-6 py-3 rounded-full bg-cyan-400 text-slate-950 font-medium text-sm hover:bg-cyan-300 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(202,164,86,0.3)] hover:shadow-[0_0_30px_rgba(202,164,86,0.5)] cursor-pointer"
               >

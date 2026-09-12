@@ -13,16 +13,17 @@ export function NavBar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { t } = useI18n();
+  const { t, href } = useI18n();
   const progressBarRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
   const [hoverRect, setHoverRect] = useState<{ left: number; width: number } | null>(null);
+  const homeHref = href("/");
 
   const navLinks = [
-    { href: "/#work", label: t.nav.work, targetId: "work" },
-    { href: "/lab", label: "Lab Demo" },
+    { href: `${homeHref}#work`, label: t.nav.work, targetId: "work" },
+    { href: href("/lab"), label: "Lab Demo" },
     { href: "/documents/CV_Giovanni_Venditto.pdf", label: "Curriculum", isDownload: true },
-    { href: "/#faq", label: "FAQ", targetId: "faq" },
+    { href: `${homeHref}#faq`, label: "FAQ", targetId: "faq" },
   ];
 
   const socialLinks = [
@@ -127,7 +128,7 @@ export function NavBar() {
 
           {/* Logo */}
           <Link
-            href="/"
+            href={homeHref}
             prefetch={true}
             className="group [font-family:var(--font-display)] uppercase text-lg text-slate-100 hover:text-accent transition-colors"
           >
@@ -174,7 +175,7 @@ export function NavBar() {
                   key={link.href}
                   href={link.href}
                   onClick={(e) => {
-                    if (link.targetId && pathname === "/") {
+                    if (link.targetId && pathname === homeHref) {
                       e.preventDefault();
                       scrollToTarget(link.targetId);
                     }
@@ -209,7 +210,7 @@ export function NavBar() {
 
             <LanguageToggle />
             <Link
-              href="/contact"
+              href={href("/contact")}
               className="px-4 py-1.5 rounded-full bg-accent text-slate-950 font-mono text-xs font-semibold hover:bg-accent-bright transition-all shadow-[0_0_15px_rgba(202,164,86,0.3)] hover:scale-105"
             >
               {t.nav.contact}
@@ -266,7 +267,7 @@ export function NavBar() {
                         href={link.href}
                         onClick={(e) => {
                           setMobileMenuOpen(false);
-                          if (link.targetId && pathname === "/") {
+                          if (link.targetId && pathname === homeHref) {
                             e.preventDefault();
                             scrollToTarget(link.targetId);
                           }
@@ -298,7 +299,7 @@ export function NavBar() {
               </div>
 
               <Link
-                href="/contact"
+                href={href("/contact")}
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full py-2.5 text-center rounded-xl bg-accent text-slate-950 [font-family:var(--font-display)] uppercase text-sm shadow-[0_0_15px_rgba(202,164,86,0.3)]"
               >

@@ -1,22 +1,20 @@
-"use client";
-
 import Link from "next/link";
-import { Button, GlassPanel } from "@/components/ui";
-import { useI18n } from "@/i18n";
 
-export default function NotFound() {
-  const { t } = useI18n();
+// Fallback for the rare case a request reaches the true root without ever
+// resolving a locale segment (e.g. a malformed path the middleware rewrite
+// didn't cover). The real, translated 404 lives at src/app/[locale]/not-found.tsx
+// and is what visitors normally see.
+export default function RootNotFound() {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-gutter">
-      <GlassPanel padding="lg" className="rounded-3xl text-center max-w-md p-12">
-        <div className="[font-family:var(--font-display)] text-7xl text-accent mb-4 tracking-tighter">404</div>
-        <p className="text-lg text-slate-400 mb-8">
-          {t.common.pageNotFound}
-        </p>
-        <Button variant="primary" asChild size="lg">
-          <Link href="/">{t.common.returnHome}</Link>
-        </Button>
-      </GlassPanel>
-    </div>
+    <html lang="it">
+      <body style={{ background: "#14100b", color: "#f3ece0", display: "flex", minHeight: "100vh", alignItems: "center", justifyContent: "center", fontFamily: "system-ui, sans-serif" }}>
+        <div style={{ textAlign: "center" }}>
+          <p style={{ fontSize: "4rem", margin: 0, fontWeight: 700 }}>404</p>
+          <p>
+            <Link href="/" style={{ color: "#caa456" }}>Torna alla home</Link>
+          </p>
+        </div>
+      </body>
+    </html>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { Toaster } from "sonner";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { I18nProvider } from "@/i18n";
@@ -8,71 +9,108 @@ import { Footer } from "@/components/layout/Footer";
 import { CursorSpotlight } from "@/components/ui/CursorSpotlight";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import Script from "next/script";
-import { getLocale } from "@/i18n/server";
+import { isLocale, locales, type Locale } from "@/i18n/server";
 import { displayFont, bodyFont } from "@/lib/fonts";
 import { config } from "@/lib/config";
-import "./globals.css";
+import { localeAlternates } from "@/lib/seo";
+import "../globals.css";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(config.siteUrl),
-  title: {
-    default: `${config.authorName} — Fullstack & AI-Ready Engineer`,
-    template: `%s | ${config.authorName}`,
-  },
-  description:
-    "Fullstack Engineer specializzato in React 19, Next.js 16, Node.js e soluzioni AI-first certificate Anthropic Claude. Sviluppo piattaforme enterprise, CRM su misura e automazioni ad alte prestazioni.",
-  keywords: [
-    "Giovanni Venditto",
-    "Fullstack Engineer",
-    "AI Engineer",
-    "Next.js 16",
-    "React 19",
-    "Anthropic Claude Certified",
-    "Sviluppatore Fullstack",
-    "Napoli",
-    "Node.js",
-    "TypeScript",
-    "CRM Custom",
-    "Enterprise Web Apps",
-    "OCR Automation",
-    "Agilae",
-  ],
-  authors: [{ name: config.authorName, url: config.siteUrl }],
-  creator: config.authorName,
-  publisher: config.authorName,
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  openGraph: {
-    type: "website",
-    locale: "it_IT",
-    alternateLocale: ["en_US"],
-    url: config.siteUrl,
+interface LayoutProps {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+const METADATA_COPY: Record<Locale, { title: string; description: string; ogDescription: string; twitterDescription: string }> = {
+  it: {
     title: `${config.authorName} — Fullstack & AI-Ready Engineer`,
     description:
+      "Fullstack Engineer specializzato in React 19, Next.js 16, Node.js e soluzioni AI-first certificate Anthropic Claude. Sviluppo piattaforme enterprise, CRM su misura e automazioni ad alte prestazioni.",
+    ogDescription:
       "Fullstack Engineer specializzato in React 19, Next.js 16 e soluzioni AI-first certificate Anthropic Claude. Piattaforme enterprise e automazioni ad alte prestazioni.",
-    siteName: `${config.authorName} Portfolio`,
-  },
-  twitter: {
-    card: "summary_large_image",
-    creator: `@${config.twitter}`,
-    title: `${config.authorName} — Fullstack & AI-Ready Engineer`,
-    description:
+    twitterDescription:
       "Fullstack Engineer specializzato in Next.js 16, Node.js e soluzioni AI-first certificate Anthropic Claude.",
   },
-  icons: {
-    icon: "/favicon.svg",
+  en: {
+    title: `${config.authorName} — Fullstack & AI-Ready Engineer`,
+    description:
+      "Fullstack Engineer specialized in React 19, Next.js 16, Node.js, and Anthropic Claude-certified AI-first solutions. I build enterprise platforms, custom CRMs, and high-performance automations.",
+    ogDescription:
+      "Fullstack Engineer specialized in React 19, Next.js 16, and Anthropic Claude-certified AI-first solutions. Enterprise platforms and high-performance automations.",
+    twitterDescription:
+      "Fullstack Engineer specialized in Next.js 16, Node.js, and Anthropic Claude-certified AI-first solutions.",
   },
-  manifest: "/manifest.json",
 };
+
+export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : "it";
+  const c = METADATA_COPY[locale];
+
+  return {
+    metadataBase: new URL(config.siteUrl),
+    title: {
+      default: c.title,
+      template: `%s | ${config.authorName}`,
+    },
+    description: c.description,
+    keywords: [
+      "Giovanni Venditto",
+      "Fullstack Engineer",
+      "AI Engineer",
+      "Next.js 16",
+      "React 19",
+      "Anthropic Claude Certified",
+      "Sviluppatore Fullstack",
+      "Napoli",
+      "Node.js",
+      "TypeScript",
+      "CRM Custom",
+      "Enterprise Web Apps",
+      "OCR Automation",
+      "Agilae",
+    ],
+    authors: [{ name: config.authorName, url: config.siteUrl }],
+    creator: config.authorName,
+    publisher: config.authorName,
+    // Root-level fallback for a route that forgets its own generateMetadata;
+    // every real page below sets this itself with its actual sub-path.
+    alternates: localeAlternates(locale, ""),
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    openGraph: {
+      type: "website",
+      locale: locale === "it" ? "it_IT" : "en_US",
+      alternateLocale: locale === "it" ? ["en_US"] : ["it_IT"],
+      url: localeAlternates(locale, "").canonical,
+      title: c.title,
+      description: c.ogDescription,
+      siteName: `${config.authorName} Portfolio`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: `@${config.twitter}`,
+      title: c.title,
+      description: c.twitterDescription,
+    },
+    icons: {
+      icon: "/favicon.svg",
+    },
+    manifest: "/manifest.json",
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#14100b",
@@ -81,8 +119,10 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getLocale();
+export default async function LocaleLayout({ children, params }: LayoutProps) {
+  const { locale: rawLocale } = await params;
+  if (!isLocale(rawLocale)) notFound();
+  const locale = rawLocale;
 
   return (
     <html lang={locale} className={`h-full antialiased ${displayFont.variable} ${bodyFont.variable}`} data-theme="dark" suppressHydrationWarning>

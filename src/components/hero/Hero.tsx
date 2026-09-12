@@ -47,7 +47,7 @@ function SplitHeadline({ text }: { text: string }) {
 }
 
 export function Hero() {
-  const { t } = useI18n();
+  const { t, href } = useI18n();
   const reduce = useReducedMotion();
 
   const reveal = (delay: number) =>
@@ -136,7 +136,7 @@ export function Hero() {
               </a>
 
               <Link
-                href="/contact"
+                href={href("/contact")}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border-2 text-sm font-semibold font-headline transition-all hover:scale-[1.02] cursor-pointer"
                 style={{
                   borderColor: "var(--color-ink)",
@@ -174,6 +174,7 @@ export function Hero() {
                   fill
                   sizes="(min-width: 1024px) 40vw, 0px"
                   className="object-contain"
+                  priority
                 />
               </div>
             </div>

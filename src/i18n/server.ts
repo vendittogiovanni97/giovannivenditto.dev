@@ -1,10 +1,8 @@
-import { cookies } from "next/headers";
-
 export type Locale = "en" | "it";
 
-export async function getLocale(): Promise<Locale> {
-  const cookieStore = await cookies();
-  const locale = cookieStore.get("locale")?.value;
-  if (locale === "en" || locale === "it") return locale;
-  return "it";
+export const locales: Locale[] = ["it", "en"];
+export const defaultLocale: Locale = "it";
+
+export function isLocale(value: string): value is Locale {
+  return value === "it" || value === "en";
 }

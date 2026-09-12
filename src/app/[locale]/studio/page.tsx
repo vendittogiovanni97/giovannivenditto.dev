@@ -1,8 +1,13 @@
 import { Metadata } from "next";
 import { StudioContent } from "@/components/studio/StudioContent";
-import { getLocale } from "@/i18n/server";
+import { isLocale, type Locale } from "@/i18n/server";
+import { localeAlternates } from "@/lib/seo";
 
-const COPY = {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+const COPY: Record<Locale, { title: string; description: string; ogTitle: string; ogDescription: string }> = {
   it: {
     title: "Chi Sono & Formazione",
     description:
@@ -19,14 +24,16 @@ const COPY = {
     ogDescription:
       "Fullstack Engineer specialized in scalable web platforms, RBAC security, and AI-first solutions (Anthropic & Gemini).",
   },
-} as const;
+};
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : "it";
   const c = COPY[locale];
   return {
     title: c.title,
     description: c.description,
+    alternates: localeAlternates(locale, "/studio"),
     openGraph: {
       title: c.ogTitle,
       description: c.ogDescription,

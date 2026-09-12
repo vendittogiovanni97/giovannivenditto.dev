@@ -1,8 +1,13 @@
 import { Metadata } from "next";
 import { ContactContent } from "@/components/contact/ContactContent";
-import { getLocale } from "@/i18n/server";
+import { isLocale, type Locale } from "@/i18n/server";
+import { localeAlternates } from "@/lib/seo";
 
-const COPY = {
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+const COPY: Record<Locale, { title: string; description: string; ogTitle: string; ogDescription: string }> = {
   it: {
     title: "Contatto & Prenota una Call",
     description:
@@ -19,14 +24,16 @@ const COPY = {
     ogDescription:
       "Have a web project or an AI automation to build? Book 30 minutes on Calendly or send a direct message.",
   },
-} as const;
+};
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : "it";
   const c = COPY[locale];
   return {
     title: c.title,
     description: c.description,
+    alternates: localeAlternates(locale, "/contact"),
     openGraph: {
       title: c.ogTitle,
       description: c.ogDescription,
